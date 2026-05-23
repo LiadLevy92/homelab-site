@@ -1,0 +1,7 @@
+{
+  "name": "homelab-site",
+  "compatibility_date": "2026-05-23",
+  "assets": {
+    "directory": "./dist"
+  }
+}
