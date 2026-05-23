@@ -17,6 +17,17 @@
 
 ---
 
+## 📄 דפים
+
+| דף | קובץ | סגנון |
+|----|------|--------|
+| `/` | `src/pages/index.astro` | עצמאי, CSS inline, אנושי/רך |
+| `/homelab` | `src/pages/homelab/index.astro` | HomelabLayout, terminal aesthetic |
+
+**דף הבית:** עיצוב נקי ואנושי — IBM Plex Sans weight 300, לא טכני, לא Tailwind. אסור לשנות לסגנון הטרמינלי של ה-homelab.
+
+---
+
 ## 🛠 Stack
 
 | כלי | שימוש |
