@@ -1,0 +1,973 @@
+---
+import HomelabLayout from '../../layouts/HomelabLayout.astro';
+---
+<HomelabLayout>
+
+  <!-- BOOT SEQUENCE -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <div class="boot-header">LIAD-HOMELAB&nbsp;//&nbsp;RACK-0&nbsp;CONSOLE&nbsp;<span class="boot-cursor"></span></div>
+      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">hypervisor online · 4 VMs running</span></div>
+      <div class="boot-line" data-boot="1"><span class="boot-ok">[ OK ]</span><span class="boot-label">AdGuard Home</span><span class="boot-value">DNS filtering active · VM 100</span></div>
+      <div class="boot-line" data-boot="2"><span class="boot-ok">[ OK ]</span><span class="boot-label">Home Assist</span><span class="boot-value">smart home online · VM 101</span></div>
+      <div class="boot-line" data-boot="3"><span class="boot-ok">[ OK ]</span><span class="boot-label">n8n</span><span class="boot-value">automations · InboxNinja active</span></div>
+      <div class="boot-line" data-boot="4"><span class="boot-ok">[ OK ]</span><span class="boot-label">Second Brain</span><span class="boot-value">Telegram bot · v2.0.0 · multi-user</span></div>
+      <div class="boot-line" data-boot="5"><span class="boot-ok">[ OK ]</span><span class="boot-label">Cloudflare</span><span class="boot-value">tunnel active · liad-dev.com</span></div>
+      <div class="boot-footer">Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue&nbsp;·&nbsp;handing&nbsp;off&nbsp;to&nbsp;operator&hellip;</div>
+    </div>
+  </div>
+
+  <!-- FLOATING NAV -->
+  <nav class="float-nav" id="floatNav" aria-label="Section navigation">
+    <a href="#principles"><span class="float-nav-dot"></span>Principles</a>
+    <a href="#hardware"><span class="float-nav-dot"></span>Hardware</a>
+    <a href="#network"><span class="float-nav-dot"></span>Network</a>
+    <a href="#services"><span class="float-nav-dot"></span>Services</a>
+    <a href="#unlocks"><span class="float-nav-dot"></span>Unlocks</a>
+    <a href="#automations"><span class="float-nav-dot"></span>Automations</a>
+    <a href="#brain"><span class="float-nav-dot"></span>Brain</a>
+    <a href="#workflow"><span class="float-nav-dot"></span>Workflow</a>
+    <a href="#why"><span class="float-nav-dot"></span>Why Works</a>
+    <a href="#planning"><span class="float-nav-dot"></span>Planning</a>
+    <a href="#docs"><span class="float-nav-dot"></span>Docs</a>
+    <a href="#journey"><span class="float-nav-dot"></span>Journey</a>
+    <a href="#recovery"><span class="float-nav-dot"></span>Recovery</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">
+        <span class="status-dot"></span>
+        Living Infrastructure-as-Code
+      </div>
+      <h1>
+        Self&nbsp;Hosted<br>
+        <span class="hero-connector">&amp;</span>&nbsp;<span class="accent">AI&nbsp;Powered</span><br>
+        Homelab
+      </h1>
+      <p class="hero-subtitle">
+        I decided to run my home like an enterprise data center — with no DevOps background and no prior sysadmin experience.
+        By partnering with <strong>Claude Code as a real-time infrastructure co-pilot</strong>, I built and now maintain
+        a self-hosted stack on a repurposed desktop PC: hypervisor, smart home, automations, and AI bots
+        <strong>— without writing a single line of code alone</strong>.
+        <br><br>
+        This is the blueprint.
+      </p>
+      <div class="hero-divider"></div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar reveal">
+      <div class="stat">
+        <div class="stat-number">4</div>
+        <div class="stat-label">VMs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Docker Services</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">Daily</div>
+        <div class="stat-label">Backups</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Git Repos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Active Workflow</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">v2</div>
+        <div class="stat-label">Brain Bot</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">663</div>
+        <div class="stat-label">HA Entities</div>
+      </div>
+    </div>
+
+    <!-- ===== ACT I ===== -->
+    <div class="act reveal">
+      <span class="act-num">ACT&nbsp;I</span>
+      <span class="act-title"><span class="label">PART&nbsp;ONE</span><span class="sep">//</span>THE&nbsp;SYSTEM</span>
+      <span class="act-status">RACK&nbsp;ONLINE</span>
+    </div>
+
+    <!-- SECTION 01: PRINCIPLES -->
+    <div class="section reveal" id="principles">
+      <div class="section-header">
+        <span class="section-num">§ 01</span>
+        <div class="section-title">Design Principles</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="principles">
+        <div class="principle reveal reveal-delay-1">
+          <span class="principle-num">01</span>
+          <div class="principle-name">Self-Hosted First</div>
+          <div class="principle-desc">Everything runs on owned hardware. No cloud subscriptions for core infrastructure. Full control over data and services.</div>
+        </div>
+        <div class="principle reveal reveal-delay-2">
+          <span class="principle-num">02</span>
+          <div class="principle-name">AI as a Partner</div>
+          <div class="principle-desc">Claude Code is the infrastructure co-pilot — every build, fix, and improvement is done collaboratively with AI in real time.</div>
+        </div>
+        <div class="principle reveal reveal-delay-3">
+          <span class="principle-num">03</span>
+          <div class="principle-name">Zero Open Ports</div>
+          <div class="principle-desc">Cloudflare Tunnel for public services, Tailscale for private access. No port-forwarding on the router. Zero-trust by default.</div>
+        </div>
+        <div class="principle reveal reveal-delay-4">
+          <span class="principle-num">04</span>
+          <div class="principle-name">Living Documentation</div>
+          <div class="principle-desc">CLAUDE.md is always up to date. Every session starts with full context. Disaster recovery is a document, not a memory test.</div>
+        </div>
+        <div class="principle reveal reveal-delay-5">
+          <span class="principle-num">05</span>
+          <div class="principle-name">Automate Everything</div>
+          <div class="principle-desc">n8n classifies Gmail. Second Brain Bot files to Notion. Anything repetitive gets automated — no manual toil.</div>
+        </div>
+        <div class="principle reveal reveal-delay-6">
+          <span class="principle-num">06</span>
+          <div class="principle-name">Resilient Backups</div>
+          <div class="principle-desc">Daily Proxmox snapshots offloaded to Google Drive. Three copies kept. Restore procedure is documented and tested.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 02: HARDWARE -->
+    <div class="section reveal" id="hardware">
+      <div class="section-header">
+        <span class="section-num">§ 02</span>
+        <div class="section-title">Hardware</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="card card-full reveal">
+        <div class="brain-grid">
+          <div>
+            <div class="card-title"><span class="dot blue"></span> CPU &amp; Memory</div>
+            <ul>
+              <li>Intel Core i7-3770 · 3rd gen · 4C/8T</li>
+              <li>Gigabyte GA-H61M-USB3H · Intel H61</li>
+              <li><strong>16 GB DDR3</strong> · 2× 8 GB · maxed out</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-title"><span class="dot amber"></span> Storage</div>
+            <ul>
+              <li><strong>Samsung 870 EVO 500 GB</strong> SSD — OS &amp; VMs</li>
+              <li><strong>WD 1 TB</strong> HDD — data</li>
+              <li><strong>Seagate 500 GB</strong> HDD — daily backups</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-title"><span class="dot green"></span> Backups</div>
+            <ul>
+              <li>Daily 02:30 + 22:30 → Google Drive</li>
+              <li>3 snapshots retained · rclone sync</li>
+              <li>Proxmox VE hypervisor · 4 VMs active</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-title"><span class="dot purple"></span> Extras</div>
+            <ul>
+              <li>Sonoff Zigbee 3.0 USB dongle — smart home</li>
+              <li>Repurposed desktop PC found on the street</li>
+              <li>Repo: <code>LiadLevy92/Homelab</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 03: NETWORK ARCHITECTURE -->
+    <div class="section reveal" id="network">
+      <div class="section-header">
+        <span class="section-num">§ 03</span>
+        <div class="section-title">Network Architecture</div>
+        <div class="section-rule dashed"></div>
+      </div>
+
+      <!-- Topology Diagram -->
+      <div class="topo-wrap reveal">
+        <div class="topo-meta">
+          <span>// NET-TOPO · 00.01</span>
+          <span>REV · 2026.05</span>
+        </div>
+        <ul class="topo-tree">
+          <li>
+            <div class="topo-box topo-box-isp">
+              <div class="topo-box-title">CELLCOM FIBER</div>
+              <div class="topo-box-sub">1 Gbps Symmetric</div>
+            </div>
+            <div class="topo-connector-down"></div>
+            <ul>
+              <li>
+                <div class="topo-box">
+                  <div class="topo-box-title">CELLCOM GATEWAY</div>
+                  <div class="topo-box-sub">Sagemcom · Router · DHCP · NAT · WiFi</div>
+                </div>
+                <div class="topo-connector-down"></div>
+                <ul>
+                  <li>
+                    <div class="topo-box topo-box-server">
+                      <div class="topo-box-badge">HOME OFFICE</div>
+                      <div class="topo-box-title">HOMELAB SERVER</div>
+                      <div class="topo-box-accent">Intel i7-3770 · 16 GB DDR3</div>
+                      <div class="topo-box-sub">Proxmox VE · 4 VMs</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="topo-box">
+                      <div class="topo-box-title">LIVING ROOM SWITCH</div>
+                      <div class="topo-box-sub">8-Port · 1G · Central Distribution</div>
+                    </div>
+                    <div class="topo-connector-down"></div>
+                    <ul>
+                      <li>
+                        <div class="topo-box topo-box-small">
+                          <div class="topo-box-title">KIDS ROOM</div>
+                          <div class="topo-box-sub">Cellcom STB</div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="topo-box topo-box-small">
+                          <div class="topo-box-title">BEDROOM</div>
+                          <div class="topo-box-sub">Cellcom STB</div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="topo-box topo-box-small">
+                          <div class="topo-box-title">MAMAD</div>
+                          <div class="topo-box-sub">Cellcom STB · Safe Room</div>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- SECTION 04: DOCKER SERVICES -->
+    <div class="section reveal" id="services">
+      <div class="section-header">
+        <span class="section-num">§ 04</span>
+        <div class="section-title">Services</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="card card-full reveal" style="margin-bottom:16px;">
+        <table class="vm-table">
+          <thead>
+            <tr>
+              <th>VM</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>OS</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="vm-id">100</span></td>
+              <td><span class="vm-name">AdGuard Home</span></td>
+              <td>DNS filtering · Ad blocking</td>
+              <td>Debian 12</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">101</span></td>
+              <td><span class="vm-name">Home Assistant</span></td>
+              <td>Smart home · UPS · Bambu Lab · Zigbee</td>
+              <td>HAOS</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">102</span></td>
+              <td><span class="vm-name">Docker Host</span></td>
+              <td>n8n · Cloudflare · Second Brain Bot</td>
+              <td>Debian 13</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">103</span></td>
+              <td><span class="vm-name">Uptime Kuma</span></td>
+              <td>Service monitoring</td>
+              <td>—</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="vlan-grid">
+        <div class="vlan-card reveal reveal-delay-1">
+          <div class="vlan-badge">N8N — AUTOMATION</div>
+
+          <ul>
+            <li>Automation engine — visual workflow builder</li>
+            <li>Webhook endpoint via Cloudflare Tunnel</li>
+            <li>OAuth callbacks via public Cloudflare endpoint</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-2">
+          <div class="vlan-badge">CLOUDFLARE — TUNNEL</div>
+
+          <ul>
+            <li>Tunnel daemon — routes external traffic to services</li>
+            <li>n8n — public automation endpoint</li>
+            <li>Home Assistant — public smart home endpoint</li>
+            <li>Domain expires May 2027 · zero open ports</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-3">
+          <div class="vlan-badge">SECOND BRAIN — TELEGRAM BOT</div>
+
+          <ul>
+            <li>Telegram → Notion AI filing bot</li>
+            <li>Multi-user — isolated Notion workspaces</li>
+            <li>Python · Docker Compose · VM 102</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-4">
+          <div class="vlan-badge">POSTGRESQL — DATABASE</div>
+
+          <ul>
+            <li>Container: <code>second-brain-postgres</code></li>
+            <li>Alpine image · Fernet-encrypted user data</li>
+            <li>Stores multi-user state &amp; tokens · VM 102</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-5">
+          <div class="vlan-badge">TAILSCALE — VPN MESH</div>
+
+          <ul>
+            <li>Private mesh network — zero config</li>
+            <li>Access Proxmox, HA, n8n from anywhere</li>
+            <li>No port forwarding required</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-6">
+          <div class="vlan-badge">ADGUARD — DNS</div>
+
+          <ul>
+            <li>Network-wide DNS filtering for all devices</li>
+            <li>Blocks ads and trackers at DNS level</li>
+            <li>Custom rules for local service resolution</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 05: UNLOCKS -->
+    <div class="section reveal" id="unlocks">
+      <div class="section-header">
+        <span class="section-num">§ 05</span>
+        <div class="section-title">What This Infrastructure Unlocks</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <p class="section-intro reveal">
+        The hard part is done. A hypervisor running on a repurposed desktop PC, smart home integration, automated email,
+        and an AI filing system mean every future project has a <strong>solid foundation to build on</strong> — without starting from scratch.
+      </p>
+      <div class="unlock-grid">
+        <div class="unlock-card reveal reveal-delay-1">
+          <div class="unlock-header">
+            <div class="unlock-title">AI In Your Pocket</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            Second Brain Bot turns anything — a thought, a voice note, a link, an image — into a structured Notion entry in seconds. From Telegram, from anywhere, in any language.
+          </div>
+          <ul>
+            <li>Accessible from any device via Telegram</li>
+            <li>Multi-user — isolated Notion workspaces per person</li>
+            <li>No manual filing, no forgetting — just capture and move on</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-2">
+          <div class="unlock-header">
+            <div class="unlock-title">Zero-Touch Inbox</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            InboxNinja on n8n classifies every incoming Gmail automatically into 7 categories. No SaaS subscription — runs entirely on the homelab, powered by Claude API.
+          </div>
+          <ul>
+            <li>Receipts extracted and structured automatically</li>
+            <li>Newsletters auto-archived, action items flagged</li>
+            <li>Runs 24/7 — inbox is always clean</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-3">
+          <div class="unlock-header">
+            <div class="unlock-title">Always-On Smart Home</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            Home Assistant runs locally with UPS battery backup — survives power cuts without interruption. Zigbee mesh, Bambu Lab monitoring, all managed locally with zero cloud dependency.
+          </div>
+          <ul>
+            <li>UPS integration — knows battery level, alerts on power loss</li>
+            <li>Bambu Lab 3D printer monitored with remote alerts</li>
+            <li>Zigbee mesh via Sonoff dongle — no cloud required</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-4">
+          <div class="unlock-header">
+            <div class="unlock-title">Remote Access — Anywhere</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            Tailscale VPN connects all 4 VMs in a private mesh. Cloudflare Tunnel exposes only what's meant to be public. Zero open ports on the router.
+          </div>
+          <ul>
+            <li>Proxmox, Home Assistant, n8n — accessible from any device</li>
+            <li>No VPN app needed for public services — Cloudflare handles it</li>
+            <li>Full access from anywhere without compromising security</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ACT II ===== -->
+    <div class="act reveal">
+      <span class="act-num">ACT&nbsp;II</span>
+      <span class="act-title"><span class="label">PART&nbsp;TWO</span><span class="sep">//</span>THE&nbsp;PROJECTS</span>
+      <span class="act-status">OPERATOR&nbsp;AT&nbsp;CONSOLE</span>
+    </div>
+
+    <!-- SECTION 06: AUTOMATIONS -->
+    <div class="section reveal" id="automations">
+      <div class="section-header">
+        <span class="section-num">§ 06</span>
+        <div class="section-title">Automations</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="vlan-grid">
+        <div class="vlan-card reveal reveal-delay-1">
+          <div class="vlan-badge">N8N — WORKFLOW ENGINE</div>
+          <ul>
+            <li><strong>InboxNinja</strong> — Gmail classifier · 7 categories</li>
+            <li>Newsletters, receipts, action items, FYI, promotions</li>
+            <li>Structured receipt extraction · smart archiving</li>
+            <li>Model: <code>claude-sonnet-4-6</code> · Claude API</li>
+            <li><span class="badge badge-ok" style="font-size:10px;">active</span></li>
+          </ul>
+        </div>
+        <div class="vlan-card vlan-card-dim reveal reveal-delay-2">
+          <div class="vlan-badge">HOME ASSISTANT — AUTOMATIONS</div>
+          <ul>
+            <li style="color:var(--text-muted); font-style:italic;">In development — coming soon</li>
+            <li style="color:var(--text-faint);">UPS alerts · smart home triggers</li>
+            <li style="color:var(--text-faint);">Bambu Lab · Zigbee device rules</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 07: SECOND BRAIN -->
+    <div class="section reveal" id="brain">
+      <div class="section-header">
+        <span class="section-num">§ 07</span>
+        <div class="section-title">Second Brain</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="cards">
+        <div class="card card-full reveal">
+          <div class="brain-grid">
+            <div>
+              <div class="card-title"><span class="dot purple"></span> What It Does</div>
+              <ul>
+                <li>Telegram bot that files anything into Notion using AI</li>
+                <li>Supports: text, voice, images, links, documents</li>
+                <li>Auto-categorizes and routes to the right Notion DB</li>
+                <li>Multi-user — each user has isolated Notion workspace</li>
+              </ul>
+            </div>
+            <div>
+              <div class="card-title"><span class="dot cyan"></span> Architecture</div>
+              <ul>
+                <li>Python bot + Docker Compose on VM 102</li>
+                <li>PostgreSQL 16-alpine for user state</li>
+                <li>Fernet encryption for stored tokens</li>
+                <li>Source: <code>/root/second_brain/</code></li>
+              </ul>
+            </div>
+            <div>
+              <div class="card-title"><span class="dot green"></span> Status</div>
+              <ul>
+                <li><strong>v2.0.0</strong> — in production</li>
+                <li>Active users: 2 · owner + beta user</li>
+                <li>Repo: <code>LiadLevy92/Second-Brain</code></li>
+                <li>Onboarding: self-serve via Telegram</li>
+              </ul>
+            </div>
+            <div>
+              <div class="card-title"><span class="dot amber"></span> Operations</div>
+              <ul>
+                <li>Restart: <code>docker compose up -d bot</code></li>
+                <li>Logs: copy <code>second_brain.log</code> from container</li>
+                <li>DB: <code>psql -U second_brain -d second_brain</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ACT III ===== -->
+    <div class="act reveal">
+      <span class="act-num">ACT&nbsp;III</span>
+      <span class="act-title"><span class="label">PART&nbsp;THREE</span><span class="sep">//</span>THE&nbsp;PROCESS</span>
+      <span class="act-status">CLAUDE&nbsp;AT&nbsp;CONSOLE</span>
+    </div>
+
+    <!-- SECTION 08: WORKFLOW -->
+    <div class="section reveal" id="workflow">
+      <div class="section-header">
+        <span class="section-num">§ 08</span>
+        <div class="section-title">The Claude Code Workflow</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <p class="section-intro reveal">
+        Every change to this homelab — a new VM, a config tweak, a bug fix — goes through the same loop.
+        I describe what needs to happen. Claude Code makes the edits, the site updates, and everything stays documented.
+      </p>
+      <div class="workflow-steps reveal">
+        <div class="workflow-step">
+          <div class="workflow-step-num">1</div>
+          <div class="workflow-step-desc">Describe the change in plain language — Hebrew or English, doesn't matter</div>
+          <div class="workflow-step-actor">Me</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">2</div>
+          <div class="workflow-step-desc">Surgical edits to all affected files — only the specific lines that changed</div>
+          <div class="workflow-step-actor actor-claude">Claude Code</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">3</div>
+          <div class="workflow-step-desc">Review in browser — check the result, request adjustments if needed</div>
+          <div class="workflow-step-actor">Me</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">4</div>
+          <div class="workflow-step-desc">Git push to GitHub — change is committed and infrastructure state is locked in</div>
+          <div class="workflow-step-actor">Me</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">5</div>
+          <div class="workflow-step-desc">Cloudflare Pages auto-deploys — site live within seconds, no manual step</div>
+          <div class="workflow-step-actor actor-auto">Cloudflare</div>
+        </div>
+      </div>
+      <div class="unlock-grid reveal">
+        <div class="unlock-card">
+          <div class="unlock-header"><div class="unlock-title">CLAUDE.md Is the Memory</div></div>
+          <div class="unlock-body">Every session starts by reading CLAUDE.md — full homelab context, no re-explaining. VM list, network layout, active projects, recent changes. The entire system state is in one file, always current.</div>
+        </div>
+        <div class="unlock-card">
+          <div class="unlock-header"><div class="unlock-title">Docs Ship With the Change</div></div>
+          <div class="unlock-body">CLAUDE.md is updated in the same session as any change. The documentation is never out of sync with reality. The changelog at the bottom of CLAUDE.md is the audit trail.</div>
+        </div>
+        <div class="unlock-card">
+          <div class="unlock-header"><div class="unlock-title">Works in Any Language</div></div>
+          <div class="unlock-body">I describe changes in Hebrew or English — often mid-sentence switching. Claude Code understands both and operates entirely in the homelab context without losing track.</div>
+        </div>
+        <div class="unlock-card">
+          <div class="unlock-header"><div class="unlock-title">No DevOps Background Required</div></div>
+          <div class="unlock-body">This entire homelab was built without prior experience in Proxmox, Docker, n8n, or networking. Claude Code fills the knowledge gap in real time — every command explained, every risk flagged.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 09: WHY THIS WORKS -->
+    <div class="section reveal" id="why">
+      <div class="section-header">
+        <span class="section-num">§ 09</span>
+        <div class="section-title">Why This Works — The Secret Sauce</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="unlock-grid">
+        <div class="unlock-card reveal reveal-delay-1">
+          <div class="unlock-header"><div class="unlock-title">CLAUDE.MD Is Everything</div></div>
+          <div class="unlock-body">The project instruction file gives Claude Code full homelab context at the start of every session — no re-explaining, no starting from scratch.</div>
+          <ul>
+            <li><strong>Who I am:</strong> product manager, not a developer — explain every command as you go</li>
+            <li><strong>Safety rails:</strong> alert before risky changes, never rewrite whole sections</li>
+            <li><strong>Change protocol:</strong> update CLAUDE.md only on confirmed changes, never during brainstorming</li>
+            <li><strong>Full index:</strong> every VM, every file, every path — Claude knows exactly where everything lives</li>
+            <li><strong>Changelog:</strong> every session ends with dated entries — full audit trail of what changed and why</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-2">
+          <div class="unlock-header"><div class="unlock-title">The Multiplier Effect</div></div>
+          <div class="unlock-body">What makes an AI-assisted homelab fundamentally different from doing it alone — it's not just a faster search engine.</div>
+          <ul>
+            <li><strong>Instant recall:</strong> "Which VM runs the bot?" — answered in seconds from CLAUDE.md</li>
+            <li><strong>Cross-domain reasoning:</strong> changing Docker config? Claude checks all affected VMs and services</li>
+            <li><strong>Incident response:</strong> something breaks at midnight → root cause + fix + docs in one session</li>
+            <li><strong>No expertise needed:</strong> learned Docker, Proxmox, n8n by doing — Claude filled every gap</li>
+            <li><strong>Always current:</strong> the docs update themselves — a git push is a documentation update</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KILLER FEATURE: terminal mock -->
+      <div class="killer-wrap reveal">
+        <div class="killer-left">
+          <div class="killer-eyebrow">The Killer Feature</div>
+          <div class="killer-headline">Ask anything.<br>Get the right<br>answer instantly.</div>
+          <p class="killer-body">
+            Every Claude Code session opens with <strong>complete knowledge of my entire infrastructure</strong> — every VM, every container, every service, every path. No searching old notes. No "I think it was on VM 102?"
+          </p>
+          <p class="killer-body">
+            Ask a question in plain language and get an answer that accounts for my specific setup, with the exact next step to take.
+          </p>
+        </div>
+        <div class="killer-right">
+          <div class="killer-terminal">
+            <div class="killer-terminal-bar">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">~ homelab-docs — claude code</span>
+            </div>
+            <div class="killer-qa">
+              <div class="qa-item">
+                <div class="qa-q">$ "Which VM runs the Second Brain Bot?"</div>
+                <div class="qa-a">› Docker Host (<span class="qa-badge">VM 102</span>). Compose at <span class="qa-badge">/root/second_brain/</span>. Restart: <span class="qa-badge">docker compose up -d bot</span>. Logs: copy from container.</div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">$ "My n8n webhook stopped receiving calls."</div>
+                <div class="qa-a">› Check <span class="qa-badge">cloudflared</span> on VM 102. If the tunnel is down, restart it. n8n listens on <span class="qa-badge">:5678</span>. Webhook goes through the Cloudflare Tunnel — verify the tunnel is active first.</div>
+              </div>
+              <div class="qa-item">
+                <div class="qa-q">$ "Home Assistant went offline — what do I check?"</div>
+                <div class="qa-a">› VM 101, HAOS. Open Proxmox console — is the VM running? If power loss: UPS should have alerted. If no alert, check VM 100 (AdGuard) — DNS might be the issue, not HA itself.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 10: PLANNING -->
+    <div class="section reveal" id="planning">
+      <div class="section-header">
+        <span class="section-num">§ 10</span>
+        <div class="section-title">Planning — Next on the Build List</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <p class="section-intro reveal">My foundation is stable. Here's what I'm building next — ordered by priority and readiness.</p>
+      <div class="phase-grid reveal">
+        <div class="phase-card">
+          <div class="phase-title">VLAN Segmentation</div>
+          <ul>
+            <li>Upgrade to a managed switch that supports 802.1Q VLANs</li>
+            <li>Replace Sagemcom gateway with a VLAN-capable router</li>
+            <li>Separate networks: IoT · main · management · cameras</li>
+            <li>Isolate smart home devices from the main LAN</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-title">HA Automations</div>
+          <ul>
+            <li>Build out presence detection — room-level awareness</li>
+            <li>Power management automations via Zigbee smart plugs</li>
+            <li>Climate and lighting schedules tied to presence</li>
+            <li>Alerts and notifications pipeline via Telegram</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-title">More n8n Workflows</div>
+          <ul>
+            <li>Expand beyond Gmail classification</li>
+            <li>Calendar sync and smart reminders</li>
+            <li>Notification routing — HA events → Telegram</li>
+            <li>Data pipelines for personal analytics</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-title">Home Surveillance</div>
+          <ul>
+            <li>NVR setup with local AI detection (Frigate)</li>
+            <li>IP cameras — key entry points and outdoor zones</li>
+            <li>Motion alerts routed to HA and Telegram</li>
+            <li>Fully local — no cloud, no subscription</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 11: DOCS -->
+    <div class="section reveal" id="docs">
+      <div class="section-header">
+        <span class="section-num">§ 11</span>
+        <div class="section-title">Living Documentation System</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <p class="section-intro reveal">
+        Every part of this homelab is documented. The documentation updates in the <strong>same session as the change</strong> — never out of sync, never from memory.
+      </p>
+      <div class="docs-grid reveal">
+        <div class="doc-item">
+          <div class="doc-badge">CLAUDE.MD</div>
+          <div>
+            <div class="doc-title">Project Brain</div>
+            <div class="doc-desc">Full homelab context — VM list, network, active projects, changelog, recovery steps. The single source of truth Claude reads at session start.</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-badge">CHANGELOG</div>
+          <div>
+            <div class="doc-title">Change Log</div>
+            <div class="doc-desc">Every significant change, dated, with context — inside CLAUDE.md. The audit trail for what changed, when, and why.</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-badge">NETWORK</div>
+          <div>
+            <div class="doc-title">Network Topology</div>
+            <div class="doc-desc">Physical and logical layout of the home network — ISP, gateway, switch, server, and all connected rooms. Visualized on this site.</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-badge">GITHUB</div>
+          <div>
+            <div class="doc-title">Homelab Repo</div>
+            <div class="doc-desc">LiadLevy92/Homelab — CLAUDE.md, crontab, backup scripts, and this site's source. Every push auto-deploys via Cloudflare Pages.</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-badge">GITHUB</div>
+          <div>
+            <div class="doc-title">Second Brain Repo</div>
+            <div class="doc-desc">LiadLevy92/Second-Brain (private) — full bot source, Docker Compose, DB schema, and onboarding flow for multi-user deployment.</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-badge">THIS SITE</div>
+          <div>
+            <div class="doc-title">Live Documentation</div>
+            <div class="doc-desc">This site is the documentation. Built with Astro, styled from scratch, updated via Claude Code. A git push is a doc update.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 12: JOURNEY -->
+    <div class="section reveal" id="journey">
+      <div class="section-header">
+        <span class="section-num">§ 12</span>
+        <div class="section-title">The Journey — How It Was Built</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <p class="section-intro reveal">
+        From a desktop PC found on the street to a running homelab with smart home, AI automation, and a Telegram bot — here's how it happened, one phase at a time.
+      </p>
+      <div class="vlan-grid journey-grid">
+        <div class="vlan-card reveal reveal-delay-1">
+          <div class="vlan-badge">PHASE 1</div>
+          <div class="journey-phase-title">Foundation</div>
+          <ul>
+            <li>Found a broken desktop PC — i7-3770, 16 GB DDR3, three drives</li>
+            <li>Installed Proxmox VE — first hypervisor, first VM, first panic</li>
+            <li>Spun up 4 VMs: AdGuard, Home Assistant, Docker Host, Uptime Kuma</li>
+            <li>No DevOps experience — Claude Code was the instructor</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-2">
+          <div class="vlan-badge">PHASE 2</div>
+          <div class="journey-phase-title">Smart Home</div>
+          <ul>
+            <li>Home Assistant on HAOS — fully local, no cloud</li>
+            <li>Zigbee mesh via Sonoff USB dongle — lights and sensors</li>
+            <li>UPS integration — power-cut proof, battery alerts</li>
+            <li>Bambu Lab 3D printer monitoring with remote alerts</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-3">
+          <div class="vlan-badge">PHASE 3</div>
+          <div class="journey-phase-title">Zero-Trust Network</div>
+          <ul>
+            <li>Tailscale mesh across all 4 VMs — private access from anywhere</li>
+            <li>Cloudflare Tunnel — public endpoints with zero open ports</li>
+            <li>AdGuard DNS — ad filtering for every device on the network</li>
+            <li>Domain liad-dev.com — expires May 2027</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-4">
+          <div class="vlan-badge">PHASE 4</div>
+          <div class="journey-phase-title">Automation Engine</div>
+          <ul>
+            <li>n8n on Docker Host — visual workflow builder</li>
+            <li>InboxNinja: Gmail → Claude API → 7-category classifier</li>
+            <li>Receipts structured, newsletters archived, action items flagged</li>
+            <li>Runs 24/7 — inbox is always clean without touching it</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-5">
+          <div class="vlan-badge">PHASE 5</div>
+          <div class="journey-phase-title">Second Brain</div>
+          <ul>
+            <li>Built a Telegram bot that files anything into Notion with AI</li>
+            <li>Text, voice, images, links — all routed to the right Notion DB</li>
+            <li>PostgreSQL with Fernet encryption for user data</li>
+            <li>v2.0.0 — multi-user, in production, two active users</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-6">
+          <div class="vlan-badge">PHASE 6</div>
+          <div class="journey-phase-title">Docs as Code</div>
+          <ul>
+            <li>CLAUDE.md as the living memory — every session starts here</li>
+            <li>This site as the documentation layer — built in one session</li>
+            <li>Astro + Claude Code — a git push is a doc update</li>
+            <li>Changelog at the bottom of CLAUDE.md is the audit trail</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 13: RECOVERY -->
+    <div class="section reveal" id="recovery">
+      <div class="section-header">
+        <span class="section-num">§ 13</span>
+        <div class="section-title">Recovery from Scratch</div>
+        <div class="section-rule dashed"></div>
+      </div>
+      <div class="recovery-list">
+        <div class="recovery-item reveal reveal-delay-1">
+          <span class="recovery-step">01</span>
+          <div class="recovery-text"><strong>Install Proxmox</strong> on new hardware</div>
+        </div>
+        <div class="recovery-item reveal reveal-delay-2">
+          <span class="recovery-step">02</span>
+          <div class="recovery-text">
+            <strong>Download backups</strong> from Google Drive
+            <span class="recovery-cmd">My Server/proxmox-backups</span>
+          </div>
+        </div>
+        <div class="recovery-item reveal reveal-delay-3">
+          <span class="recovery-step">03</span>
+          <div class="recovery-text"><strong>Restore VMs</strong> via Proxmox UI — in order: 100, 101, 102, 103</div>
+        </div>
+        <div class="recovery-item reveal reveal-delay-4">
+          <span class="recovery-step">04</span>
+          <div class="recovery-text">
+            <strong>Install rclone</strong>
+            <span class="recovery-cmd">curl https://rclone.org/install.sh | bash</span>
+          </div>
+        </div>
+        <div class="recovery-item reveal reveal-delay-5">
+          <span class="recovery-step">05</span>
+          <div class="recovery-text">
+            <strong>Configure rclone</strong>
+            <span class="recovery-cmd">rclone config → gdrive → Google Drive</span>
+          </div>
+        </div>
+        <div class="recovery-item reveal reveal-delay-6">
+          <span class="recovery-step">06</span>
+          <div class="recovery-text">
+            <strong>Restore backup script + crontab</strong>
+            <span class="recovery-cmd">cp backup-to-gdrive.sh /usr/local/bin/ &amp;&amp; crontab ~/homelab/crontab.txt</span>
+          </div>
+        </div>
+        <div class="recovery-item reveal">
+          <span class="recovery-step">07</span>
+          <div class="recovery-text"><strong>Configure Tailscale</strong> on each VM — connect to your account</div>
+        </div>
+        <div class="recovery-item reveal">
+          <span class="recovery-step">08</span>
+          <div class="recovery-text"><strong>Verify Cloudflare Tunnel</strong> is active on VM 102 — test public endpoints</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING: THE STACK -->
+    <div class="stack-block reveal">
+      <div class="stack-eyebrow">// EOF</div>
+      <div class="stack-statement">Built Different</div>
+      <p class="stack-body">
+        I'm an electrical engineering student — not a sysadmin, not a developer, not someone who does this professionally.
+        I built and now maintain a self-hosted homelab with a hypervisor, smart home, AI automations,
+        and a multi-user Telegram bot — fully documented, version-controlled, and continuously extended.
+        All of it built collaboratively with Claude Code, one session at a time.
+        <strong>No prior experience required. Just curiosity and a PC someone threw out.</strong>
+      </p>
+      <div class="stack-tags">
+        <span class="stack-tag">Proxmox</span>
+        <span class="stack-tag">Home Assistant</span>
+        <span class="stack-tag">n8n</span>
+        <span class="stack-tag">Docker</span>
+        <span class="stack-tag">AdGuard</span>
+        <span class="stack-tag">Tailscale</span>
+        <span class="stack-tag">Cloudflare</span>
+        <span class="stack-tag">Telegram</span>
+        <span class="stack-tag">Notion</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Astro</span>
+        <span class="stack-tag">Claude Code</span>
+        <span class="stack-tag">Zigbee</span>
+        <span class="stack-tag">Git</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <span class="footer-identity">Liad Levy <span class="footer-sep">—</span> Israel <span class="footer-sep">—</span> Built with <span class="accent">Claude Code</span></span>
+      <span class="footer-right"><span class="ok">● SYSTEM NOMINAL</span> <span class="footer-sep">—</span> {new Date().toLocaleString('en-US', {month: 'long', year: 'numeric'})}</span>
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Boot sequence
+    const boot = document.getElementById('boot');
+    const body = document.body;
+    function dismissBoot() {
+      if (!boot || boot.classList.contains('done')) return;
+      boot.classList.add('done');
+      body.classList.remove('booting');
+      document.documentElement.classList.remove('js-booting');
+    }
+    document.addEventListener('keydown', dismissBoot);
+    document.addEventListener('click',   dismissBoot);
+    document.addEventListener('touchstart', dismissBoot);
+    setTimeout(dismissBoot, 2200);
+
+    // Floating nav
+    const floatNav = document.getElementById('floatNav');
+    let navShown = false;
+    function updateNav() {
+      if (!floatNav) return;
+      const scrolled = window.scrollY > 200;
+      if (scrolled && !navShown) { floatNav.classList.add('visible'); navShown = true; }
+      else if (!scrolled && navShown) { floatNav.classList.remove('visible'); navShown = false; }
+      const sections = document.querySelectorAll('.section[id]');
+      let active = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) active = s.id;
+      });
+      floatNav.querySelectorAll('a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + active);
+      });
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</HomelabLayout>

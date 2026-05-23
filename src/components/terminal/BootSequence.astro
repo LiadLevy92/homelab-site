@@ -1,0 +1,33 @@
+---
+const services = [
+  { label: 'Proxmox VE',     detail: 'hypervisor online · 4 VMs running' },
+  { label: 'AdGuard Home',   detail: 'DNS filtering active · 10.100.102.220' },
+  { label: 'Home Assistant', detail: 'smart home · 10.100.102.210:8123' },
+  { label: 'n8n',            detail: 'automations · InboxNinja active' },
+  { label: 'Second Brain',   detail: 'Telegram bot · v2.0.0 · multi-user' },
+  { label: 'Cloudflare',     detail: 'tunnel active · liad-dev.com' },
+];
+---
+
+<div class="border border-terminal-border bg-terminal-surface rounded px-6 py-5 mb-8" id="boot-sequence">
+  <p class="text-terminal-dim text-xs mb-4">LIAD-HOMELAB // BOOT SEQUENCE</p>
+
+  {services.map((s, i) => (
+    <div
+      class="flex items-center gap-3 text-sm mb-1 opacity-0 animate-fade-in"
+      style={`animation-delay: ${i * 150}ms; animation-fill-mode: forwards;`}
+    >
+      <span class="text-terminal-green font-bold">[ OK ]</span>
+      <span class="text-terminal-text font-semibold w-36">{s.label}</span>
+      <span class="text-terminal-dim">{s.detail}</span>
+    </div>
+  ))}
+
+  <div
+    class="flex items-center gap-2 mt-4 text-xs text-terminal-dim opacity-0 animate-fade-in"
+    style={`animation-delay: ${services.length * 150 + 200}ms; animation-fill-mode: forwards;`}
+  >
+    <span>Press any key to continue</span>
+    <span class="animate-blink text-terminal-green">█</span>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+---
+export interface Props {
+  label: string;
+  status?: 'online' | 'active' | 'deprecated' | 'offline';
+}
+
+const { label, status = 'active' } = Astro.props;
+
+const colors: Record<string, string> = {
+  online:     'bg-terminal-green/10 text-terminal-green border-terminal-green/30',
+  active:     'bg-terminal-cyan/10 text-terminal-cyan border-terminal-cyan/30',
+  deprecated: 'bg-terminal-amber/10 text-terminal-amber border-terminal-amber/30',
+  offline:    'bg-terminal-red/10 text-terminal-red border-terminal-red/30',
+};
+---
+<span class={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold border ${colors[status]}`}>
+  {label}
+</span>

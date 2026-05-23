@@ -1,0 +1,18 @@
+---
+export interface Props {
+  id: string;
+  icon: string;
+  title: string;
+  number: string;
+}
+
+const { id, icon, title, number } = Astro.props;
+---
+<section id={id} class="mb-16 scroll-mt-20">
+  <div class="flex items-center gap-3 mb-6 pb-3 border-b border-terminal-border">
+    <span class="text-terminal-dim font-mono text-sm">{number}</span>
+    <span class="text-xl">{icon}</span>
+    <h2 class="text-terminal-green font-bold text-lg tracking-wide uppercase">{title}</h2>
+  </div>
+  <slot />
+</section>

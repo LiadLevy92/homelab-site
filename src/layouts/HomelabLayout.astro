@@ -1,0 +1,25 @@
+---
+import '../styles/homelab.css';
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'Homelab — Liad Levy', description = "Liad's self-hosted homelab — Proxmox, Home Assistant, n8n, Second Brain Bot" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js-booting');</script>
+  </head>
+  <body class="booting">
+    <slot />
+  </body>
+</html>
