@@ -126,6 +126,19 @@
     document.querySelectorAll('.drawer-nav .nav-item').forEach(link => {
       if (link.href) link.addEventListener('click', closeDrawer);
     });
+
+    // Spotlight cursor glow
+    document.querySelectorAll('.nav-item, .ext-link').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
+        el.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.setProperty('--mouse-x', '-9999px');
+        el.style.setProperty('--mouse-y', '-9999px');
+      });
+    });
   </script>
 
 </body>
@@ -225,12 +238,17 @@
     color: #7c8296;
     padding: 7px 10px;
     border-radius: 6px;
-    transition: background 0.15s, color 0.15s;
+    transition: background-color 0.15s, color 0.15s;
     cursor: pointer;
+    background-image: radial-gradient(
+      200px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+      rgba(255, 181, 71, 0.08),
+      transparent 80%
+    );
   }
 
   .nav-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
     color: #e8eaf2;
   }
 
@@ -270,12 +288,17 @@
     padding: 7px 10px;
     border-radius: 6px;
     letter-spacing: 0.5px;
-    transition: color 0.15s, background 0.15s;
+    transition: color 0.15s, background-color 0.15s;
+    background-image: radial-gradient(
+      200px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+      rgba(255, 181, 71, 0.08),
+      transparent 80%
+    );
   }
 
   .ext-link:hover {
     color: #c8cad8;
-    background: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
   /* ─── MOBILE NAV ────────────────────────────── */
