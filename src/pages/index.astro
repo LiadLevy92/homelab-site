@@ -15,6 +15,9 @@
 </head>
 <body>
 
+  <!-- Global cursor glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <!-- Desktop Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-top">
@@ -127,6 +130,17 @@
       if (link.href) link.addEventListener('click', closeDrawer);
     });
 
+    // Global page cursor glow
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => {
+      glow.style.setProperty('--cx', `${e.clientX}px`);
+      glow.style.setProperty('--cy', `${e.clientY}px`);
+    });
+    document.addEventListener('mouseleave', () => {
+      glow.style.setProperty('--cx', '-9999px');
+      glow.style.setProperty('--cy', '-9999px');
+    });
+
     // Spotlight cursor glow
     document.querySelectorAll('.nav-item, .ext-link').forEach(el => {
       el.addEventListener('mousemove', e => {
@@ -172,6 +186,19 @@
       radial-gradient(ellipse 50% 40% at 20% 80%, rgba(120, 100, 200, 0.035), transparent 60%);
     pointer-events: none;
     z-index: 0;
+  }
+
+  .cursor-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      550px circle at var(--cx, -9999px) var(--cy, -9999px),
+      rgba(255, 181, 71, 0.055),
+      transparent 70%
+    );
+    transition: background 0.08s ease;
   }
 
   /* ─── SIDEBAR ──────────────────────────────── */
