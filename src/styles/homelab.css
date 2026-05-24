@@ -47,6 +47,19 @@
 }
 
 /* =============================================
+   SPOTLIGHT GLOW — cursor-following radial gradient on cards
+   JS sets --mouse-x / --mouse-y per element on mousemove
+   ============================================= */
+.card, .vlan-card, .principle, .unlock-card, .phase-card,
+.topo-box, .doc-item, .recovery-item, .stat, .workflow-step {
+  background-image: radial-gradient(
+    400px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+    rgba(255, 181, 71, 0.09),
+    transparent 40%
+  );
+}
+
+/* =============================================
    RESET & BASE
    ============================================= */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -414,7 +427,7 @@ body:not(.booting) .page {
   opacity: 0;
   transition: opacity 0.25s;
 }
-.stat:hover { background: var(--surface-1); }
+.stat:hover { background-color: var(--surface-1); }
 .stat:hover::before { opacity: 1; }
 .stat-number {
   font-family: var(--font-display);
@@ -591,7 +604,7 @@ body:not(.booting) .page {
   gap: 16px;
 }
 .card {
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 20px 22px;
@@ -618,7 +631,7 @@ body:not(.booting) .page {
   pointer-events: none;
   transition: border-color 0.2s;
 }
-.card:hover { background: var(--surface-2); border-color: var(--line-bright); }
+.card:hover { background-color: var(--surface-2); border-color: var(--line-bright); }
 .card:hover::before,
 .card:hover::after { border-color: var(--amber-dim); }
 .card-full { grid-column: 1 / -1; }
@@ -676,7 +689,7 @@ body:not(.booting) .page {
 /* full amber outline — used for highlighted service cards */
 .card-outline-amber {
   border-color: rgba(255,181,71,0.35);
-  background: rgba(255,181,71,0.04);
+  background-color: rgba(255,181,71,0.04);
 }
 .card-outline-amber::before,
 .card-outline-amber::after { border-color: var(--amber-dim); }
@@ -814,14 +827,14 @@ body:not(.booting) .page {
   gap: 14px;
 }
 .principle {
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 22px 20px 20px;
   position: relative;
   transition: background 0.2s, border-color 0.2s;
 }
-.principle:hover { background: var(--surface-2); border-color: var(--line-bright); }
+.principle:hover { background-color: var(--surface-2); border-color: var(--line-bright); }
 .principle::before {
   content: '';
   position: absolute;
@@ -951,7 +964,7 @@ body:not(.booting) .page {
 }
 
 .topo-box {
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line-bright);
   padding: 14px 20px;
   text-align: center;
@@ -1018,7 +1031,7 @@ body:not(.booting) .page {
 
 .topo-box-server {
   border-color: rgba(255,181,71,0.35);
-  background: rgba(255,181,71,0.04);
+  background-color: rgba(255,181,71,0.04);
 }
 .topo-box-server::before,
 .topo-box-server::after { border-color: var(--amber); }
@@ -1040,7 +1053,7 @@ body:not(.booting) .page {
 }
 
 .vlan-card {
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line-bright);
   padding: 42px 20px 20px;
   position: relative;
@@ -1067,7 +1080,7 @@ body:not(.booting) .page {
   transition: border-color 0.2s;
 }
 .vlan-card:hover {
-  background: var(--surface-2);
+  background-color: var(--surface-2);
   border-color: var(--line-hot);
 }
 .vlan-card-dim {
@@ -1178,12 +1191,12 @@ body:not(.booting) .page {
   align-items: flex-start;
   gap: 16px;
   padding: 14px 18px;
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition: background 0.2s;
 }
-.recovery-item:hover { background: var(--surface-2); }
+.recovery-item:hover { background-color: var(--surface-2); }
 .recovery-step {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -1244,14 +1257,14 @@ body:not(.booting) .page {
 @media (max-width: 768px) { .unlock-grid { grid-template-columns: 1fr; } }
 
 .unlock-card {
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line-bright);
   border-left: 3px solid var(--amber);
   padding: 20px 22px;
   position: relative;
   transition: background 0.2s;
 }
-.unlock-card:hover { background: var(--surface-2); }
+.unlock-card:hover { background-color: var(--surface-2); }
 .unlock-card::after {
   content: '';
   position: absolute;
@@ -1386,7 +1399,7 @@ body:not(.booting) .page {
 }
 .doc-item:nth-child(3n) { border-right: none; }
 .doc-item:nth-last-child(-n+3) { border-bottom: none; }
-.doc-item:hover { background: var(--surface-1); }
+.doc-item:hover { background-color: var(--surface-1); }
 .doc-badge {
   font-family: var(--font-mono);
   font-size: 8px;
@@ -1426,13 +1439,13 @@ body:not(.booting) .page {
 @media (max-width: 768px) { .phase-grid { grid-template-columns: 1fr; } }
 
 .phase-card {
-  background: var(--surface-1);
+  background-color: var(--surface-1);
   border: 1px solid var(--line);
   padding: 18px 20px;
   position: relative;
   transition: background 0.2s;
 }
-.phase-card:hover { background: var(--surface-2); }
+.phase-card:hover { background-color: var(--surface-2); }
 .phase-card::before {
   content: '';
   position: absolute;

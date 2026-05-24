@@ -56,4 +56,15 @@
 
 ---
 
+## v1.2.0 — May 2026
+
+### שינויים
+- **Spotlight glow** — אפקט זוהר עוקב-סמן על כל כרטיסי הדף
+  - JS: `mousemove`/`mouseleave` listeners על 10 סוגי אלמנטים — מעדכן `--mouse-x`/`--mouse-y` CSS vars
+  - CSS: `radial-gradient` ב-`background-image` (400px, amber 9% opacity) משתמש ב-vars אלו
+  - תיקון קריטי: כל `background:` shorthand על hover states הוחלף ב-`background-color:` כדי לשמור על ה-gradient
+  - אלמנטים מושפעים: `.card`, `.vlan-card`, `.principle`, `.unlock-card`, `.phase-card`, `.topo-box`, `.doc-item`, `.recovery-item`, `.stat`, `.workflow-step`
+
+---
+
 *עדכן קובץ זה בכל שינוי. תאריך + גרסה + תיאור קצר.*
