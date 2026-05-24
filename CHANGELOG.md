@@ -110,4 +110,40 @@
 
 ---
 
+## v1.5.0 — May 2026
+
+### דף הבית — Refactor מלא לסידבר צף
+
+**עיצוב מחדש מלא של `/`** בהשראת Vercel/Supabase dashboard.
+
+#### Layout
+- הוחלף עיצוב ה-CTA buttons ב-**Floating Sidebar** קבוע משמאל (240px)
+- תוכן ראשי ממורכז מימין לסיידבר, `max-width: 660px`
+
+#### Sidebar
+- **Top:** ⚡ `PERSONAL HUB` — IBM Plex Mono, uppercase
+- **Nav:** Homelab / Second Brain / Web App (badge "Soon", dim)
+  - Hover: rounded background `rgba(255,255,255,0.05)` + spotlight glow ענבר
+- **Bottom:** GitHub + LinkedIn עם SVG brand icons inline, מיושרים אופקית
+
+#### Mobile
+- Sidebar מוסתר — מוחלף ב-**Top Navbar** עם ⚡ PERSONAL HUB + hamburger button
+- לחיצה על hamburger → **Drawer** מחליק מהשמאל עם כל הקישורים
+- Overlay כהה מאחורי ה-drawer, לחיצה עליו סוגרת
+
+#### Copy
+- Label: `ABOUT ME —` (במקום `Hello —`)
+- Tagline: `Electrical Engineering Student (RF Track) · Israel`
+- Bio: 4 פסקאות נפרדות עם gap, closing line italic ומעומעמת
+
+#### Cursor Effects
+- **Spotlight על סיידבר** — `radial-gradient` 200px amber על `.nav-item` ו-`.ext-link`
+  - `background:` shorthand → `background-color:` לשמירת ה-gradient
+  - JS `mousemove`/`mouseleave` per-element
+- **Global cursor glow** — fixed overlay, `radial-gradient` 550px amber (5.5% opacity)
+  - JS tracks `mousemove` על `document`, מעדכן `--cx`/`--cy` CSS vars
+  - נעלם כש-mouse יוצא מהדף
+
+---
+
 *עדכן קובץ זה בכל שינוי. תאריך + גרסה + תיאור קצר.*

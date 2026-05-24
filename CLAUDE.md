@@ -25,7 +25,11 @@
 | `/homelab` | `src/pages/homelab/index.astro` | HomelabLayout, terminal aesthetic |
 | `/second-brain` | `src/pages/second-brain/index.astro` | עצמאי, Hebrew RTL, indigo (#6366f1) |
 
-**דף הבית:** עיצוב נקי ואנושי — IBM Plex Sans weight 300, לא טכני, לא Tailwind. אסור לשנות לסגנון הטרמינלי של ה-homelab.
+**דף הבית:** Floating Sidebar Layout — Vercel/Supabase inspired. סיידבר שמאלי קבוע 240px + תוכן ממורכז מימין. ללא Tailwind. אסור לשנות לסגנון הטרמינלי של ה-homelab.
+- Sidebar: ⚡ PERSONAL HUB, nav (Homelab / Second Brain / Web App Soon), GitHub + LinkedIn SVG icons
+- Mobile: top navbar + hamburger → slide drawer
+- Cursor effects: spotlight per nav item + global page glow
+- להוספת דף חדש: שורה ב-`.sidebar-nav` + שורה ב-`.drawer-nav`
 
 **דף Second Brain:** עצמאי לחלוטין (ללא layout משותף). Hebrew RTL. פונטים: Rubik (section labels) + Secular One (badges). Supabase waitlist + Telegram notifications.
 
