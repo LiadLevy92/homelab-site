@@ -56,6 +56,20 @@
 
 ---
 
+## v1.3.0 — May 2026
+
+### שינויים
+- **דף Second Brain** — `liad-dev.com/second-brain` — דף נחיתה + טופס וויטליסט
+  - Hebrew RTL, dark mode, indigo (#6366f1) כצבע ראשי
+  - טופס: שם + אימייל → Supabase `waiting_list` table (עם RLS)
+  - סקשנים: Hero, Pain Points, How It Works, Features, Waitlist Form
+  - הודעות: הצלחה / כפול / שגיאה
+  - Telegram notifications — pending (ממתין ל-bot token + chat ID)
+- **דף הבית** — נוספו כפתורים: Second Brain (indigo) + LinkedIn
+- **Supabase** — נוצרה טבלת `waiting_list` עם RLS (anon INSERT, authenticated read/update)
+
+---
+
 ## v1.2.0 — May 2026
 
 ### שינויים

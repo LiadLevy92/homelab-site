@@ -38,8 +38,14 @@
         <a href="/homelab" class="cta-primary">
           Homelab <span class="arrow">→</span>
         </a>
+        <a href="/second-brain" class="cta-brain">
+          Second Brain <span class="arrow">→</span>
+        </a>
         <a href="https://github.com/LiadLevy92" class="cta-secondary" target="_blank" rel="noopener">
           GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/liadlevy92/" class="cta-secondary" target="_blank" rel="noopener">
+          LinkedIn
         </a>
       </div>
 
@@ -171,6 +177,33 @@
   }
 
   .cta-primary:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  .cta-brain {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: #6366f1;
+    padding: 13px 28px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-brain:hover {
+    background: #818cf8;
+    transform: translateX(3px);
+  }
+
+  .cta-brain .arrow {
+    transition: transform 0.2s;
+  }
+
+  .cta-brain:hover .arrow {
     transform: translateX(4px);
   }
 
