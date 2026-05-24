@@ -1,5 +1,5 @@
 ---
-// Landing page — warm, human, personal
+// Landing page — floating sidebar layout
 ---
 <!doctype html>
 <html lang="en">
@@ -8,16 +8,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Liad Levy — Electrical Engineering student, homelab builder, dad of two. Personal hub." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>Liad Levy</title>
+  <title>Liad Levy — Personal Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <header class="hub-header">PERSONAL HUB</header>
+  <!-- Desktop Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="/" class="brand">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-text">PERSONAL HUB</span>
+      </a>
+    </div>
 
-  <main class="landing">
+    <nav class="sidebar-nav">
+      <span class="nav-label">Pages</span>
+      <a href="/homelab" class="nav-item">Homelab</a>
+      <a href="/second-brain" class="nav-item">Second Brain</a>
+      <a class="nav-item nav-item--dim">
+        Web App
+        <span class="nav-badge">Soon</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="https://github.com/LiadLevy92" class="ext-link" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/liadlevy92/" class="ext-link" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </aside>
+
+  <!-- Mobile Top Navbar -->
+  <header class="mobile-nav">
+    <a href="/" class="brand">
+      <span class="brand-icon">⚡</span>
+      <span class="brand-text">PERSONAL HUB</span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer" id="drawer">
+    <nav class="drawer-nav">
+      <span class="nav-label">Pages</span>
+      <a href="/homelab" class="nav-item">Homelab</a>
+      <a href="/second-brain" class="nav-item">Second Brain</a>
+      <a class="nav-item nav-item--dim">Web App <span class="nav-badge">Soon</span></a>
+      <div class="drawer-divider"></div>
+      <a href="https://github.com/LiadLevy92" class="nav-item" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/liadlevy92/" class="nav-item" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main">
     <div class="content">
 
       <div class="intro">
@@ -36,27 +87,36 @@
         <p class="bio-footer">Dad of two. Permanently curious. Learning by doing.</p>
       </div>
 
-      <div class="links">
-        <a href="/homelab" class="cta-primary">
-          Homelab <span class="arrow">→</span>
-        </a>
-        <a href="/second-brain" class="cta-brain">
-          Second Brain <span class="arrow">→</span>
-        </a>
-        <a href="https://github.com/LiadLevy92" class="cta-secondary" target="_blank" rel="noopener">
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/liadlevy92/" class="cta-secondary" target="_blank" rel="noopener">
-          LinkedIn
-        </a>
-      </div>
-
     </div>
-
-    <footer class="footer">
-      liad-dev.com
-    </footer>
   </main>
+
+  <script is:inline>
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawerOverlay');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    });
+
+    overlay.addEventListener('click', closeDrawer);
+
+    document.querySelectorAll('.drawer-nav .nav-item').forEach(link => {
+      if (link.href) link.addEventListener('click', closeDrawer);
+    });
+  </script>
 
 </body>
 </html>
@@ -80,52 +140,169 @@
     overflow-x: hidden;
   }
 
-  /* Subtle warm glow in the center */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255, 181, 71, 0.055), transparent 65%),
-      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(120, 100, 200, 0.04), transparent 60%);
+      radial-gradient(ellipse 70% 60% at 60% 40%, rgba(255, 181, 71, 0.045), transparent 65%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(120, 100, 200, 0.035), transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
 
-  .landing {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
+  /* ─── SIDEBAR ──────────────────────────────── */
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 220px;
+    padding: 32px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 64px 10vw;
-    max-width: 900px;
-    margin: 0 auto;
+    z-index: 100;
+  }
+
+  .sidebar-top {
+    margin-bottom: 44px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    font-size: 15px;
+  }
+
+  .brand-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #c8cad8;
+    text-transform: uppercase;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+  }
+
+  .nav-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+    color: #2e3348;
+    text-transform: uppercase;
+    padding: 0 10px;
+    margin-bottom: 6px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #7c8296;
+    padding: 7px 10px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e8eaf2;
+  }
+
+  .nav-item--dim {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .nav-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    color: #ffb547;
+    background: rgba(255, 181, 71, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: auto;
+  }
+
+  .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding-top: 16px;
+    border-top: 1px solid #181b28;
+  }
+
+  .ext-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #2e3348;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .ext-link:hover {
+    color: #7c8296;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* ─── MOBILE NAV ────────────────────────────── */
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  /* ─── DRAWER ────────────────────────────────── */
+
+  .drawer-overlay {
+    display: none;
+  }
+
+  .drawer {
+    display: none;
+  }
+
+  /* ─── MAIN CONTENT ──────────────────────────── */
+
+  .main {
+    margin-left: 220px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 8vw;
+    position: relative;
+    z-index: 1;
   }
 
   .content {
     width: 100%;
+    max-width: 660px;
   }
 
   .intro {
     margin-bottom: 20px;
-  }
-
-  .hub-header {
-    position: fixed;
-    top: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: #3a3f58;
-    text-transform: uppercase;
-    z-index: 10;
-    white-space: nowrap;
   }
 
   .hello {
@@ -138,7 +315,7 @@
   }
 
   .name {
-    font-size: clamp(64px, 11vw, 128px);
+    font-size: clamp(60px, 9vw, 120px);
     font-weight: 300;
     letter-spacing: -3px;
     line-height: 0.92;
@@ -155,112 +332,124 @@
   }
 
   .bio {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 300;
     color: #9ba3b5;
-    line-height: 1.8;
-    max-width: 540px;
-    margin-bottom: 52px;
+    line-height: 1.85;
     display: flex;
     flex-direction: column;
     gap: 18px;
   }
 
   .bio-footer {
-    color: #6b7280;
+    color: #4b5163;
     font-style: italic;
   }
 
-  .links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+  /* ─── MOBILE ────────────────────────────────── */
 
-  .cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    color: #0e0f18;
-    background: #ffb547;
-    padding: 13px 28px;
-    transition: background 0.2s, transform 0.15s;
-  }
+  @media (max-width: 768px) {
 
-  .cta-primary:hover {
-    background: #ffc872;
-    transform: translateX(3px);
-  }
+    .sidebar {
+      display: none;
+    }
 
-  .cta-primary .arrow {
-    transition: transform 0.2s;
-  }
+    .mobile-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(14, 15, 24, 0.95);
+      border-bottom: 1px solid #181b28;
+      backdrop-filter: blur(8px);
+    }
 
-  .cta-primary:hover .arrow {
-    transform: translateX(4px);
-  }
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
 
-  .cta-brain {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    color: #fff;
-    background: #6366f1;
-    padding: 13px 28px;
-    transition: background 0.2s, transform 0.15s;
-  }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: #6b7280;
+      transition: background 0.2s;
+      border-radius: 1px;
+    }
 
-  .cta-brain:hover {
-    background: #818cf8;
-    transform: translateX(3px);
-  }
+    .hamburger:hover span {
+      background: #e8eaf2;
+    }
 
-  .cta-brain .arrow {
-    transition: transform 0.2s;
-  }
+    .drawer-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 250;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
 
-  .cta-brain:hover .arrow {
-    transform: translateX(4px);
-  }
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
 
-  .cta-secondary {
-    text-decoration: none;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px;
-    color: #6b7280;
-    letter-spacing: 1px;
-    border-bottom: 1px solid #2a2d3e;
-    padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
-  }
+    .drawer {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 260px;
+      background: #0e0f18;
+      border-right: 1px solid #181b28;
+      padding: 28px 16px;
+      z-index: 300;
+      transform: translateX(-100%);
+      transition: transform 0.28s ease;
+    }
 
-  .cta-secondary:hover {
-    color: #e8eaf2;
-    border-color: #6b7280;
-  }
+    .drawer.open {
+      transform: translateX(0);
+    }
 
-  .footer {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10.5px;
-    color: #2e3348;
-    letter-spacing: 1.5px;
-  }
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 8px;
+    }
 
-  @media (max-width: 600px) {
-    .landing { padding: 48px 24px; }
-    .name { letter-spacing: -2px; }
+    .drawer-divider {
+      height: 1px;
+      background: #181b28;
+      margin: 10px 0;
+    }
+
+    .main {
+      margin-left: 0;
+      padding: 96px 24px 60px;
+      align-items: flex-start;
+    }
+
+    .name {
+      letter-spacing: -2px;
+    }
   }
 </style>
