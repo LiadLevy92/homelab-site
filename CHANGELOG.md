@@ -56,6 +56,17 @@
 
 ---
 
+## v1.2.0 — May 2026
+
+### שינויים
+- **Spotlight glow** — אפקט זוהר עוקב-סמן על כל כרטיסי הדף
+  - JS: `mousemove`/`mouseleave` listeners על 10 סוגי אלמנטים — מעדכן `--mouse-x`/`--mouse-y` CSS vars
+  - CSS: `radial-gradient` ב-`background-image` (400px, amber 9% opacity) משתמש ב-vars אלו
+  - תיקון קריטי: כל `background:` shorthand על hover states הוחלף ב-`background-color:` כדי לשמור על ה-gradient
+  - אלמנטים מושפעים: `.card`, `.vlan-card`, `.principle`, `.unlock-card`, `.phase-card`, `.topo-box`, `.doc-item`, `.recovery-item`, `.stat`, `.workflow-step`
+
+---
+
 ## v1.3.0 — May 2026
 
 ### שינויים
@@ -68,22 +79,34 @@
   - Copywriting: פנייה ברבים לאורך כל הדף
 - **דף הבית** — נוספו כפתורים: Second Brain (indigo) + LinkedIn
 - **Supabase** — נוצרה טבלת `waiting_list` עם RLS (anon INSERT, authenticated read/update)
-- **Telegram notifications** — הודעה אוטומטית בכל הרשמה חדשה:
+- **Telegram notifications** — הודעה אוטומטית בכל הרשמה חדשה (נבדק ועובד):
   - Edge Function `notify-waitlist` (Deno, ACTIVE) — קורא `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` מ-Secrets
   - pg_net extension מותקן ופעיל
   - DB Trigger `on_waitlist_signup` — AFTER INSERT על `waiting_list` → קורא ל-Edge Function
-  - **⚠️ Action required:** Supabase Dashboard → Edge Functions → `notify-waitlist` → Secrets → הוסף `TELEGRAM_BOT_TOKEN` ו-`TELEGRAM_CHAT_ID`
 
 ---
 
-## v1.2.0 — May 2026
+## v1.4.0 — May 2026
 
-### שינויים
-- **Spotlight glow** — אפקט זוהר עוקב-סמן על כל כרטיסי הדף
-  - JS: `mousemove`/`mouseleave` listeners על 10 סוגי אלמנטים — מעדכן `--mouse-x`/`--mouse-y` CSS vars
-  - CSS: `radial-gradient` ב-`background-image` (400px, amber 9% opacity) משתמש ב-vars אלו
-  - תיקון קריטי: כל `background:` shorthand על hover states הוחלף ב-`background-color:` כדי לשמור על ה-gradient
-  - אלמנטים מושפעים: `.card`, `.vlan-card`, `.principle`, `.unlock-card`, `.phase-card`, `.topo-box`, `.doc-item`, `.recovery-item`, `.stat`, `.workflow-step`
+### תיקון תשתית — Cloudflare Routing
+
+**בעיה שאובחנה:** לאחר deploy ל-Cloudflare Pages, כל הסאבדומיינים (`n8n.liad-dev.com`, `homeassistant.liad-dev.com`) הציגו את דף הבית במקום לנתב דרך הטאנל.
+
+**סיבת השורש:** הפרויקט `homelab-site` ב-Workers & Pages הוגדר עם Route `*.liad-dev.com/*` — wildcard שתפס את כל הסאבדומיינים לפני שהגיעו לטאנל.
+
+**תיקון:**
+1. נמחק ה-Route `*.liad-dev.com/*`
+2. נוסף Route ספציפי `liad-dev.com/*` (apex בלבד — ללא wildcard)
+3. נוסף Redirect Rule ב-Cloudflare: `www.liad-dev.com` → `https://liad-dev.com` (301)
+
+**תוצאה:**
+- ✅ `liad-dev.com` — מגיש את האתר מ-Pages
+- ✅ `n8n.liad-dev.com` — עובד דרך הטאנל
+- ✅ `homeassistant.liad-dev.com` — עובד דרך הטאנל
+- ✅ `www.liad-dev.com` — redirect ל-apex
+
+### ⚠️ הערה לעתיד
+בכל deploy עתידי לאתר — לוודא שה-Route בWorkers & Pages הוא `liad-dev.com/*` בלבד, **לא** `*.liad-dev.com/*`.
 
 ---
 

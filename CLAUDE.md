@@ -23,8 +23,11 @@
 |----|------|--------|
 | `/` | `src/pages/index.astro` | עצמאי, CSS inline, אנושי/רך |
 | `/homelab` | `src/pages/homelab/index.astro` | HomelabLayout, terminal aesthetic |
+| `/second-brain` | `src/pages/second-brain/index.astro` | עצמאי, Hebrew RTL, indigo (#6366f1) |
 
 **דף הבית:** עיצוב נקי ואנושי — IBM Plex Sans weight 300, לא טכני, לא Tailwind. אסור לשנות לסגנון הטרמינלי של ה-homelab.
+
+**דף Second Brain:** עצמאי לחלוטין (ללא layout משותף). Hebrew RTL. פונטים: Rubik (section labels) + Secular One (badges). Supabase waitlist + Telegram notifications.
 
 ---
 
@@ -46,17 +49,19 @@
 site/
 ├── src/
 │   ├── pages/
-│   │   ├── index.astro          ← דף הבית (placeholder)
-│   │   └── homelab/
-│   │       └── index.astro      ← דף ה-homelab הראשי
+│   │   ├── index.astro              ← דף הבית (אנושי, IBM Plex Sans)
+│   │   ├── homelab/
+│   │   │   └── index.astro          ← דף ה-homelab הראשי (terminal)
+│   │   └── second-brain/
+│   │       └── index.astro          ← דף Second Brain (Hebrew RTL, indigo)
 │   ├── layouts/
-│   │   └── HomelabLayout.astro  ← Layout wrapper (head, fonts, boot script)
+│   │   └── HomelabLayout.astro      ← Layout wrapper (head, fonts, boot script)
 │   └── styles/
-│       └── homelab.css          ← כל ה-CSS של הדף
+│       └── homelab.css              ← כל ה-CSS של דף ה-homelab
 ├── public/
 │   └── favicon.svg
-├── CLAUDE.md                    ← קובץ זה
-├── CHANGELOG.md                 ← לוג שינויים
+├── CLAUDE.md                        ← קובץ זה
+├── CHANGELOG.md                     ← לוג שינויים
 ├── astro.config.mjs
 └── package.json
 ```
@@ -154,6 +159,48 @@ Footer
 ```bash
 npm run build   # חייב לעבור בלי שגיאות
 ```
+
+---
+
+## ⚠️ Cloudflare Routing — כללי קריטיים
+
+### בעיה שנתקלנו בה (מאי 2026)
+הפרויקט ב-Workers & Pages הוגדר עם Route `*.liad-dev.com/*` — wildcard שגרם לכל הסאבדומיינים (`n8n.liad-dev.com`, `homeassistant.liad-dev.com`) להציג את האתר במקום לנתב דרך הטאנל.
+
+### הגדרה נכונה (Workers & Pages → homelab-site → Domains):
+| Route | מטרה |
+|-------|-------|
+| `liad-dev.com/*` | ✅ apex בלבד — Pages מגיש את האתר |
+| ~~`*.liad-dev.com/*`~~ | ❌ אסור — חוסם את הטאנל |
+
+### DNS נכון (Cloudflare DNS):
+| שם | סוג | תוכן |
+|----|-----|------|
+| `liad-dev.com` | A | `192.64.119.165` (Pages IP) |
+| `n8n` | Tunnel | `homelab` |
+| `homeassistant` | Tunnel | `homelab` |
+| `www` | — | Redirect rule → `https://liad-dev.com` (301) |
+
+### Cloudflare Tunnel (Zero Trust → Networks → Connectors → homelab → Published application routes):
+| Hostname | Service |
+|----------|---------|
+| `n8n.liad-dev.com` | `http://n8n:5678` |
+| `homeassistant.liad-dev.com` | `http://10.100.102.210:8123` |
+
+---
+
+## 🗄️ Supabase — Second Brain Waitlist
+
+**פרויקט:** `secondbrainbot` (ID: `xntytizwljdlblyusfpo`)
+
+| רכיב | פרטים |
+|------|--------|
+| טבלה | `waiting_list` — שם + אימייל + created_at |
+| RLS | anon: INSERT בלבד. authenticated: SELECT/UPDATE |
+| Edge Function | `notify-waitlist` — שולח Telegram בכל הרשמה |
+| pg_net | מותקן — מאפשר HTTP מ-DB trigger |
+| DB Trigger | `on_waitlist_signup` — AFTER INSERT → Edge Function |
+| Secrets | `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` (בדשבורד Supabase) |
 
 ---
 
