@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Liad Levy — Electrical engineering student, homelab builder, dad of two." />
+  <meta name="description" content="Liad Levy — Electrical Engineering student, homelab builder, dad of two. Personal hub." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>Liad Levy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,24 +15,26 @@
 </head>
 <body>
 
+  <header class="hub-header">PERSONAL HUB</header>
+
   <main class="landing">
     <div class="content">
 
       <div class="intro">
-        <span class="hello">Hello —</span>
+        <span class="hello">About me —</span>
       </div>
 
       <h1 class="name">Liad<br>Levy</h1>
 
-      <p class="tagline">Electrical Engineering Student · Israel</p>
+      <p class="tagline">Electrical Engineering Student (RF Track) · Israel</p>
 
-      <p class="bio">
-        I run a self-hosted homelab on a PC I found on the street —
-        a hypervisor, smart home, AI automations, and a Telegram bot
-        built one late-night session at a time.
-        <br><br>
-        Dad of two. Permanently curious. Learning by doing.
-      </p>
+      <div class="bio">
+        <p>Hey there! I'm an Electrical Engineering student and a lifelong tinkerer. For as long as I can remember, I've been obsessed with figuring out how things work and solving problems using technology.</p>
+        <p>The real turning point happened when I rescued an old PC from the street. It was the perfect playground I needed to unleash that curiosity.</p>
+        <p>In today's AI era, everything clicked. Instead of spending months mastering every single domain from scratch, I leverage AI to instantly bridge the gap for any task at hand. It has become my ultimate force multiplier — allowing me to jump straight into action, write custom code, and deploy complex tools one late-night session at a time.</p>
+        <p>In fact, it's exactly how I built this entire personal hub, mapped out my homelab blueprints, and developed the web application you can access right here on this site.</p>
+        <p class="bio-footer">Dad of two. Permanently curious. Learning by doing.</p>
+      </div>
 
       <div class="links">
         <a href="/homelab" class="cta-primary">
@@ -111,6 +113,21 @@
     margin-bottom: 20px;
   }
 
+  .hub-header {
+    position: fixed;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #3a3f58;
+    text-transform: uppercase;
+    z-index: 10;
+    white-space: nowrap;
+  }
+
   .hello {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
@@ -144,6 +161,14 @@
     line-height: 1.8;
     max-width: 540px;
     margin-bottom: 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .bio-footer {
+    color: #6b7280;
+    font-style: italic;
   }
 
   .links {
