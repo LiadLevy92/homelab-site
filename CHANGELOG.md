@@ -61,12 +61,18 @@
 ### שינויים
 - **דף Second Brain** — `liad-dev.com/second-brain` — דף נחיתה + טופס וויטליסט
   - Hebrew RTL, dark mode, indigo (#6366f1) כצבע ראשי
+  - פונטים: IBM Plex Sans + Rubik (section labels) + Secular One (badges) — Hebrew-native
   - טופס: שם + אימייל → Supabase `waiting_list` table (עם RLS)
-  - סקשנים: Hero, Pain Points, How It Works, Features, Waitlist Form
+  - סקשנים: Hero, Scenarios ("מכירים את זה?"), Waitlist Form
   - הודעות: הצלחה / כפול / שגיאה
-  - Telegram notifications — pending (ממתין ל-bot token + chat ID)
+  - Copywriting: פנייה ברבים לאורך כל הדף
 - **דף הבית** — נוספו כפתורים: Second Brain (indigo) + LinkedIn
 - **Supabase** — נוצרה טבלת `waiting_list` עם RLS (anon INSERT, authenticated read/update)
+- **Telegram notifications** — הודעה אוטומטית בכל הרשמה חדשה:
+  - Edge Function `notify-waitlist` (Deno, ACTIVE) — קורא `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` מ-Secrets
+  - pg_net extension מותקן ופעיל
+  - DB Trigger `on_waitlist_signup` — AFTER INSERT על `waiting_list` → קורא ל-Edge Function
+  - **⚠️ Action required:** Supabase Dashboard → Edge Functions → `notify-waitlist` → Secrets → הוסף `TELEGRAM_BOT_TOKEN` ו-`TELEGRAM_CHAT_ID`
 
 ---
 
