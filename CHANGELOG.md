@@ -146,4 +146,17 @@
 
 ---
 
+## v1.6.0 — May 2026
+
+### תיקוני Mobile — דף Homelab
+
+- **§03 NETWORK — Topology** — תוקן overflow על מסכים צרים
+  - נוסף `min-width: max-content` ל-`.topo-tree` — הדיאגרמה גולשת אופקית בתוך `.topo-wrap` במקום להיחתך
+  - נוסף `-webkit-overflow-scrolling: touch` ל-`.topo-wrap` — גלילה חלקה ב-iOS
+- **§04 SERVICES — VM Table** — תוקן גלישת עמודות על נייד
+  - הטבלה עוטפת ב-`<div class="vm-table-scroll">` עם `overflow-x: auto`
+  - כל 5 עמודות (VM, Name, Role, OS, Status) נגישות על כל רוחב מסך
+
+---
+
 *עדכן קובץ זה בכל שינוי. תאריך + גרסה + תיאור קצר.*
