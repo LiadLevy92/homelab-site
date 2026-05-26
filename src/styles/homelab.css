@@ -736,6 +736,10 @@ body:not(.booting) .page {
 }
 .vm-table tr:hover td { background: var(--surface-1); }
 .vm-table tr:last-child td { border-bottom: none; }
+.vm-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .vm-id {
   font-family: var(--font-mono);
   font-weight: 700;
@@ -915,8 +919,10 @@ body:not(.booting) .page {
   border-radius: var(--radius);
   padding: 28px 24px 32px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin-bottom: 16px;
 }
+.topo-tree { min-width: max-content; }
 .topo-meta {
   display: flex;
   justify-content: space-between;
