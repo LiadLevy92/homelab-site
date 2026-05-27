@@ -1,11 +1,11 @@
 ---
 // Landing page — floating sidebar layout
 const canonicalURL = 'https://liad-dev.com/';
-const title = 'Liad Levy — Personal Hub';
-const description = 'Liad Levy — Electrical Engineering student (RF Track), homelab builder, dad of two. Self-hosting enthusiast building with Proxmox, Home Assistant, and n8n.';
+const title = 'ליעד לוי | הנדסת חשמל, מערכות הספק RF וניהול פרויקטים';
+const description = 'האתר האישי של ליעד לוי. סטודנט להנדסת חשמל והתמחות ב-RF, מנהל ומפתח פרויקטים בתחומי ה-DIY, האוטומציות וה-Homelab.';
 ---
 <!doctype html>
-<html lang="en">
+<html lang="he" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +13,8 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
   <!-- Primary SEO -->
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="author" content="Liad Levy" />
-  <meta name="keywords" content="Liad Levy, Electrical Engineering, RF Engineering, Homelab, Self-hosted, Proxmox, Home Assistant, n8n, DIY, Israel, Second Brain" />
+  <meta name="author" content="ליעד לוי" />
+  <meta name="keywords" content="ליעד לוי, Liad Levy, הנדסת חשמל, RF, מערכות הספק, LiFePO4, Homelab, Proxmox, Home Assistant, n8n, DIY, אוטומציות, ישראל, Second Brain" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href={canonicalURL} />
 
@@ -23,7 +23,8 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:site_name" content="Liad Levy" />
+  <meta property="og:site_name" content="ליעד לוי" />
+  <meta property="og:locale" content="he_IL" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
@@ -35,14 +36,15 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Liad Levy",
+    "name": "ליעד לוי",
+    "alternateName": "Liad Levy",
     "url": "https://liad-dev.com",
     "sameAs": [
       "https://github.com/LiadLevy92",
       "https://www.linkedin.com/in/liadlevy92/"
     ],
-    "jobTitle": "Electrical Engineering Student",
-    "description": "Homelab builder, self-hosting enthusiast, and RF Engineering student"
+    "jobTitle": "סטודנט להנדסת חשמל, התמחות RF",
+    "description": "מנהל ומפתח פרויקטים בתחומי DIY, אוטומציות, Homelab ומערכות הספק"
   }
   </script>
 
@@ -124,25 +126,73 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
     <div class="content">
 
       <div class="intro">
-        <span class="hello">About me —</span>
+        <span class="hello">מי אני —</span>
       </div>
 
       <h1 class="name">Liad<br>Levy</h1>
 
-      <p class="tagline">Electrical Engineering Student (RF Track) · Israel</p>
+      <p class="tagline">סטודנט להנדסת חשמל (RF Track) · ישראל</p>
 
       <div class="bio">
-        <p>Hey there! I'm an Electrical Engineering student and a lifelong tinkerer. For as long as I can remember, I've been obsessed with figuring out how things work and solving problems using technology.</p>
-        <p>The real turning point happened when I rescued an old PC from the street. It was the perfect playground I needed to unleash that curiosity.</p>
-        <p>In today's AI era, everything clicked. Instead of spending months mastering every single domain from scratch, I leverage AI to instantly bridge the gap for any task at hand. It has become my ultimate force multiplier — allowing me to jump straight into action, write custom code, and deploy complex tools one late-night session at a time.</p>
-        <p>In fact, it's exactly how I built this entire personal hub, mapped out my homelab blueprints, and developed the web application you can access right here on this site.</p>
-        <p class="bio-footer">Dad of two. Permanently curious. Learning by doing.</p>
+        <p>היי, אני ליעד לוי.</p>
+
+        <p>אני מאמין שהדרך הכי טובה להכיר בן אדם היא לראות מה הוא עושה בשעות הפנאי שלו. כחלק מהפרויקטים שלי בניתי את האתר הזה, פשוט כדי שיהיה מקום שמתעד את העשייה שלי בגובה העיניים ובדרך שלי.</p>
+
+        <p>ביום-יום אני סטודנט להנדסת חשמל עם התמחות ב-RF ב-SCE, אבא לשניים ולוחם במילואים. בלילה, אני מנהל ומפיק את הפרויקטים שלי.</p>
+
+        <p>אם תסתכלו על הקוד כאן או באפליקציות שלי, תראו מושגים כמו Next.js, סופאבייס, דוקר או פרוקסמוקס. אבל האמת? אני בכלל סטודנט להנדסת חשמל 😅 וזה כל היופי – היום כבר לא חייבים להיות מתכנתים או אנשי סיסטם קלאסיים. כל מה שצריך זה לדעת מה אתה רוצה להשיג ואיך לנהל את זה נכון.</p>
+
+        <p>ה-AI הוא כלי חזק בטירוף, הוא ברגע נותן לנו לראות את התמונה המלאה: מהאפיון הראשוני ועד למוצר עובד (כביכול חח), אבל בלי הדרכה מתאימה, יצירתיות וחשיבה ביקורתית הוא כמו הפטיש של תור בידיים של ספיידרמן.</p>
+
+        <p>פה באתר תוכלו להתרשם ממה שעל הדרך קלוד בנה בהדרכתי 😉, לצד פרויקטים פיזיים של ספקי כוח ותחנות אנרגיה (LiFePO4), תכנון מארזים ב-Fusion 360, ואוטומציות שרצות אצלי ב-Homelab.</p>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="contact-section">
+        <p class="contact-heading">מחפשים עובד?</p>
+        <p class="contact-body">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
+        <div class="contact-wrap">
+          <button class="contact-btn" id="contactBtn" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            צרו איתי קשר
+            <svg class="chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="contact-dropdown" id="contactDropdown" aria-hidden="true">
+            <a
+              href="https://mail.google.com/mail/?view=cm&to=liad1023@gmail.com&subject=%D7%94%D7%99%D7%99%20%D7%9C%D7%99%D7%A2%D7%93%20%E2%80%94%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98%D7%99%D7%9D"
+              target="_blank"
+              rel="noopener"
+              class="contact-option"
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                <path fill="#EA4335" d="M6 18V9.5L12 13l6-3.5V18H6z"/>
+                <path fill="#FBBC04" d="M6 9.5 0 6v12l6-4.5V9.5z"/>
+                <path fill="#34A853" d="M18 9.5V18l6-4.5V6l-6 3.5z"/>
+                <path fill="#4285F4" d="m0 6 12 7 12-7-12-7L0 6z"/>
+              </svg>
+              פתח ב-Gmail
+            </a>
+            <button class="contact-option" id="copyEmailBtn">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span id="copyLabel">העתק כתובת מייל</span>
+            </button>
+          </div>
+        </div>
       </div>
 
     </div>
   </main>
 
   <script is:inline>
+    // ─── Drawer ────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('drawerOverlay');
@@ -169,7 +219,7 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
       if (link.href) link.addEventListener('click', closeDrawer);
     });
 
-    // Global page cursor glow
+    // ─── Cursor glows ──────────────────────
     const glow = document.getElementById('cursorGlow');
     document.addEventListener('mousemove', e => {
       glow.style.setProperty('--cx', `${e.clientX}px`);
@@ -180,7 +230,6 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
       glow.style.setProperty('--cy', '-9999px');
     });
 
-    // Spotlight cursor glow
     document.querySelectorAll('.nav-item, .ext-link').forEach(el => {
       el.addEventListener('mousemove', e => {
         const r = el.getBoundingClientRect();
@@ -190,6 +239,35 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
       el.addEventListener('mouseleave', () => {
         el.style.setProperty('--mouse-x', '-9999px');
         el.style.setProperty('--mouse-y', '-9999px');
+      });
+    });
+
+    // ─── Contact dropdown ──────────────────
+    const contactBtn = document.getElementById('contactBtn');
+    const contactDropdown = document.getElementById('contactDropdown');
+
+    contactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = contactDropdown.classList.contains('open');
+      contactDropdown.classList.toggle('open', !isOpen);
+      contactBtn.setAttribute('aria-expanded', String(!isOpen));
+      contactDropdown.setAttribute('aria-hidden', String(isOpen));
+    });
+
+    document.addEventListener('click', () => {
+      contactDropdown.classList.remove('open');
+      contactBtn.setAttribute('aria-expanded', 'false');
+      contactDropdown.setAttribute('aria-hidden', 'true');
+    });
+
+    contactDropdown.addEventListener('click', e => e.stopPropagation());
+
+    // ─── Copy email ────────────────────────
+    document.getElementById('copyEmailBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText('liad1023@gmail.com').then(() => {
+        const label = document.getElementById('copyLabel');
+        label.textContent = 'הועתק! ✓';
+        setTimeout(() => { label.textContent = 'העתק כתובת מייל'; }, 2000);
       });
     });
   </script>
@@ -415,6 +493,8 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
     letter-spacing: 2px;
     color: #ffb547;
     text-transform: uppercase;
+    direction: rtl;
+    display: block;
   }
 
   .name {
@@ -430,8 +510,10 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12.5px;
     color: #6b7280;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     margin-bottom: 36px;
+    direction: rtl;
+    text-align: right;
   }
 
   .bio {
@@ -442,11 +524,120 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
     display: flex;
     flex-direction: column;
     gap: 18px;
+    direction: rtl;
+    text-align: right;
   }
 
-  .bio-footer {
+  /* ─── CONTACT SECTION ───────────────────────── */
+
+  .contact-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid #181b28;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .contact-heading {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: #ffb547;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .contact-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: #6b7280;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .contact-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #e8eaf2;
+    background: #13151e;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    direction: rtl;
+  }
+
+  .contact-btn:hover {
+    background: #1a1d2a;
+    border-color: rgba(255, 181, 71, 0.35);
+    color: #ffb547;
+  }
+
+  .contact-btn .chevron {
+    transition: transform 0.2s ease;
     color: #4b5163;
-    font-style: italic;
+  }
+
+  .contact-btn[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+    color: #ffb547;
+  }
+
+  .contact-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    background: #13151e;
+    border: 1px solid #2a2d3e;
+    border-radius: 8px;
+    padding: 6px;
+    z-index: 200;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .contact-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  .contact-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 13.5px;
+    color: #9ba3b5;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .contact-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e8eaf2;
   }
 
   /* ─── MOBILE ────────────────────────────────── */
@@ -553,6 +744,11 @@ const description = 'Liad Levy — Electrical Engineering student (RF Track), ho
 
     .name {
       letter-spacing: -2px;
+    }
+
+    .contact-dropdown {
+      right: auto;
+      left: 0;
     }
   }
 </style>
