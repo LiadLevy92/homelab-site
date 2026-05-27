@@ -4,16 +4,37 @@ export interface Props {
   title?: string;
   description?: string;
 }
-const { title = 'Homelab — Liad Levy', description = "Liad's self-hosted homelab — Proxmox, Home Assistant, n8n, Second Brain Bot" } = Astro.props;
+const { title = 'Homelab — Liad Levy', description = "Liad Levy's self-hosted homelab — Proxmox, Home Assistant, n8n, Docker, Cloudflare Tunnel, and Second Brain Bot." } = Astro.props;
+const canonicalURL = 'https://liad-dev.com/homelab';
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Primary SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Liad Levy" />
+    <meta name="keywords" content="Homelab, Self-hosted, Proxmox, Home Assistant, n8n, Docker, Cloudflare Tunnel, Second Brain, Automation, Liad Levy, Israel, DIY server, VMs" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Liad Levy" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />

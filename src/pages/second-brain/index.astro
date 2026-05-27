@@ -1,14 +1,38 @@
 ---
 // Second Brain — Landing Page & Waitlist
+const canonicalURL = 'https://liad-dev.com/second-brain';
+const title = 'Second Brain — הצטרפו לוויטליסט';
+const description = 'Second Brain — המוח השני שלך בטלגרם. שלח תמונה, קול, או טקסט — הבוט מתייק ל-Notion אוטומטית עם AI. שמור הכל, מצא הכל.';
 ---
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Second Brain — המוח השני שלך בטלגרם. שמור הכל, מצא הכל." />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Liad Levy" />
+  <meta name="keywords" content="Second Brain, בוט טלגרם, Notion, AI, PKM, ניהול ידע, בוט, אוטומציה, ליעד לוי" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="Liad Levy" />
+  <meta property="og:locale" content="he_IL" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>Second Brain — הצטרפו לוויטליסט</title>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Rubik:wght@500;600&family=Secular+One&display=swap" rel="stylesheet" />

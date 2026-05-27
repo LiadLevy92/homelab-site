@@ -1,14 +1,53 @@
 ---
 // Landing page — floating sidebar layout
+const canonicalURL = 'https://liad-dev.com/';
+const title = 'Liad Levy — Personal Hub';
+const description = 'Liad Levy — Electrical Engineering student (RF Track), homelab builder, dad of two. Self-hosting enthusiast building with Proxmox, Home Assistant, and n8n.';
 ---
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Liad Levy — Electrical Engineering student, homelab builder, dad of two. Personal hub." />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Liad Levy" />
+  <meta name="keywords" content="Liad Levy, Electrical Engineering, RF Engineering, Homelab, Self-hosted, Proxmox, Home Assistant, n8n, DIY, Israel, Second Brain" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="Liad Levy" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- JSON-LD — Person schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Liad Levy",
+    "url": "https://liad-dev.com",
+    "sameAs": [
+      "https://github.com/LiadLevy92",
+      "https://www.linkedin.com/in/liadlevy92/"
+    ],
+    "jobTitle": "Electrical Engineering Student",
+    "description": "Homelab builder, self-hosting enthusiast, and RF Engineering student"
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>Liad Levy — Personal Hub</title>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
