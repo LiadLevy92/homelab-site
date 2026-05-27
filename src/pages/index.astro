@@ -126,14 +126,35 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     <div class="content">
 
       <div class="intro">
-        <span class="hello">מי אני —</span>
+        <span class="hello">About me —</span>
       </div>
 
       <h1 class="name">Liad<br>Levy</h1>
 
-      <p class="tagline">סטודנט להנדסת חשמל (RF Track) · ישראל</p>
+      <p class="tagline">Electrical Engineering Student (RF Track) · Israel</p>
 
+      <!-- ── English bio ─────────────────────── -->
       <div class="bio">
+        <p>Hi, I'm Liad Levy.</p>
+
+        <p>I believe the best way to get to know someone is to see what they do in their spare time. I built this site as a place to document what I do — in my own way, at eye level.</p>
+
+        <p>During the day I'm an Electrical Engineering student specializing in RF at SCE, a father of two, and a reserve combat soldier. At night, I run my own projects.</p>
+
+        <p>If you look at the code here or in my apps, you'll see things like Next.js, Supabase, Docker, or Proxmox. But honestly? I'm an Electrical Engineering student 😅 — and that's exactly the point. You don't need to be a classic programmer or sysadmin anymore. You just need to know what you want to build and how to manage the process.</p>
+
+        <p>AI is a ridiculously powerful tool. It instantly shows you the full picture — from initial spec to a working product (well, sort of lol). But without proper guidance, creativity, and critical thinking, it's like Thor's hammer in Spider-Man's hands.</p>
+
+        <p>Here you can check out what Claude built under my direction 😉, alongside physical projects — power supplies and energy stations (LiFePO4), enclosure design in Fusion 360, and automations running in my Homelab.</p>
+      </div>
+
+      <!-- ── Language divider ───────────────── -->
+      <div class="lang-sep">
+        <span class="lang-tag">עברית</span>
+      </div>
+
+      <!-- ── Hebrew bio ──────────────────────── -->
+      <div class="bio bio-rtl">
         <p>היי, אני ליעד לוי.</p>
 
         <p>אני מאמין שהדרך הכי טובה להכיר בן אדם היא לראות מה הוא עושה בשעות הפנאי שלו. כחלק מהפרויקטים שלי בניתי את האתר הזה, פשוט כדי שיהיה מקום שמתעד את העשייה שלי בגובה העיניים ובדרך שלי.</p>
@@ -149,8 +170,13 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
 
       <!-- Contact Section -->
       <div class="contact-section">
-        <p class="contact-heading">מחפשים עובד?</p>
-        <p class="contact-body">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
+        <p class="contact-heading">
+          Looking to hire?
+          <span class="contact-heading-sep">/</span>
+          <span class="contact-heading-he">מחפשים עובד?</span>
+        </p>
+        <p class="contact-body">If you've seen the projects and like the way I think — I'd love to send over my CV.</p>
+        <p class="contact-body contact-body-he">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
         <div class="contact-wrap">
           <button class="contact-btn" id="contactBtn" aria-expanded="false">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -493,7 +519,6 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     letter-spacing: 2px;
     color: #ffb547;
     text-transform: uppercase;
-    direction: rtl;
     display: block;
   }
 
@@ -510,10 +535,8 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12.5px;
     color: #6b7280;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     margin-bottom: 36px;
-    direction: rtl;
-    text-align: right;
   }
 
   .bio {
@@ -524,8 +547,38 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     display: flex;
     flex-direction: column;
     gap: 18px;
+  }
+
+  /* Hebrew bio — RTL */
+  .bio-rtl {
     direction: rtl;
     text-align: right;
+  }
+
+  /* Language divider */
+  .lang-sep {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 40px 0;
+  }
+
+  .lang-sep::before,
+  .lang-sep::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #181b28;
+  }
+
+  .lang-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #2e3348;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   /* ─── CONTACT SECTION ───────────────────────── */
@@ -534,8 +587,6 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     margin-top: 48px;
     padding-top: 32px;
     border-top: 1px solid #181b28;
-    direction: rtl;
-    text-align: right;
   }
 
   .contact-heading {
@@ -546,6 +597,18 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     color: #ffb547;
     text-transform: uppercase;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .contact-heading-sep {
+    color: #2e3348;
+  }
+
+  .contact-heading-he {
+    direction: rtl;
   }
 
   .contact-body {
@@ -553,6 +616,12 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     font-weight: 300;
     color: #6b7280;
     line-height: 1.7;
+    margin-bottom: 6px;
+  }
+
+  .contact-body-he {
+    direction: rtl;
+    text-align: right;
     margin-bottom: 20px;
   }
 
