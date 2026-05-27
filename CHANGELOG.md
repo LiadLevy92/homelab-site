@@ -146,6 +146,27 @@
 
 ---
 
+## v1.7.0 — May 2026
+
+### SEO — קידום אורגני
+
+- **כל 3 הדפים** קיבלו metadata מלא:
+  - `<meta name="keywords">` — מילות מפתח רלוונטיות לכל דף
+  - `<meta name="robots" content="index, follow">`
+  - `<meta name="author" content="Liad Levy">`
+  - `<link rel="canonical">` — URL קנוני מדויק
+- **Open Graph** — `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`
+  - דף Second Brain: `og:locale = he_IL`
+- **Twitter Card** — `summary` card בכל דף
+- **JSON-LD Person Schema** — דף הבית: Person schema עם `sameAs` ל-GitHub ו-LinkedIn
+- **sitemap.xml** — `public/sitemap.xml` עם 3 URLs + priority weights
+  - `liad-dev.com/` → priority 1.0
+  - `liad-dev.com/homelab` → priority 0.9
+  - `liad-dev.com/second-brain` → priority 0.8
+- **`<link rel="sitemap">`** — בכל דף, לגוגלבוט
+
+---
+
 ## v1.6.0 — May 2026
 
 ### תיקוני Mobile — דף Homelab
