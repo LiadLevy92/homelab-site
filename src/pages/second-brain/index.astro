@@ -336,7 +336,7 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
         var isUrl = s.userText.startsWith('http');
         if (inputField) inputField.dir = isUrl ? 'ltr' : 'rtl';
         await typeIn(s.userText, 42);
-        await wait(650); /* pause after typing before sending */
+        await wait(450); /* pause after typing before sending */
       }
 
       // 2. Send button press animation
@@ -364,11 +364,11 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
         userHtml = utxt + '<div class="tg-time">' + nowTime() + ' ✓✓</div>';
       }
       appendMsg(userHtml, 'tg-msg-user');
-      await wait(700); /* pause before מנתח appears */
+      await wait(500); /* pause before מנתח appears */
 
-      // 3. Typing indicator — visible for 2.8s so users clearly see it
+      // 3. Typing indicator — visible for 2.5s so users clearly see it
       var typing = appendMsg('<div class="tg-dots"><span></span><span></span><span></span></div>', 'tg-msg-bot');
-      await wait(2800);
+      await wait(2500);
       if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
       await wait(120);
 
@@ -410,17 +410,17 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
       await wait(1600);
       var saveBtn = card.querySelector('.tg-save');
       if (saveBtn) {
-        saveBtn.classList.add('tapped');          /* scale down — looks like a finger tap */
-        await wait(240);
+        saveBtn.classList.add('tapped');          /* bounce animation — clear finger tap */
+        await wait(380);                          /* wait for full animation (0.35s + buffer) */
         saveBtn.classList.remove('tapped');
         saveBtn.classList.add('active');          /* green confirm state */
       }
-      await wait(450);
+      await wait(400);
 
       // 8. Confirmation message
       var confirmHtml = s.saved.replace('\n', '<br>') + '<div class="tg-time">' + nowTime() + '</div>';
       appendMsg(confirmHtml, 'tg-msg-bot tg-confirm');
-      await wait(2600);
+      await wait(2400);
 
       // 9. Fade out & reset for next scenario
       var msgs = document.getElementById('tgMsgs');
@@ -828,14 +828,16 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     font-size: 13.5px; line-height: 1.5;
     opacity: 0; transform: translateY(8px);
     transition: opacity 0.22s ease, transform 0.22s ease;
+    align-self: flex-start; /* base: all messages start on left */
   }
   .tg-msg.show { opacity: 1; transform: translateY(0); }
   .tg-msg-user {
-    align-self: flex-end; background: #8774e1; color: #fff;
+    margin-left: auto; /* physical property — always pushes to RIGHT regardless of RTL */
+    background: #8774e1; color: #fff;
     border-bottom-right-radius: 3px; direction: rtl; text-align: right;
   }
   .tg-msg-bot {
-    align-self: flex-start; background: #182533; color: #d4dde6;
+    background: #182533; color: #d4dde6;
     border-bottom-left-radius: 3px; direction: rtl; text-align: right;
   }
   .tg-time { font-size: 10.5px; color: rgba(255,255,255,0.4); margin-top: 4px; text-align: left; direction: ltr; }
@@ -910,9 +912,10 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; flex-shrink: 0; transition: transform 0.12s;
   }
-  .tg-kbtn { transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s !important; }
-  @keyframes tgTap { 0% { transform:scale(1); } 40% { transform:scale(0.84); } 100% { transform:scale(1); } }
-  .tg-save.tapped { animation: tgTap 0.22s ease-out; }
+  .tg-kbtn { transition: background 0.15s, border-color 0.15s, color 0.15s !important; } /* no transform transition — let animation own it */
+  @keyframes tgTap { 0% { transform:scale(1); } 30% { transform:scale(0.74); } 75% { transform:scale(1.06); } 100% { transform:scale(1); } }
+  .tg-save.tapped { animation: tgTap 0.35s cubic-bezier(.36,.07,.19,.97); }
+  .tg-save.active { background: rgba(77,205,94,0.28) !important; border-color: #4dcd5e !important; color: #4dcd5e !important; font-weight: 600; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
