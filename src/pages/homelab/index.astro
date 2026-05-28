@@ -468,26 +468,16 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
       </div>
       <div class="vlan-grid">
         <div class="vlan-card reveal reveal-delay-1">
-          <div class="vlan-badge">N8N — WORKFLOW ENGINE</div>
+          <div class="vlan-badge">N8N — AUTOMATIONS</div>
           <ul>
-            <li><strong>InboxNinja</strong> — Gmail classifier · 7 categories</li>
-            <li>Newsletters, receipts, action items, FYI, promotions</li>
-            <li>Structured receipt extraction · smart archiving</li>
+            <li><strong>InboxNinja</strong> — Gmail classifier · 7 categories · receipts, newsletters, action items</li>
+            <li><strong>Daily Feedback Review</strong> — 09:00 daily · Notion → Claude API → Telegram</li>
+            <li>Hebrew analysis: user intent + proposed fix + complexity level</li>
             <li>Model: <code>claude-sonnet-4-6</code> · Claude API</li>
             <li><span class="badge badge-ok" style="font-size:10px;">active</span></li>
           </ul>
         </div>
-        <div class="vlan-card reveal reveal-delay-2">
-          <div class="vlan-badge">N8N — FEEDBACK REVIEW</div>
-          <ul>
-            <li><strong>Daily Feedback Review</strong> — runs every day at 09:00</li>
-            <li>Pulls unreviewed feedback from Notion · sends to Claude API</li>
-            <li>Hebrew analysis: user intent + proposed fix + complexity</li>
-            <li>Telegram report + auto-updates Notion status → In Review</li>
-            <li><span class="badge badge-ok" style="font-size:10px;">active</span></li>
-          </ul>
-        </div>
-        <div class="vlan-card vlan-card-dim reveal reveal-delay-3">
+        <div class="vlan-card vlan-card-dim reveal reveal-delay-2">
           <div class="vlan-badge">HOME ASSISTANT — AUTOMATIONS</div>
           <ul>
             <li style="color:var(--text-muted); font-style:italic;">In development — coming soon</li>
