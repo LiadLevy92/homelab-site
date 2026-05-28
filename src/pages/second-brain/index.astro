@@ -318,7 +318,8 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
       div.className = 'tg-msg ' + cls;
       div.innerHTML = html;
       msgs.appendChild(div);
-      requestAnimationFrame(function() { div.classList.add('show'); });
+      void div.getBoundingClientRect(); /* force reflow so opacity:0 is rendered first */
+      div.classList.add('show');
       scrollBottom();
       return div;
     }
@@ -366,8 +367,8 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
       appendMsg(userHtml, 'tg-msg-user');
       await wait(500); /* pause before מנתח appears */
 
-      // 3. Typing indicator — visible for 2.5s so users clearly see it
-      var typing = appendMsg('<div class="tg-dots"><span></span><span></span><span></span></div>', 'tg-msg-bot');
+      // 3. "מנתח..." message — matches real bot behavior, clearly visible
+      var typing = appendMsg('🤔 מנתח...', 'tg-msg-bot');
       await wait(2500);
       if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
       await wait(120);
@@ -820,6 +821,7 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
   .tg-msgs {
     flex: 1; overflow-y: auto; padding: 10px 8px;
     display: flex; flex-direction: column; gap: 3px; scroll-behavior: smooth;
+    direction: ltr !important; /* MUST be CSS, not HTML attr — controls flex cross-axis alignment */
   }
   .tg-msgs::-webkit-scrollbar { width: 2px; }
   .tg-msgs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
@@ -828,16 +830,15 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     font-size: 13.5px; line-height: 1.5;
     opacity: 0; transform: translateY(8px);
     transition: opacity 0.22s ease, transform 0.22s ease;
-    align-self: flex-start; /* base: all messages start on left */
   }
   .tg-msg.show { opacity: 1; transform: translateY(0); }
   .tg-msg-user {
-    margin-left: auto; /* physical property — always pushes to RIGHT regardless of RTL */
+    align-self: flex-end; /* RIGHT — works now that container is LTR */
     background: #8774e1; color: #fff;
     border-bottom-right-radius: 3px; direction: rtl; text-align: right;
   }
   .tg-msg-bot {
-    margin-right: auto; /* physical property — always LEFT regardless of RTL */
+    align-self: flex-start; /* LEFT — works now that container is LTR */
     background: #182533; color: #d4dde6;
     border-bottom-left-radius: 3px; direction: rtl; text-align: right;
   }
