@@ -411,8 +411,8 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
       await wait(1600);
       var saveBtn = card.querySelector('.tg-save');
       if (saveBtn) {
-        saveBtn.classList.add('tapped');          /* bounce animation — clear finger tap */
-        await wait(380);                          /* wait for full animation (0.35s + buffer) */
+        saveBtn.classList.add('tapped');          /* green flash — clear finger press */
+        await wait(500);                          /* wait for full 0.48s animation + buffer */
         saveBtn.classList.remove('tapped');
         saveBtn.classList.add('active');          /* green confirm state */
       }
@@ -819,26 +819,27 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
   .tg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #4dcd5e; display: inline-block; }
   .tg-hdr-dots { color: #6d8c9a; font-size: 18px; }
   .tg-msgs {
-    flex: 1; overflow-y: auto; padding: 10px 8px;
-    display: flex; flex-direction: column; gap: 3px; scroll-behavior: smooth;
-    direction: ltr !important; /* MUST be CSS, not HTML attr — controls flex cross-axis alignment */
+    flex: 1; overflow-y: auto; padding: 10px 8px; scroll-behavior: smooth;
+    /* float layout — immune to RTL/LTR direction issues */
   }
+  .tg-msgs::after { content: ''; display: table; clear: both; } /* clearfix */
   .tg-msgs::-webkit-scrollbar { width: 2px; }
   .tg-msgs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
   .tg-msg {
-    max-width: 82%; padding: 8px 11px; border-radius: 14px;
+    clear: both; /* each message on its own line */
+    max-width: 82%; padding: 8px 11px; border-radius: 14px; margin-bottom: 4px;
     font-size: 13.5px; line-height: 1.5;
     opacity: 0; transform: translateY(8px);
     transition: opacity 0.22s ease, transform 0.22s ease;
   }
   .tg-msg.show { opacity: 1; transform: translateY(0); }
   .tg-msg-user {
-    align-self: flex-end; /* RIGHT — works now that container is LTR */
+    float: right; /* PHYSICAL right — always, regardless of RTL */
     background: #8774e1; color: #fff;
     border-bottom-right-radius: 3px; direction: rtl; text-align: right;
   }
   .tg-msg-bot {
-    align-self: flex-start; /* LEFT — works now that container is LTR */
+    float: left; /* PHYSICAL left — always, regardless of RTL */
     background: #182533; color: #d4dde6;
     border-bottom-left-radius: 3px; direction: rtl; text-align: right;
   }
@@ -914,10 +915,15 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; flex-shrink: 0; transition: transform 0.12s;
   }
-  .tg-kbtn { transition: background 0.15s, border-color 0.15s, color 0.15s !important; } /* no transform transition — let animation own it */
-  @keyframes tgTap { 0% { transform:scale(1); } 30% { transform:scale(0.74); } 75% { transform:scale(1.06); } 100% { transform:scale(1); } }
-  .tg-save.tapped { animation: tgTap 0.35s cubic-bezier(.36,.07,.19,.97); }
-  .tg-save.active { background: rgba(77,205,94,0.28) !important; border-color: #4dcd5e !important; color: #4dcd5e !important; font-weight: 600; }
+  .tg-kbtn { transition: background 0.15s, border-color 0.15s, color 0.15s; } /* no transform transition — animation owns it */
+  @keyframes tgTap {
+    0%   { background: rgba(255,255,255,0.04); color: #a8d8f0; transform: scale(1); box-shadow: none; border-color: rgba(255,255,255,0.09); }
+    18%  { background: rgba(77,205,94,0.55); color: #fff; transform: scale(0.87); box-shadow: 0 0 14px rgba(77,205,94,0.65); border-color: rgba(77,205,94,0.7); }
+    55%  { background: rgba(77,205,94,0.38); color: #4dcd5e; transform: scale(1.02); box-shadow: 0 0 9px rgba(77,205,94,0.45); border-color: rgba(77,205,94,0.5); }
+    100% { background: rgba(77,205,94,0.22); color: #4dcd5e; transform: scale(1); box-shadow: none; border-color: rgba(77,205,94,0.38); }
+  }
+  .tg-save.tapped { animation: tgTap 0.48s ease-out forwards; }
+  .tg-save.active { background: rgba(77,205,94,0.22) !important; border-color: rgba(77,205,94,0.38) !important; color: #4dcd5e !important; font-weight: 600; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
