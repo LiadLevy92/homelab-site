@@ -146,6 +146,18 @@
 
 ---
 
+## v2.0.0 — May 2026
+
+### דף Homelab — §06 AUTOMATIONS: Daily Feedback Review
+
+- **כרטיס n8n חדש** — "N8N — FEEDBACK REVIEW" (badge: active)
+  - Daily Feedback Review flow — רץ כל יום ב-09:00
+  - שולף פידבק חדש מ-Notion, מנתח עם Claude API בעברית
+  - שולח Telegram עם ניתוח + מעדכן Notion Status → In Review
+- כרטיס HA (coming soon) הועבר ל-delay-3
+
+---
+
 ## v1.9.0 — May 2026
 
 ### דף Homelab — AdGuard + Tailscale DNS

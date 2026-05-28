@@ -477,7 +477,17 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li><span class="badge badge-ok" style="font-size:10px;">active</span></li>
           </ul>
         </div>
-        <div class="vlan-card vlan-card-dim reveal reveal-delay-2">
+        <div class="vlan-card reveal reveal-delay-2">
+          <div class="vlan-badge">N8N — FEEDBACK REVIEW</div>
+          <ul>
+            <li><strong>Daily Feedback Review</strong> — runs every day at 09:00</li>
+            <li>Pulls unreviewed feedback from Notion · sends to Claude API</li>
+            <li>Hebrew analysis: user intent + proposed fix + complexity</li>
+            <li>Telegram report + auto-updates Notion status → In Review</li>
+            <li><span class="badge badge-ok" style="font-size:10px;">active</span></li>
+          </ul>
+        </div>
+        <div class="vlan-card vlan-card-dim reveal reveal-delay-3">
           <div class="vlan-badge">HOME ASSISTANT — AUTOMATIONS</div>
           <ul>
             <li style="color:var(--text-muted); font-style:italic;">In development — coming soon</li>
