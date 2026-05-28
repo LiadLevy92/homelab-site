@@ -283,9 +283,13 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
 
     function wait(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
-    function nowTime() {
-      var d = new Date();
-      return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+    /* Demo times — afternoon hours so the chat looks realistic */
+    var DEMO_TIMES = [16*60+28, 14*60+52, 11*60+07]; /* 16:28, 14:52, 11:07 */
+    function demoTime(scenarioIdx, offsetMins) {
+      var t = DEMO_TIMES[scenarioIdx % DEMO_TIMES.length] + (offsetMins || 0);
+      var h = Math.floor(t / 60) % 24;
+      var m = t % 60;
+      return ('0'+h).slice(-2) + ':' + ('0'+m).slice(-2);
     }
 
     function scrollBottom() {
@@ -356,13 +360,13 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
           + '<span class="tg-vicon">🎤</span>'
           + '<div class="tg-vwave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>'
           + '<span class="tg-vdur">0:08</span>'
-          + '</div><div class="tg-time">' + nowTime() + ' ✓✓</div>';
+          + '</div><div class="tg-time">' + demoTime(idx, 0) + ' ✓✓</div>';
       } else {
         var udir = s.userText.startsWith('http') ? 'ltr' : 'rtl';
         var utxt = s.userText.startsWith('http')
           ? '<span style="direction:ltr;display:block;text-align:left">' + s.userText + '</span>'
           : s.userText;
-        userHtml = utxt + '<div class="tg-time">' + nowTime() + ' ✓✓</div>';
+        userHtml = utxt + '<div class="tg-time">' + demoTime(idx, 0) + ' ✓✓</div>';
       }
       appendMsg(userHtml, 'tg-msg-user');
       await wait(500); /* pause before מנתח appears */
@@ -385,7 +389,7 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
         '<hr class="tg-hr">',
         '<div class="tg-saveq">שומרים?</div>',
         '<div class="tg-kbd"><button class="tg-kbtn tg-cancel">❌ בטל</button><button class="tg-kbtn tg-save">✅ שמור</button></div>',
-        '<div class="tg-time">' + nowTime() + '</div>'
+        '<div class="tg-time">' + demoTime(idx, 1) + '</div>'
       ].join('');
       var card = appendMsg(cardHtml, 'tg-msg-bot');
       if (!card) return;
@@ -419,7 +423,7 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
       await wait(400);
 
       // 8. Confirmation message
-      var confirmHtml = s.saved.replace('\n', '<br>') + '<div class="tg-time">' + nowTime() + '</div>';
+      var confirmHtml = s.saved.replace('\n', '<br>') + '<div class="tg-time">' + demoTime(idx, 1) + '</div>';
       appendMsg(confirmHtml, 'tg-msg-bot tg-confirm');
       await wait(2400);
 
@@ -470,7 +474,7 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
 </body>
 </html>
 
-<style>
+<style is:global>
   :root {
     --bg:             #050511;
     --surface:        #0c0d1f;
