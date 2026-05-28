@@ -5,6 +5,30 @@
 
 ---
 
+## v2.1.0 — May 2026
+
+### דף Second Brain — Telegram Demo + Scenario Cards refactor
+
+**Telegram Demo (חדש):** אנימציית שיחה חיה בטלגרם בין Hero ל-Scenarios.
+- חלון טלגרם dark-theme אותנטי (header, online, input bar)
+- 3 סצנריות מתחלפות בלולאה: תזכורת ביתית → לינק יוטיוב (מתכון) → הקלטה קולית עסקית
+- typewriter בתיבת הקלט → "🤔 מנתח..." → כרטיס ניתוח קלוד נחשף בהדרגה (bullets, tags, עדיפות) → מחוות לחיצה ירוקה על "שמור" → הודעת אישור
+- IntersectionObserver מפעיל את הלולאה כשהסקשן נכנס לפריים
+
+**באג קריטי שתוקן — Astro CSS scoping:**
+- `<style>` רגיל ב-Astro מקבל `data-astro-cid-*` scope. אלמנטים שנוצרים דינמית ב-JS (בועות הצ'אט) לא קיבלו את ה-attribute → **אפס CSS עליהם**
+- תוקן: `<style>` → `<style is:global>` (דף עצמאי, ללא סיכון leakage)
+- בועות: `float: right` (משתמש) / `float: left` (בוט) — physical, חסין ל-RTL
+- שעות הדגמה קבועות (16:28 / 14:52 / 11:07) במקום שעת הרצה אמיתית
+
+**Scenario Cards — refactor מלא לקריאות מובייל:**
+- הוחלף קיר טקסט בכרטיסים קומפקטיים: אימוג'י גדול + setup→punchline (משפט בעיה אחד)
+- pill סגול-זוהר אחיד "פשוט שלחו לבוט 🤖" בכל 3 הכרטיסים — החזרה מחזקת את המסר
+- layout ממורכז, פונטים גדולים, hover lift + chip scale
+- מובייל: עמודה אחת מוגבלת ל-440px
+
+---
+
 ## v1.0.0 — May 2026
 
 **Launch ראשון של האתר.**
