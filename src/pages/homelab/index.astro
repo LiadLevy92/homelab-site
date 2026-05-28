@@ -359,8 +359,8 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
           <div class="vlan-badge">ADGUARD — DNS</div>
 
           <ul>
-            <li>Network-wide DNS filtering for all devices</li>
-            <li>Blocks ads and trackers at DNS level</li>
+            <li>Router-level DNS — whole-home blocking, zero per-device config</li>
+            <li>Tailscale DNS override — ad-free on any device, anywhere</li>
             <li>Custom rules for local service resolution</li>
           </ul>
         </div>
@@ -433,6 +433,20 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>Proxmox, Home Assistant, n8n — accessible from any device</li>
             <li>No VPN app needed for public services — Cloudflare handles it</li>
             <li>Full access from anywhere without compromising security</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-5">
+          <div class="unlock-header">
+            <div class="unlock-title">Ad-Free Everywhere</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            AdGuard Home runs as the network's DNS resolver — every device on the home network gets ad and tracker blocking with zero configuration. Tailscale extends this outside the home.
+          </div>
+          <ul>
+            <li>Router points to AdGuard — all devices covered automatically</li>
+            <li>Tailscale DNS override — same filtering on mobile and laptop, anywhere</li>
+            <li>No browser extension, no per-device setup required</li>
           </ul>
         </div>
       </div>

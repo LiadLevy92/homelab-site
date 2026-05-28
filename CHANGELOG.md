@@ -146,6 +146,20 @@
 
 ---
 
+## v1.9.0 — May 2026
+
+### דף Homelab — AdGuard + Tailscale DNS
+
+- **§04 SERVICES — AdGuard vlan-card** — עודכן לתאר את ה-DNS הגדרה הנוכחית:
+  - "Router-level DNS — whole-home blocking, zero per-device config"
+  - "Tailscale DNS override — ad-free on any device, anywhere"
+- **§05 UNLOCKS — כרטיס 5** — נוסף unlock-card חדש "Ad-Free Everywhere" (badge: live):
+  - מסביר: ראוטר מצביע ל-AdGuard → כל מכשיר בבית מכוסה אוטומטית
+  - Tailscale DNS override מרחיב את החסימה גם מחוץ לבית (נייד + מחשב)
+  - אין הגדרה ידנית לכל מכשיר, אין תוסף דפדפן
+
+---
+
 ## v1.8.0 — May 2026
 
 ### דף הבית — עברית + כפתור יצירת קשר
