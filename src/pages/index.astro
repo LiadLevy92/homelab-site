@@ -132,15 +132,21 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     <div class="content">
 
       <div class="intro">
-        <span class="hello">About me —</span>
+        <span class="hello" id="helloLabel" data-en="About me —" data-he="מי אני —">מי אני —</span>
       </div>
 
       <h1 class="name">Liad<br>Levy</h1>
 
       <p class="tagline" lang="en">Electrical Engineering Student (RF Track) · Israel</p>
 
+      <!-- ── Language toggle ─────────────────── -->
+      <div class="lang-toggle" role="group" aria-label="שפה / Language">
+        <button type="button" class="lang-btn active" data-lang="he" aria-pressed="true">עברית</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">English</button>
+      </div>
+
       <!-- ── English bio ─────────────────────── -->
-      <div class="bio" lang="en">
+      <div class="bio" id="bioEn" lang="en" style="display:none">
         <p>Hi, I'm Liad Levy.</p>
 
         <p>I believe the best way to get to know someone is to see what they do in their spare time. I built this site as a place to document what I do — in my own way, at eye level.</p>
@@ -154,13 +160,8 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
         <p>Here you can check out what Claude built under my direction 😉, alongside physical projects — power supplies and energy stations (LiFePO4), enclosure design in Fusion 360, and automations running in my Homelab.</p>
       </div>
 
-      <!-- ── Language divider ───────────────── -->
-      <div class="lang-sep">
-        <span class="lang-tag">עברית</span>
-      </div>
-
       <!-- ── Hebrew bio ──────────────────────── -->
-      <div class="bio bio-rtl" lang="he">
+      <div class="bio bio-rtl" id="bioHe" lang="he">
         <p>היי, אני ליעד לוי.</p>
 
         <p>אני מאמין שהדרך הכי טובה להכיר בן אדם היא לראות מה הוא עושה בשעות הפנאי שלו. כחלק מהפרויקטים שלי בניתי את האתר הזה, פשוט כדי שיהיה מקום שמתעד את העשייה שלי בגובה העיניים ובדרך שלי.</p>
@@ -251,6 +252,24 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     document.querySelectorAll('.drawer-nav .nav-item').forEach(link => {
       if (link.href) link.addEventListener('click', closeDrawer);
     });
+
+    // ─── Language toggle (About me) ────────
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const bioEn = document.getElementById('bioEn');
+    const bioHe = document.getElementById('bioHe');
+    const helloLabel = document.getElementById('helloLabel');
+    function setLang(lang) {
+      const isHe = lang === 'he';
+      if (bioHe) bioHe.style.display = isHe ? '' : 'none';
+      if (bioEn) bioEn.style.display = isHe ? 'none' : '';
+      if (helloLabel) helloLabel.textContent = isHe ? helloLabel.dataset.he : helloLabel.dataset.en;
+      langBtns.forEach(b => {
+        const on = b.dataset.lang === lang;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+    }
+    langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
     // ─── Cursor glows ──────────────────────
     const glow = document.getElementById('cursorGlow');
@@ -550,8 +569,33 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     font-size: 12.5px;
     color: #8f95a8;
     letter-spacing: 1px;
-    margin-bottom: 36px;
+    margin-bottom: 28px;
   }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: inline-flex;
+    gap: 3px;
+    margin-bottom: 34px;
+    padding: 4px;
+    background: #13151e;
+    border: 1px solid #2a2d3e;
+    border-radius: 10px;
+  }
+  .lang-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #969cb0;
+    background: none;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .lang-btn:hover { color: #e8eaf2; }
+  .lang-btn.active { background: rgba(255, 181, 71, 0.12); color: #ffb547; }
 
   .bio {
     font-size: 16px;
@@ -567,32 +611,6 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
   .bio-rtl {
     direction: rtl;
     text-align: right;
-  }
-
-  /* Language divider */
-  .lang-sep {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 40px 0;
-  }
-
-  .lang-sep::before,
-  .lang-sep::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #181b28;
-  }
-
-  .lang-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: #565d75;
-    text-transform: uppercase;
-    white-space: nowrap;
   }
 
   /* ─── CONTACT SECTION ───────────────────────── */

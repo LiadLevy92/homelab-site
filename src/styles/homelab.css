@@ -260,6 +260,13 @@ body:not(.booting) .page {
   margin-bottom: 6px;
 }
 .float-nav.visible { opacity: 1; transform: translateX(0); }
+.float-nav-home {
+  color: var(--amber) !important;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 8px !important;
+  margin-bottom: 6px;
+}
+.float-nav-home:hover { background: var(--amber-low); }
 .float-nav a {
   display: flex;
   align-items: center;
