@@ -726,14 +726,21 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
   }
   .form-subtitle { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
 
-  /* honeypot — visually hidden, off-screen, not announced */
+  /* honeypot — visually hidden (RTL-safe clip, no off-screen offset that
+     would create horizontal overflow on a dir="rtl" page) */
   .hp-field {
     position: absolute !important;
-    left: -9999px !important;
-    width: 1px; height: 1px;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   .signup-form { display: flex; flex-direction: column; gap: 16px; }

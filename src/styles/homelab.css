@@ -293,6 +293,33 @@ body:not(.booting) .page {
 
 @media (max-width: 1200px) { .float-nav { display: none; } }
 
+/* Mobile back-to-home button — visible only when the floating nav is hidden */
+.mobile-home-btn { display: none; }
+@media (max-width: 1200px) {
+  .mobile-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 90;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--amber);
+    background: rgba(14,15,23,0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line-bright);
+    border-radius: var(--radius);
+    padding: 8px 13px;
+    text-decoration: none;
+  }
+  .mobile-home-btn:active { background: var(--amber-low); }
+}
+
 /* =============================================
    SCROLL REVEAL
    ============================================= */

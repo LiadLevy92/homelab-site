@@ -177,20 +177,18 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
 
       <!-- Contact Section -->
       <div class="contact-section">
-        <p class="contact-heading" lang="en">
-          Looking to hire?
-          <span class="contact-heading-sep">/</span>
-          <span class="contact-heading-he" lang="he">מחפשים עובד?</span>
+        <p class="contact-heading">
+          <span id="contactHeading" data-en="Looking to hire?" data-he="מחפשים עובד?">מחפשים עובד?</span>
         </p>
-        <p class="contact-body" lang="en">If you've seen the projects and like the way I think — I'd love to send over my CV.</p>
-        <p class="contact-body contact-body-he" lang="he">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
+        <p class="contact-body" id="contactBodyEn" lang="en" style="display:none">If you've seen the projects and like the way I think — I'd love to send over my CV.</p>
+        <p class="contact-body contact-body-he" id="contactBodyHe" lang="he">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
         <div class="contact-wrap">
           <button class="contact-btn" id="contactBtn" aria-expanded="false">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            צרו איתי קשר
+            <span id="contactBtnLabel" data-en="Get in touch" data-he="צרו איתי קשר">צרו איתי קשר</span>
             <svg class="chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m6 9 6 6 6-6"/>
             </svg>
@@ -209,14 +207,14 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
                 <path fill="#34A853" d="M18 9.5V18l6-4.5V6l-6 3.5z"/>
                 <path fill="#4285F4" d="m0 6 12 7 12-7-12-7L0 6z"/>
               </svg>
-              פתח ב-Gmail
+              <span id="gmailLabel" data-en="Open in Gmail" data-he="פתח ב-Gmail">פתח ב-Gmail</span>
             </a>
             <button class="contact-option" id="copyEmailBtn">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
               </svg>
-              <span id="copyLabel">העתק כתובת מייל</span>
+              <span id="copyLabel" data-en="Copy email address" data-he="העתק כתובת מייל">העתק כתובת מייל</span>
             </button>
           </div>
         </div>
@@ -253,16 +251,29 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
       if (link.href) link.addEventListener('click', closeDrawer);
     });
 
-    // ─── Language toggle (About me) ────────
+    // ─── Language toggle (About me + Contact) ────────
+    let currentLang = 'he';
     const langBtns = document.querySelectorAll('.lang-btn');
     const bioEn = document.getElementById('bioEn');
     const bioHe = document.getElementById('bioHe');
+    const contactBodyEn = document.getElementById('contactBodyEn');
+    const contactBodyHe = document.getElementById('contactBodyHe');
     const helloLabel = document.getElementById('helloLabel');
+    const contactHeading = document.getElementById('contactHeading');
+    const contactBtnLabel = document.getElementById('contactBtnLabel');
+    const gmailLabel = document.getElementById('gmailLabel');
+    function txt(el) { if (el) el.textContent = currentLang === 'he' ? el.dataset.he : el.dataset.en; }
     function setLang(lang) {
+      currentLang = lang;
       const isHe = lang === 'he';
       if (bioHe) bioHe.style.display = isHe ? '' : 'none';
       if (bioEn) bioEn.style.display = isHe ? 'none' : '';
-      if (helloLabel) helloLabel.textContent = isHe ? helloLabel.dataset.he : helloLabel.dataset.en;
+      if (contactBodyHe) contactBodyHe.style.display = isHe ? '' : 'none';
+      if (contactBodyEn) contactBodyEn.style.display = isHe ? 'none' : '';
+      txt(helloLabel); txt(contactHeading); txt(contactBtnLabel); txt(gmailLabel);
+      txt(document.getElementById('copyLabel'));
+      if (contactHeading) contactHeading.dir = isHe ? 'rtl' : 'ltr';
+      document.querySelectorAll('.contact-btn, .contact-option').forEach(e => { e.dir = isHe ? 'rtl' : 'ltr'; });
       langBtns.forEach(b => {
         const on = b.dataset.lang === lang;
         b.classList.toggle('active', on);
@@ -325,8 +336,8 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     document.getElementById('copyEmailBtn').addEventListener('click', () => {
       navigator.clipboard.writeText(emailAddr).then(() => {
         const label = document.getElementById('copyLabel');
-        label.textContent = 'הועתק! ✓';
-        setTimeout(() => { label.textContent = 'העתק כתובת מייל'; }, 2000);
+        label.textContent = currentLang === 'he' ? 'הועתק! ✓' : 'Copied! ✓';
+        setTimeout(() => { txt(label); }, 2000);
       });
     });
   </script>
