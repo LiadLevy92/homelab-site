@@ -972,4 +972,14 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     .hero { padding: 120px 0 64px; }
     .page-footer { flex-direction: column; gap: 8px; text-align: center; }
   }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 </style>

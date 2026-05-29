@@ -34,8 +34,8 @@
 
   --text:       #edeef5;
   --text-dim:   #a8acc0;
-  --text-muted: #686d84;
-  --text-faint: #3d4257;
+  --text-muted: #868ca2;
+  --text-faint: #565d75;
 
   --radius-sm: 2px;
   --radius:    4px;
@@ -1690,3 +1690,14 @@ body:not(.booting) .page {
 .footer-sep { color: var(--text-faint); margin: 0 6px; }
 .footer-identity { color: var(--text-muted); }
 .footer-right { color: var(--text-muted); }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

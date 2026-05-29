@@ -136,10 +136,10 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
 
       <h1 class="name">Liad<br>Levy</h1>
 
-      <p class="tagline">Electrical Engineering Student (RF Track) · Israel</p>
+      <p class="tagline" lang="en">Electrical Engineering Student (RF Track) · Israel</p>
 
       <!-- ── English bio ─────────────────────── -->
-      <div class="bio">
+      <div class="bio" lang="en">
         <p>Hi, I'm Liad Levy.</p>
 
         <p>I believe the best way to get to know someone is to see what they do in their spare time. I built this site as a place to document what I do — in my own way, at eye level.</p>
@@ -159,7 +159,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
       </div>
 
       <!-- ── Hebrew bio ──────────────────────── -->
-      <div class="bio bio-rtl">
+      <div class="bio bio-rtl" lang="he">
         <p>היי, אני ליעד לוי.</p>
 
         <p>אני מאמין שהדרך הכי טובה להכיר בן אדם היא לראות מה הוא עושה בשעות הפנאי שלו. כחלק מהפרויקטים שלי בניתי את האתר הזה, פשוט כדי שיהיה מקום שמתעד את העשייה שלי בגובה העיניים ובדרך שלי.</p>
@@ -175,13 +175,13 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
 
       <!-- Contact Section -->
       <div class="contact-section">
-        <p class="contact-heading">
+        <p class="contact-heading" lang="en">
           Looking to hire?
           <span class="contact-heading-sep">/</span>
-          <span class="contact-heading-he">מחפשים עובד?</span>
+          <span class="contact-heading-he" lang="he">מחפשים עובד?</span>
         </p>
-        <p class="contact-body">If you've seen the projects and like the way I think — I'd love to send over my CV.</p>
-        <p class="contact-body contact-body-he">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
+        <p class="contact-body" lang="en">If you've seen the projects and like the way I think — I'd love to send over my CV.</p>
+        <p class="contact-body contact-body-he" lang="he">אם הגעתם לכאן, ראיתם את הפרויקטים שלי ומתחברים לראש הזה – אשמח לשלוח קורות חיים.</p>
         <div class="contact-wrap">
           <button class="contact-btn" id="contactBtn" aria-expanded="false">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -398,7 +398,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9.5px;
     letter-spacing: 1.5px;
-    color: #2e3348;
+    color: #565d75;
     text-transform: uppercase;
     padding: 0 10px;
     margin-bottom: 6px;
@@ -410,7 +410,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     text-decoration: none;
     font-size: 13.5px;
     font-weight: 400;
-    color: #7c8296;
+    color: #969cb0;
     padding: 7px 10px;
     border-radius: 6px;
     transition: background-color 0.15s, color 0.15s;
@@ -458,7 +458,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     gap: 8px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    color: #5a6070;
+    color: #8b91a4;
     text-decoration: none;
     padding: 7px 10px;
     border-radius: 6px;
@@ -539,7 +539,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
   .tagline {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12.5px;
-    color: #6b7280;
+    color: #8f95a8;
     letter-spacing: 1px;
     margin-bottom: 36px;
   }
@@ -581,7 +581,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 2px;
-    color: #2e3348;
+    color: #565d75;
     text-transform: uppercase;
     white-space: nowrap;
   }
@@ -609,7 +609,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
   }
 
   .contact-heading-sep {
-    color: #2e3348;
+    color: #565d75;
   }
 
   .contact-heading-he {
@@ -619,7 +619,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
   .contact-body {
     font-size: 14px;
     font-weight: 300;
-    color: #6b7280;
+    color: #8f95a8;
     line-height: 1.7;
     margin-bottom: 6px;
   }
@@ -752,7 +752,7 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
       display: block;
       width: 20px;
       height: 1.5px;
-      background: #6b7280;
+      background: #8f95a8;
       transition: background 0.2s;
       border-radius: 1px;
     }
@@ -824,5 +824,16 @@ const description = 'האתר האישי של ליעד לוי. סטודנט לה
       right: auto;
       left: 0;
     }
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+    .cursor-glow { display: none !important; }
   }
 </style>
