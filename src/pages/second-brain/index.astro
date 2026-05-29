@@ -25,11 +25,16 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
   <meta property="og:description" content={description} />
   <meta property="og:site_name" content="Liad Levy" />
   <meta property="og:locale" content="he_IL" />
+  <meta property="og:image" content="https://liad-dev.com/og/brain.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Second Brain — המוח השני שלך בטלגרם" />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://liad-dev.com/og/brain.png" />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -147,6 +152,11 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
             <label for="wl-email">כתובת אימייל</label>
             <input type="email" id="wl-email" name="email" placeholder="you@example.com" dir="ltr" autocomplete="email" required />
           </div>
+          <!-- honeypot — hidden from humans, bots fill it -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="wl-company">Company (leave empty)</label>
+            <input type="text" id="wl-company" name="company" tabindex="-1" autocomplete="off" />
+          </div>
           <button type="submit" id="submitBtn" class="btn-submit">
             <span id="btnText">שמרו לי מקום ←</span>
             <span id="btnLoading" style="display:none">שולח…</span>
@@ -181,6 +191,7 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const btnLoading = document.getElementById('btnLoading');
+    const formLoadTime = Date.now();
 
     function showMsg(id) {
       ['msg-success', 'msg-duplicate', 'msg-error'].forEach(m => {
@@ -200,6 +211,14 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
       const name  = document.getElementById('wl-name').value.trim();
       const email = document.getElementById('wl-email').value.trim().toLowerCase();
       if (!name || !email) return;
+
+      // Spam guard — honeypot filled OR submitted suspiciously fast → fake success, no insert
+      const hp = document.getElementById('wl-company').value;
+      if (hp || (Date.now() - formLoadTime) < 2500) {
+        form.style.display = 'none';
+        showMsg('msg-success');
+        return;
+      }
 
       setLoading(true);
       showMsg(null);
@@ -705,6 +724,16 @@ const description = 'Second Brain — המוח השני שלך בטלגרם. ש�
     margin-bottom: 8px;
   }
   .form-subtitle { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+  /* honeypot — visually hidden, off-screen, not announced */
+  .hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
 
   .signup-form { display: flex; flex-direction: column; gap: 16px; }
   .field-group { display: flex; flex-direction: column; gap: 6px; }
