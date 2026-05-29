@@ -5,6 +5,31 @@
 
 ---
 
+## v2.2.0 — May 2026
+
+### שיפור רוחבי — UX, אבטחה, נגישות, SEO (3 גלים)
+
+**גל 1 — 🔴 Must:**
+- **OG images** — נוצרו 3 תמונות preview על-מותג (1200×630, Chrome-headless) לכל דף, ב-`public/og/`. חוט `og:image` + `twitter:image` + שדרוג Twitter card ל-`summary_large_image`. עכשיו יש preview בשיתוף לינק בוואטסאפ/לינקדאין/טלגרם
+- **Security headers** — `public/_headers` ל-Cloudflare Pages: CSP, X-Frame-Options DENY, nosniff, Referrer-Policy, Permissions-Policy + caching ל-assets
+- **הגנת ספאם לוויטליסט** — honeypot field נסתר + בדיקת timing (submit מתחת ל-2.5 שניות) → fake-success שקט בלי INSERT ל-DB / ספאם טלגרם
+
+**גל 2 — 🟡 נגישות + SEO מבני:**
+- **כותרות סמנטיות** — 13 section titles בדף Homelab הומרו מ-`<div>` ל-`<h2>` (document outline תקין)
+- **ניגודיות** — הובהרו גוונים מעומעמים שנפלו מ-WCAG AA (`--text-muted`/`--text-faint` בהומלאב, dim colors בדף הבית)
+- **`lang` attributes** — סימון בלוקים אנגלית/עברית בדף הבית הדו-לשוני
+- **`prefers-reduced-motion`** — מכבה אנימציות/cursor glow למשתמשים שביקשו
+
+**גל 3 — 🟢 ליטוש:**
+- **קיצוץ פונטים** — הוסר משקל 500 (הומלאב) + 600 ואיטלקים (בית) שלא בשימוש
+- **apple-touch-icon** — `apple-touch-icon.png` 180×180 בכל הדפים
+- **Email obfuscation** — הכתובת מורכבת ב-runtime, לא plaintext ב-HTML/JS (עדיין עובד מלא)
+- **סמנטיקה** — פריט nav מושבת "Web App" מ-`<a>` ל-`<span aria-disabled>`
+
+> ⏭️ נשאר לעתיד: שדרוג הגנת הספאם ל-Cloudflare Turnstile (דורש הקמת widget בדשבורד).
+
+---
+
 ## v2.1.0 — May 2026
 
 ### דף Second Brain — Telegram Demo + Scenario Cards refactor

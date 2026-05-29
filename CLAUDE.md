@@ -63,7 +63,11 @@ site/
 │   └── styles/
 │       └── homelab.css              ← כל ה-CSS של דף ה-homelab
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   ├── apple-touch-icon.png         ← 180×180 (iOS home screen)
+│   ├── _headers                     ← Cloudflare security headers (CSP, X-Frame-Options...)
+│   ├── sitemap.xml
+│   └── og/                          ← OG social preview images (home/homelab/brain.png)
 ├── CLAUDE.md                        ← קובץ זה
 ├── CHANGELOG.md                     ← לוג שינויים
 ├── astro.config.mjs
@@ -163,6 +167,12 @@ Footer
 ```bash
 npm run build   # חייב לעבור בלי שגיאות
 ```
+
+**🔒 Security headers (`public/_headers`):** CSP + X-Frame-Options DENY + nosniff + Referrer-Policy + Permissions-Policy. אם מוסיפים מקור חיצוני חדש (פונט/API/תמונה) — לעדכן את ה-CSP בהתאם אחרת הדפדפן יחסום.
+
+**🖼️ OG images (`public/og/*.png`):** 1200×630, נוצרו ע"י Chrome headless מתבניות HTML. לרינדור מחדש: HTML זמני → `chrome --headless=new --screenshot --window-size=1200,630`.
+
+**🛡️ Waitlist spam guard:** honeypot field (`#wl-company`) + timing check (<2.5s) בדף Second Brain. שדרוג עתידי: Cloudflare Turnstile.
 
 ---
 
