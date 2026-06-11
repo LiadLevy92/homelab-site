@@ -123,22 +123,22 @@ Hero + Stats bar (7 stats)
 
 ACT I — THE SYSTEM
 § 01 PRINCIPLES  — 6 עקרונות, גריד 3 עמודות
-§ 02 HARDWARE    — brain-grid 4 כרטיסים (CPU, Storage, Backups, Extras)
-§ 03 NETWORK     — topology diagram עץ
-§ 04 SERVICES    — טבלת VMs + 6 vlan-cards
-§ 05 UNLOCKS     — 4 unlock-cards (2 עמודות)
+§ 02 HARDWARE    — brain-grid 4 כרטיסים (Storage Node, Dev Node, Drives, Backups)
+§ 03 NETWORK     — topology diagram עץ (2 שרתים: Storage + Dev node)
+§ 04 SERVICES    — טבלת 8 אורחים (ID/Service/Role/Node/Status, עם VM/LXC) + 7 vlan-cards
+§ 05 UNLOCKS     — 7 unlock-cards (2 עמודות)
 
 ACT II — THE PROJECTS
 § 06 AUTOMATIONS — 2 vlan-cards (n8n active, HA dim)
-§ 07 SECOND BRAIN — brain-grid 4 כרטיסים
+§ 07 SECOND BRAIN — brain-grid 4 כרטיסים (עבר ל-Vercel+Supabase)
 
 ACT III — THE PROCESS
 § 08 WORKFLOW    — 5-step stepper + 4 unlock-cards
 § 09 WHY THIS WORKS — 2 unlock-cards + killer terminal mock
 § 10 PLANNING    — 4 phase-cards
 § 11 DOCS        — 6-item docs-grid
-§ 12 JOURNEY     — 6 vlan-cards (PHASE 1–6)
-§ 13 RECOVERY    — 8 recovery steps
+§ 12 JOURNEY     — 8 vlan-cards (PHASE 1–8)
+§ 13 RECOVERY    — 11 recovery steps
 
 Closing stack block (Built Different)
 Footer

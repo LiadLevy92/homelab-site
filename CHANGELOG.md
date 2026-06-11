@@ -5,6 +5,29 @@
 
 ---
 
+## v3.0.0 — June 2026
+
+### דף Homelab — ריענון תוכן מלא: ארכיטקטורת שני שרתים
+
+עד כה האתר תיאר שרת **יחיד** (4 VMs). עודכן כך שיתאים למצב החי בפועל על השרתים (אומת מול `qm list`/`pct list` על שני המארחים).
+
+**שינויי תוכן מרכזיים:**
+- **שני שרתים** — `pve` (אחסון, ה-i7-3770) + `pve2` (פיתוח, PVE 9.2.3, NVMe). Hero, Hardware, Topology, Journey, Recovery עודכנו בהתאם.
+- **Stats bar** — הוחלפו: `2 Proxmox Nodes` · `8 VMs+LXC` · `Daily Backups` · `3 Git Repos` · `2 Active Workflows` · `0 Open Ports` · `663 HA Entities`.
+- **§02 Hardware** — brain-grid: Storage Node · Dev Node · Drives · Backups. תוקן גיבוי ל-22:30→23:30 (היה 02:30+22:30).
+- **§03 Network** — נוסף Dev Node לטופולוגיה, שם ראשון → Storage Node. REV · 2026.06.
+- **§04 Services** — הטבלה הורחבה ל-**8 אורחים** עם עמודת Node + סוג VM/LXC: נוספו NAS (104), Vaultwarden (105), devstore (110), Immich (111). תוקן: 100/103 הם LXC. vlan-cards: הוסרו Second Brain + PostgreSQL, נוספו Immich · Vaultwarden · NAS.
+- **§05 Unlocks** — נוספו 2 כרטיסים: "My Own Google Photos" (Immich) + "Self-Hosted Passwords" (Vaultwarden). תוקן ניסוח "4 VMs".
+- **§07 Second Brain** — מסגור מחדש: הבוט **עבר מהשרת** ל-Vercel+Supabase. כרטיס "From Homelab to Cloud".
+- **§09** — שאלת terminal עודכנה (Second Brain/VM 102 → Immich/dev node).
+- **§12 Journey** — נוספו PHASE 7 (Second Node) + PHASE 8 (Self-Hosted Suite). PHASE 5 עודכן (הבוט עבר לוורסל).
+- **§13 Recovery** — הורחב ל-11 צעדים: NAS (104), Vaultwarden (105), והקמת dev node + Immich.
+- **Stack tags** — נוספו Immich · Vaultwarden · Samba · LXC · Vercel · Supabase.
+
+> 🔄 **כלל סנכרון:** מעתה — כל שינוי תשתית ב-homelab מתועד גם כאן באתר, באותה רוח של "docs ship with the change".
+
+---
+
 ## v2.2.0 — May 2026
 
 ### שיפור רוחבי — UX, אבטחה, נגישות, SEO (3 גלים)

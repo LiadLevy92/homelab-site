@@ -7,11 +7,11 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
   <div class="boot" id="boot" aria-hidden="true">
     <div class="boot-inner">
       <div class="boot-header">LIAD-HOMELAB&nbsp;//&nbsp;RACK-0&nbsp;CONSOLE&nbsp;<span class="boot-cursor"></span></div>
-      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">hypervisor online · 4 VMs running</span></div>
-      <div class="boot-line" data-boot="1"><span class="boot-ok">[ OK ]</span><span class="boot-label">AdGuard Home</span><span class="boot-value">DNS filtering active · VM 100</span></div>
+      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">2 nodes online · storage + dev · 8 guests</span></div>
+      <div class="boot-line" data-boot="1"><span class="boot-ok">[ OK ]</span><span class="boot-label">AdGuard Home</span><span class="boot-value">DNS filtering active · CT 100</span></div>
       <div class="boot-line" data-boot="2"><span class="boot-ok">[ OK ]</span><span class="boot-label">Home Assist</span><span class="boot-value">smart home online · VM 101</span></div>
-      <div class="boot-line" data-boot="3"><span class="boot-ok">[ OK ]</span><span class="boot-label">n8n</span><span class="boot-value">automations · InboxNinja active</span></div>
-      <div class="boot-line" data-boot="4"><span class="boot-ok">[ OK ]</span><span class="boot-label">Second Brain</span><span class="boot-value">Telegram bot · v2.0.0 · multi-user</span></div>
+      <div class="boot-line" data-boot="3"><span class="boot-ok">[ OK ]</span><span class="boot-label">n8n</span><span class="boot-value">automations · 2 workflows active</span></div>
+      <div class="boot-line" data-boot="4"><span class="boot-ok">[ OK ]</span><span class="boot-label">Immich</span><span class="boot-value">photo gallery online · dev node · CT 111</span></div>
       <div class="boot-line" data-boot="5"><span class="boot-ok">[ OK ]</span><span class="boot-label">Cloudflare</span><span class="boot-value">tunnel active · liad-dev.com</span></div>
       <div class="boot-footer">Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue&nbsp;·&nbsp;handing&nbsp;off&nbsp;to&nbsp;operator&hellip;</div>
     </div>
@@ -54,7 +54,8 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
       <p class="hero-subtitle">
         I decided to run my home like an enterprise data center — with no DevOps background and no prior sysadmin experience.
         By partnering with <strong>Claude Code as a real-time infrastructure co-pilot</strong>, I built and now maintain
-        a self-hosted stack on a repurposed desktop PC: hypervisor, smart home, automations, and AI bots
+        a <strong>two-node Proxmox setup</strong> — a repurposed desktop PC as the storage node plus a dedicated dev node:
+        hypervisors, smart home, automations, self-hosted photos, passwords, and NAS
         <strong>— without writing a single line of code alone</strong>.
         <br><br>
         This is the blueprint.
@@ -65,28 +66,28 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
     <!-- STATS BAR -->
     <div class="stats-bar reveal">
       <div class="stat">
-        <div class="stat-number">4</div>
-        <div class="stat-label">VMs</div>
+        <div class="stat-number">2</div>
+        <div class="stat-label">Proxmox Nodes</div>
       </div>
       <div class="stat">
-        <div class="stat-number">5</div>
-        <div class="stat-label">Docker Services</div>
+        <div class="stat-number">8</div>
+        <div class="stat-label">VMs + LXC</div>
       </div>
       <div class="stat">
         <div class="stat-number">Daily</div>
         <div class="stat-label">Backups</div>
       </div>
       <div class="stat">
-        <div class="stat-number">2</div>
+        <div class="stat-number">3</div>
         <div class="stat-label">Git Repos</div>
       </div>
       <div class="stat">
-        <div class="stat-number">1</div>
-        <div class="stat-label">Active Workflow</div>
+        <div class="stat-number">2</div>
+        <div class="stat-label">Active Workflows</div>
       </div>
       <div class="stat">
-        <div class="stat-number">v2</div>
-        <div class="stat-label">Brain Bot</div>
+        <div class="stat-number">0</div>
+        <div class="stat-label">Open Ports</div>
       </div>
       <div class="stat">
         <div class="stat-number">663</div>
@@ -152,34 +153,38 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
       <div class="card card-full reveal">
         <div class="brain-grid">
           <div>
-            <div class="card-title"><span class="dot blue"></span> CPU &amp; Memory</div>
+            <div class="card-title"><span class="dot blue"></span> Storage Node · pve</div>
             <ul>
               <li>Intel Core i7-3770 · 3rd gen · 4C/8T</li>
-              <li>Gigabyte GA-H61M-USB3H · Intel H61</li>
               <li><strong>16 GB DDR3</strong> · 2× 8 GB · maxed out</li>
+              <li>The original — a desktop PC found on the street</li>
+              <li>Hosts 6 guests + the NAS</li>
             </ul>
           </div>
           <div>
-            <div class="card-title"><span class="dot amber"></span> Storage</div>
+            <div class="card-title"><span class="dot cyan"></span> Dev Node · pve2</div>
+            <ul>
+              <li>Newer mini-PC · 12-thread CPU · 16 GB</li>
+              <li><strong>Proxmox VE 9.2.3</strong> · fast local NVMe</li>
+              <li>Runs heavier services — Immich photo gallery</li>
+              <li>Added to scale beyond the storage node</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-title"><span class="dot amber"></span> Storage &amp; Drives</div>
             <ul>
               <li><strong>Samsung 870 EVO 500 GB</strong> SSD — OS &amp; VMs</li>
-              <li><strong>WD 1 TB</strong> HDD — data</li>
-              <li><strong>Seagate 500 GB</strong> HDD — daily backups</li>
+              <li><strong>WD 1 TB</strong> HDD — NAS data</li>
+              <li><strong>Seagate 500 GB</strong> HDD — backups</li>
+              <li><strong>NVMe 500 GB</strong> — dev node fast storage</li>
             </ul>
           </div>
           <div>
-            <div class="card-title"><span class="dot green"></span> Backups</div>
+            <div class="card-title"><span class="dot green"></span> Backups &amp; Extras</div>
             <ul>
-              <li>Daily 02:30 + 22:30 → Google Drive</li>
-              <li>3 snapshots retained · rclone sync</li>
-              <li>Proxmox VE hypervisor · 4 VMs active</li>
-            </ul>
-          </div>
-          <div>
-            <div class="card-title"><span class="dot purple"></span> Extras</div>
-            <ul>
+              <li>Daily 22:30 snapshot → 23:30 sync to Google Drive</li>
+              <li>7 days + 3 latest retained · rclone</li>
               <li>Sonoff Zigbee 3.0 USB dongle — smart home</li>
-              <li>Repurposed desktop PC found on the street</li>
               <li>Repo: <code>LiadLevy92/Homelab</code></li>
             </ul>
           </div>
@@ -199,7 +204,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
       <div class="topo-wrap reveal">
         <div class="topo-meta">
           <span>// NET-TOPO · 00.01</span>
-          <span>REV · 2026.05</span>
+          <span>REV · 2026.06</span>
         </div>
         <ul class="topo-tree">
           <li>
@@ -219,9 +224,17 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
                   <li>
                     <div class="topo-box topo-box-server">
                       <div class="topo-box-badge">HOME OFFICE</div>
-                      <div class="topo-box-title">HOMELAB SERVER</div>
+                      <div class="topo-box-title">STORAGE NODE · pve</div>
                       <div class="topo-box-accent">Intel i7-3770 · 16 GB DDR3</div>
-                      <div class="topo-box-sub">Proxmox VE · 4 VMs</div>
+                      <div class="topo-box-sub">Proxmox VE · 6 guests + NAS</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="topo-box topo-box-server">
+                      <div class="topo-box-badge">HOME OFFICE</div>
+                      <div class="topo-box-title">DEV NODE · pve2</div>
+                      <div class="topo-box-accent">12-thread · 16 GB · NVMe</div>
+                      <div class="topo-box-sub">Proxmox VE 9.2.3 · 2 guests</div>
                     </div>
                   </li>
                   <li>
@@ -272,10 +285,10 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         <table class="vm-table">
           <thead>
             <tr>
-              <th>VM</th>
-              <th>Name</th>
+              <th>ID</th>
+              <th>Service</th>
               <th>Role</th>
-              <th>OS</th>
+              <th>Node</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -283,29 +296,57 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <tr>
               <td><span class="vm-id">100</span></td>
               <td><span class="vm-name">AdGuard Home</span></td>
-              <td>DNS filtering · Ad blocking</td>
-              <td>Debian 12</td>
+              <td>DNS filtering · ad blocking</td>
+              <td>pve · LXC</td>
               <td><span class="badge badge-ok">running</span></td>
             </tr>
             <tr>
               <td><span class="vm-id">101</span></td>
               <td><span class="vm-name">Home Assistant</span></td>
               <td>Smart home · UPS · Bambu Lab · Zigbee</td>
-              <td>HAOS</td>
+              <td>pve · VM</td>
               <td><span class="badge badge-ok">running</span></td>
             </tr>
             <tr>
               <td><span class="vm-id">102</span></td>
               <td><span class="vm-name">Docker Host</span></td>
-              <td>n8n · Cloudflare · Second Brain Bot</td>
-              <td>Debian 13</td>
+              <td>n8n · Cloudflare Tunnel</td>
+              <td>pve · VM</td>
               <td><span class="badge badge-ok">running</span></td>
             </tr>
             <tr>
               <td><span class="vm-id">103</span></td>
               <td><span class="vm-name">Uptime Kuma</span></td>
               <td>Service monitoring</td>
-              <td>—</td>
+              <td>pve · LXC</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">104</span></td>
+              <td><span class="vm-name">NAS</span></td>
+              <td>Samba file server · 1 TB shares</td>
+              <td>pve · LXC</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">105</span></td>
+              <td><span class="vm-name">Vaultwarden</span></td>
+              <td>Self-hosted password manager</td>
+              <td>pve · LXC</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">110</span></td>
+              <td><span class="vm-name">devstore</span></td>
+              <td>Dev NVMe storage · Samba</td>
+              <td>pve2 · LXC</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
+            <tr>
+              <td><span class="vm-id">111</span></td>
+              <td><span class="vm-name">Immich</span></td>
+              <td>Photo gallery · AI face/object search</td>
+              <td>pve2 · LXC</td>
               <td><span class="badge badge-ok">running</span></td>
             </tr>
           </tbody>
@@ -333,21 +374,30 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
           </ul>
         </div>
         <div class="vlan-card reveal reveal-delay-3">
-          <div class="vlan-badge">SECOND BRAIN — TELEGRAM BOT</div>
+          <div class="vlan-badge">IMMICH — PHOTO GALLERY</div>
 
           <ul>
-            <li>Telegram → Notion AI filing bot</li>
-            <li>Multi-user — isolated Notion workspaces</li>
-            <li>Python · Docker Compose · VM 102</li>
+            <li>Self-hosted Google Photos alternative</li>
+            <li>AI face &amp; object recognition · timeline · albums</li>
+            <li>Dev node · CT 111 · photos stored on the NAS</li>
           </ul>
         </div>
         <div class="vlan-card reveal reveal-delay-4">
-          <div class="vlan-badge">POSTGRESQL — DATABASE</div>
+          <div class="vlan-badge">VAULTWARDEN — PASSWORDS</div>
 
           <ul>
-            <li>Container: <code>second-brain-postgres</code></li>
-            <li>Alpine image · Fernet-encrypted user data</li>
-            <li>Stores multi-user state &amp; tokens · VM 102</li>
+            <li>Self-hosted, Bitwarden-compatible vault</li>
+            <li>Tailscale-only access · zero public exposure</li>
+            <li>Dedicated nightly backup · CT 105</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-5">
+          <div class="vlan-badge">NAS — FILE SERVER</div>
+
+          <ul>
+            <li>Samba shares over LAN + Tailscale</li>
+            <li>1 TB data drive · media, photos, dev files</li>
+            <li>Unprivileged LXC · CT 104</li>
           </ul>
         </div>
         <div class="vlan-card reveal reveal-delay-5">
@@ -379,8 +429,8 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         <div class="section-rule dashed"></div>
       </div>
       <p class="section-intro reveal">
-        The hard part is done. A hypervisor running on a repurposed desktop PC, smart home integration, automated email,
-        and an AI filing system mean every future project has a <strong>solid foundation to build on</strong> — without starting from scratch.
+        The hard part is done. Two Proxmox nodes, smart home integration, automated email, self-hosted photos and passwords
+        mean every future project has a <strong>solid foundation to build on</strong> — without starting from scratch.
       </p>
       <div class="unlock-grid">
         <div class="unlock-card reveal reveal-delay-1">
@@ -431,7 +481,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <span class="badge badge-ok">live</span>
           </div>
           <div class="unlock-body">
-            Tailscale VPN connects all 4 VMs in a private mesh. Cloudflare Tunnel exposes only what's meant to be public. Zero open ports on the router.
+            Tailscale VPN connects every node and service in a private mesh. Cloudflare Tunnel exposes only what's meant to be public. Zero open ports on the router.
           </div>
           <ul>
             <li>Proxmox, Home Assistant, n8n — accessible from any device</li>
@@ -451,6 +501,34 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>Router points to AdGuard — all devices covered automatically</li>
             <li>Tailscale DNS override — same filtering on mobile and laptop, anywhere</li>
             <li>No browser extension, no per-device setup required</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-6">
+          <div class="unlock-header">
+            <div class="unlock-title">My Own Google Photos</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            Immich runs on the dev node — a private photo gallery with AI face and object recognition. Phone auto-backup, timeline, and albums, with originals stored on the NAS. No subscription, no one else's cloud.
+          </div>
+          <ul>
+            <li>Automatic phone backup — like Google Photos, fully local</li>
+            <li>AI search by face, object, and place — runs on my hardware</li>
+            <li>Originals on the NAS, thumbnails on fast NVMe</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-7">
+          <div class="unlock-header">
+            <div class="unlock-title">Self-Hosted Passwords</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            Vaultwarden is a self-hosted, Bitwarden-compatible password vault. Reachable only over Tailscale — never exposed to the public internet — with its own dedicated nightly backup.
+          </div>
+          <ul>
+            <li>Works with the Bitwarden apps and browser extensions</li>
+            <li>Tailscale-only — zero public attack surface</li>
+            <li>Dedicated encrypted backup, separate from the VM snapshots</li>
           </ul>
         </div>
       </div>
@@ -514,27 +592,28 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <div>
               <div class="card-title"><span class="dot cyan"></span> Architecture</div>
               <ul>
-                <li>Python bot + Docker Compose on VM 102</li>
-                <li>PostgreSQL 16-alpine for user state</li>
-                <li>Fernet encryption for stored tokens</li>
-                <li>Source: <code>/root/second_brain/</code></li>
+                <li>Now runs on <strong>Vercel + Supabase</strong> — fully managed</li>
+                <li>Serverless functions · Supabase Postgres</li>
+                <li>Encrypted per-user tokens &amp; isolated state</li>
+                <li>Telegram webhook → AI routing → Notion</li>
               </ul>
             </div>
             <div>
               <div class="card-title"><span class="dot green"></span> Status</div>
               <ul>
-                <li><strong>v2.0.0</strong> — in production</li>
-                <li>Active users: 2 · owner + beta user</li>
+                <li><strong>v2</strong> — in production on Vercel</li>
+                <li>Multi-user · public waitlist open</li>
                 <li>Repo: <code>LiadLevy92/Second-Brain</code></li>
                 <li>Onboarding: self-serve via Telegram</li>
               </ul>
             </div>
             <div>
-              <div class="card-title"><span class="dot amber"></span> Operations</div>
+              <div class="card-title"><span class="dot amber"></span> From Homelab to Cloud</div>
               <ul>
-                <li>Restart: <code>docker compose up -d bot</code></li>
-                <li>Logs: copy <code>second_brain.log</code> from container</li>
-                <li>DB: <code>psql -U second_brain -d second_brain</code></li>
+                <li>Prototyped on the homelab — VM 102, Docker</li>
+                <li>Graduated to Vercel + Supabase for zero-maintenance scale</li>
+                <li>The homelab is where projects are born and tested</li>
+                <li>n8n still reviews its feedback daily (§ 06)</li>
               </ul>
             </div>
           </div>
@@ -661,8 +740,8 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             </div>
             <div class="killer-qa">
               <div class="qa-item">
-                <div class="qa-q">$ "Which VM runs the Second Brain Bot?"</div>
-                <div class="qa-a">› Docker Host (<span class="qa-badge">VM 102</span>). Compose at <span class="qa-badge">/root/second_brain/</span>. Restart: <span class="qa-badge">docker compose up -d bot</span>. Logs: copy from container.</div>
+                <div class="qa-q">$ "Which node runs Immich, and where are the photos?"</div>
+                <div class="qa-a">› Dev node <span class="qa-badge">pve2</span>, container <span class="qa-badge">CT 111</span>. Originals live on the <span class="qa-badge">NAS</span> (CT 104); thumbnails and the database stay on the dev node's fast NVMe.</div>
               </div>
               <div class="qa-item">
                 <div class="qa-q">$ "My n8n webhook stopped receiving calls."</div>
@@ -799,7 +878,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
           <ul>
             <li>Found a broken desktop PC — i7-3770, 16 GB DDR3, three drives</li>
             <li>Installed Proxmox VE — first hypervisor, first VM, first panic</li>
-            <li>Spun up 4 VMs: AdGuard, Home Assistant, Docker Host, Uptime Kuma</li>
+            <li>Spun up the first guests: AdGuard, Home Assistant, Docker Host, Uptime Kuma</li>
             <li>No DevOps experience — Claude Code was the instructor</li>
           </ul>
         </div>
@@ -817,7 +896,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
           <div class="vlan-badge">PHASE 3</div>
           <div class="journey-phase-title">Zero-Trust Network</div>
           <ul>
-            <li>Tailscale mesh across all 4 VMs — private access from anywhere</li>
+            <li>Tailscale mesh across every guest — private access from anywhere</li>
             <li>Cloudflare Tunnel — public endpoints with zero open ports</li>
             <li>AdGuard DNS — ad filtering for every device on the network</li>
             <li>Domain liad-dev.com — expires May 2027</li>
@@ -840,7 +919,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>Built a Telegram bot that files anything into Notion with AI</li>
             <li>Text, voice, images, links — all routed to the right Notion DB</li>
             <li>PostgreSQL with Fernet encryption for user data</li>
-            <li>v2.0.0 — multi-user, in production, two active users</li>
+            <li>Graduated off the homelab → now in production on Vercel + Supabase</li>
           </ul>
         </div>
         <div class="vlan-card reveal reveal-delay-6">
@@ -851,6 +930,26 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>This site as the documentation layer — built in one session</li>
             <li>Astro + Claude Code — a git push is a doc update</li>
             <li>Changelog at the bottom of CLAUDE.md is the audit trail</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-1">
+          <div class="vlan-badge">PHASE 7</div>
+          <div class="journey-phase-title">Second Node</div>
+          <ul>
+            <li>Added a dedicated dev node (pve2) — Proxmox VE 9.2.3</li>
+            <li>Split roles: the street PC becomes the storage node, new box is dev</li>
+            <li>Fast local NVMe for heavier services</li>
+            <li>Both nodes on one LAN and one Tailnet</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-2">
+          <div class="vlan-badge">PHASE 8</div>
+          <div class="journey-phase-title">Self-Hosted Suite</div>
+          <ul>
+            <li>NAS — Samba file server on a 1 TB drive</li>
+            <li>Vaultwarden — self-hosted passwords, Tailscale-only</li>
+            <li>Immich — private Google Photos replacement on the dev node</li>
+            <li>Replacing cloud subscriptions, one service at a time</li>
           </ul>
         </div>
       </div>
@@ -877,7 +976,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         </div>
         <div class="recovery-item reveal reveal-delay-3">
           <span class="recovery-step">03</span>
-          <div class="recovery-text"><strong>Restore VMs</strong> via Proxmox UI — in order: 100, 101, 102, 103</div>
+          <div class="recovery-text"><strong>Restore storage-node guests</strong> via Proxmox UI — 100, 101, 102, 103, 104, 105</div>
         </div>
         <div class="recovery-item reveal reveal-delay-4">
           <span class="recovery-step">04</span>
@@ -908,6 +1007,21 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
           <span class="recovery-step">08</span>
           <div class="recovery-text"><strong>Verify Cloudflare Tunnel</strong> is active on VM 102 — test public endpoints</div>
         </div>
+        <div class="recovery-item reveal">
+          <span class="recovery-step">09</span>
+          <div class="recovery-text"><strong>Restore NAS (CT 104)</strong> — bind-mount the data drive, Samba share over LAN + Tailscale</div>
+        </div>
+        <div class="recovery-item reveal">
+          <span class="recovery-step">10</span>
+          <div class="recovery-text">
+            <strong>Restore Vaultwarden (CT 105)</strong> — vault data + dedicated nightly backup
+            <span class="recovery-cmd">Tailscale-only access</span>
+          </div>
+        </div>
+        <div class="recovery-item reveal">
+          <span class="recovery-step">11</span>
+          <div class="recovery-text"><strong>Set up the dev node (pve2)</strong> — install Proxmox, then restore devstore (110) + Immich (111)</div>
+        </div>
       </div>
     </div>
 
@@ -917,8 +1031,8 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
       <div class="stack-statement">Built Different</div>
       <p class="stack-body">
         I'm an electrical engineering student — not a sysadmin, not a developer, not someone who does this professionally.
-        I built and now maintain a self-hosted homelab with a hypervisor, smart home, AI automations,
-        and a multi-user Telegram bot — fully documented, version-controlled, and continuously extended.
+        I built and now maintain a self-hosted homelab across two Proxmox nodes — smart home, AI automations,
+        self-hosted photos, passwords, and a NAS — fully documented, version-controlled, and continuously extended.
         All of it built collaboratively with Claude Code, one session at a time.
         <strong>No prior experience required. Just curiosity and a PC someone threw out.</strong>
       </p>
@@ -935,6 +1049,12 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         <span class="stack-tag">Python</span>
         <span class="stack-tag">Astro</span>
         <span class="stack-tag">Claude Code</span>
+        <span class="stack-tag">Immich</span>
+        <span class="stack-tag">Vaultwarden</span>
+        <span class="stack-tag">Samba</span>
+        <span class="stack-tag">LXC</span>
+        <span class="stack-tag">Vercel</span>
+        <span class="stack-tag">Supabase</span>
         <span class="stack-tag">Zigbee</span>
         <span class="stack-tag">Git</span>
       </div>
