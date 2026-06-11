@@ -125,7 +125,7 @@ ACT I — THE SYSTEM
 § 01 PRINCIPLES  — 6 עקרונות, גריד 3 עמודות
 § 02 HARDWARE    — brain-grid 4 כרטיסים (Storage Node, Dev Node, Drives, Backups)
 § 03 NETWORK     — topology diagram עץ (2 שרתים: Storage + Dev node)
-§ 04 SERVICES    — טבלת 8 אורחים (ID/Service/Role/Node/Status, עם VM/LXC) + 7 vlan-cards
+§ 04 SERVICES    — טבלת 9 אורחים (ID/Service/Role/Node/Status, עם VM/LXC) + 8 vlan-cards
 § 05 UNLOCKS     — 7 unlock-cards (2 עמודות)
 
 ACT II — THE PROJECTS

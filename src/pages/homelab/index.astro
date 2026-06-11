@@ -7,7 +7,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
   <div class="boot" id="boot" aria-hidden="true">
     <div class="boot-inner">
       <div class="boot-header">LIAD-HOMELAB&nbsp;//&nbsp;RACK-0&nbsp;CONSOLE&nbsp;<span class="boot-cursor"></span></div>
-      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">2 nodes online · storage + dev · 8 guests</span></div>
+      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">2 nodes online · storage + dev · 9 guests</span></div>
       <div class="boot-line" data-boot="1"><span class="boot-ok">[ OK ]</span><span class="boot-label">AdGuard Home</span><span class="boot-value">DNS filtering active · CT 100</span></div>
       <div class="boot-line" data-boot="2"><span class="boot-ok">[ OK ]</span><span class="boot-label">Home Assist</span><span class="boot-value">smart home online · VM 101</span></div>
       <div class="boot-line" data-boot="3"><span class="boot-ok">[ OK ]</span><span class="boot-label">n8n</span><span class="boot-value">automations · 2 workflows active</span></div>
@@ -70,7 +70,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         <div class="stat-label">Proxmox Nodes</div>
       </div>
       <div class="stat">
-        <div class="stat-number">8</div>
+        <div class="stat-number">9</div>
         <div class="stat-label">VMs + LXC</div>
       </div>
       <div class="stat">
@@ -234,7 +234,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
                       <div class="topo-box-badge">HOME OFFICE</div>
                       <div class="topo-box-title">DEV NODE · pve2</div>
                       <div class="topo-box-accent">12-thread · 16 GB · NVMe</div>
-                      <div class="topo-box-sub">Proxmox VE 9.2.3 · 2 guests</div>
+                      <div class="topo-box-sub">Proxmox VE 9.2.3 · 3 guests</div>
                     </div>
                   </li>
                   <li>
@@ -349,6 +349,13 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
               <td>pve2 · LXC</td>
               <td><span class="badge badge-ok">running</span></td>
             </tr>
+            <tr>
+              <td><span class="vm-id">112</span></td>
+              <td><span class="vm-name">claude-dash</span></td>
+              <td>Claude Code usage analytics</td>
+              <td>pve2 · LXC</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
           </tbody>
         </table>
         </div>
@@ -398,6 +405,15 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>Samba shares over LAN + Tailscale</li>
             <li>1 TB data drive · media, photos, dev files</li>
             <li>Unprivileged LXC · CT 104</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-6">
+          <div class="vlan-badge">CLAUDE DASHBOARD — ANALYTICS</div>
+
+          <ul>
+            <li>Self-hosted analytics for my Claude Code usage</li>
+            <li>Tokens, cost, models, sessions — all local</li>
+            <li>Dev node · CT 112 · Tailscale-only</li>
           </ul>
         </div>
         <div class="vlan-card reveal reveal-delay-5">
@@ -1020,7 +1036,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         </div>
         <div class="recovery-item reveal">
           <span class="recovery-step">11</span>
-          <div class="recovery-text"><strong>Set up the dev node (pve2)</strong> — install Proxmox, then restore devstore (110) + Immich (111)</div>
+          <div class="recovery-text"><strong>Set up the dev node (pve2)</strong> — install Proxmox, then restore devstore (110), Immich (111), claude-dash (112)</div>
         </div>
       </div>
     </div>

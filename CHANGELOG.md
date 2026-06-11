@@ -5,6 +5,17 @@
 
 ---
 
+## v3.1.0 — June 2026
+
+### דף Homelab — שירות חדש: CT 112 claude-dash
+
+לפי כלל הסנכרון אתר↔תשתית — נוסף שירות חדש למערך:
+- **§04 Services** — שורת טבלה חדשה: CT 112 `claude-dash` (pve2 · LXC, Claude Code usage analytics). נוסף vlan-card "CLAUDE DASHBOARD — ANALYTICS".
+- **Stats** — `8 → 9` VMs+LXC. **Boot** — `8 → 9 guests`. **§03 Topology** — dev node `2 → 3 guests`.
+- **§13 Recovery** — צעד dev node כולל עכשיו גם claude-dash (112).
+
+---
+
 ## v3.0.0 — June 2026
 
 ### דף Homelab — ריענון תוכן מלא: ארכיטקטורת שני שרתים
