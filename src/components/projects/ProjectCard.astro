@@ -1,0 +1,61 @@
+---
+import type { Project } from '../../data/projects';
+import { getBadge } from '../../data/projects';
+
+export interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const badge = getBadge(project.category, project.state);
+const isModal = project.linkType === 'modal';
+
+// Shared attributes so the JS filter + modal opener can find each card.
+const dataAttrs = {
+  'data-category': project.category,
+  'data-id': project.id,
+};
+---
+{isModal ? (
+  <button
+    type="button"
+    class="project-card"
+    {...dataAttrs}
+    data-modal="open"
+    data-title={project.title}
+    data-image={project.image}
+    data-summary={project.tldr ?? project.summary}
+    data-href={project.href}
+    data-cta={project.ctaLabel ?? 'Open →'}
+    data-tech={project.technologies.join(',')}
+    data-badge-label={badge.label}
+    data-badge-cls={badge.cls}
+    aria-haspopup="dialog"
+  >
+    <div class="card-media">
+      <img src={project.image} alt={project.title} loading="lazy" decoding="async" />
+      <span class={`project-badge ${badge.cls}`}>{badge.label}</span>
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">{project.title}</h3>
+      <p class="card-summary">{project.summary}</p>
+      <ul class="card-tech">
+        {project.technologies.map((t) => <li class="tech-pill">{t}</li>)}
+      </ul>
+    </div>
+  </button>
+) : (
+  <a class="project-card" href={project.href} {...dataAttrs}>
+    <div class="card-media">
+      <img src={project.image} alt={project.title} loading="lazy" decoding="async" />
+      <span class={`project-badge ${badge.cls}`}>{badge.label}</span>
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">{project.title}<span class="card-arrow" aria-hidden="true">↗</span></h3>
+      <p class="card-summary">{project.summary}</p>
+      <ul class="card-tech">
+        {project.technologies.map((t) => <li class="tech-pill">{t}</li>)}
+      </ul>
+    </div>
+  </a>
+)}

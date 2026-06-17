@@ -26,3 +26,14 @@ Thumbs.db
 
 # Logs
 npm-debug.log*
+
+# Local Claude tooling config (contains machine-local paths)
+.claude/
+
+# Personal planning / spec notes — not for the public repo
+spec and photos/
+
+# Private project source materials — PUBLIC repo, so never publish raw docs.
+# Keep only the folder structure (.gitkeep) and the workflow README.
+raw_projects_assets/*/**
+!raw_projects_assets/*/.gitkeep

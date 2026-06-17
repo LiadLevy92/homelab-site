@@ -5,6 +5,26 @@
 
 ---
 
+## v3.2.0 — June 2026
+
+### עמוד חדש — Projects Hub (`/projects`)
+
+עמוד מרכזי אחד שמאגד את כל סוגי העשייה (קוד/AI, מייקר/חומרה, הנדסה/אקדמיה, HomeLab) בגריד אחיד עם סינון מהיר.
+
+- **עיצוב:** "Clean Tech / Bento" — Dark Mode עדין, אנגלית LTR. כרטיסי bento עם גבול דק + hover (הרמה + glow). badges חיים מסגנון ה-homelab (ירוק/צהוב/סגול/אפור לפי מצב).
+- **ארכיטקטורה:**
+  - `src/data/projects.ts` — מקור נתונים יחיד (טייפים + מערך פרויקטים + `getBadge(category,state)`). זה הקובץ לעריכה כדי להוסיף/לעדכן פרויקט.
+  - `src/components/projects/ProjectCard.astro` + `ProjectModal.astro`, `src/styles/projects.css`.
+  - 4 קטגוריות + טאב "All", סינון client-side ב-vanilla JS (כמו שאר האתר). ברירת מחדל `software_ai`.
+  - שני סוגי ניווט: `linkType:'internal'` (עוגן לדף מלא) ו-`'modal'` (פופ-אפ עם תמונה + TL;DR + CTA).
+- **תוכן ראשוני (2 פרויקטים אמיתיים לבדיקת שני המסלולים):**
+  - **Self-Hosted Homelab** (`homelab_infra`, internal) → מנווט ל-`/homelab`.
+  - **Second Brain Bot** (`software_ai`, modal) → פופ-אפ עם CTA ל-`/second-brain`.
+- **נכסים:** תמונות מתפרסמות תחת `public/assets/projects/<category>/<project>/images/`. חומרי גלם (Word/PDF/PPTX) ב-`raw_projects_assets/` **מחוץ ל-`public/`** — לא מתקמפל ל-`dist/` (ראה `raw_projects_assets/README.md` ל-workflow המלא).
+- **ניווט:** נוסף "Projects" לסיידבר + drawer בדף הבית. נוסף `/projects` ל-`sitemap.xml`.
+
+---
+
 ## v3.1.0 — June 2026
 
 ### דף Homelab — שירות חדש: CT 112 claude-dash

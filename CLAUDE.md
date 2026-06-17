@@ -22,8 +22,11 @@
 | דף | קובץ | סגנון |
 |----|------|--------|
 | `/` | `src/pages/index.astro` | עצמאי, CSS inline, אנושי/רך |
+| `/projects` | `src/pages/projects/index.astro` | עצמאי, "Clean Tech / Bento", English LTR, dark |
 | `/homelab` | `src/pages/homelab/index.astro` | HomelabLayout, terminal aesthetic |
 | `/second-brain` | `src/pages/second-brain/index.astro` | עצמאי, Hebrew RTL, indigo (#6366f1) |
+
+**דף Projects:** Hub שמאגד את כל הפרויקטים בגריד Bento עם סינון לפי קטגוריה. **מקור נתונים: `src/data/projects.ts`** (טייפים + מערך + `getBadge()`) — זה הקובץ לעריכה כדי להוסיף פרויקט. רכיבים: `src/components/projects/ProjectCard.astro` + `ProjectModal.astro`, סטייל `src/styles/projects.css`. שני סוגי ניווט: `internal` (עוגן לדף) / `modal` (פופ-אפ). חומרי גלם לעיבוד ב-`raw_projects_assets/` (מחוץ ל-public — ראה ה-README שם ל-workflow). תמונות מתפרסמות תחת `public/assets/projects/`.
 
 **דף הבית:** Floating Sidebar Layout — Vercel/Supabase inspired. סיידבר שמאלי קבוע 240px + תוכן ממורכז מימין. ללא Tailwind. אסור לשנות לסגנון הטרמינלי של ה-homelab.
 - Sidebar: ⚡ PERSONAL HUB, nav (Homelab / Second Brain / Web App Soon), GitHub + LinkedIn SVG icons
@@ -54,14 +57,23 @@ site/
 ├── src/
 │   ├── pages/
 │   │   ├── index.astro              ← דף הבית (אנושי, IBM Plex Sans)
+│   │   ├── projects/
+│   │   │   └── index.astro          ← דף Projects Hub (Bento, English LTR)
 │   │   ├── homelab/
 │   │   │   └── index.astro          ← דף ה-homelab הראשי (terminal)
 │   │   └── second-brain/
 │   │       └── index.astro          ← דף Second Brain (Hebrew RTL, indigo)
+│   ├── components/projects/
+│   │   ├── ProjectCard.astro        ← כרטיס פרויקט (internal / modal)
+│   │   └── ProjectModal.astro       ← מודל יחיד (מאוכלס מ-data-*)
+│   ├── data/
+│   │   └── projects.ts              ← ★ מקור נתוני הפרויקטים + getBadge()
 │   ├── layouts/
 │   │   └── HomelabLayout.astro      ← Layout wrapper (head, fonts, boot script)
 │   └── styles/
-│       └── homelab.css              ← כל ה-CSS של דף ה-homelab
+│       ├── homelab.css              ← כל ה-CSS של דף ה-homelab
+│       └── projects.css             ← CSS של דף Projects
+├── raw_projects_assets/             ← חומרי גלם לפרויקטים (פרטי, מחוץ ל-build)
 ├── public/
 │   ├── favicon.svg
 │   ├── apple-touch-icon.png         ← 180×180 (iOS home screen)

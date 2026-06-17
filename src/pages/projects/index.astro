@@ -1,0 +1,177 @@
+---
+import '../../styles/projects.css';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+import ProjectModal from '../../components/projects/ProjectModal.astro';
+import { projects, categories, DEFAULT_CATEGORY } from '../../data/projects';
+
+const canonicalURL = 'https://liad-dev.com/projects';
+const title = 'Projects | Liad Levy';
+const description =
+  'A hub of everything I build — software & AI, maker / hardware, electrical engineering and the self-hosted homelab.';
+
+// Count per category for the tab labels.
+const counts: Record<string, number> = {};
+for (const p of projects) counts[p.category] = (counts[p.category] ?? 0) + 1;
+---
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Liad Levy" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="Liad Levy" />
+  <meta property="og:image" content="https://liad-dev.com/og/home.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://liad-dev.com/og/home.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <a href="/" class="back-home">← Home</a>
+      <span class="topbar-brand">Liad Levy / Projects</span>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero reveal">
+      <div class="hero-eyebrow"><span class="dot"></span>Build Log</div>
+      <h1>Projects</h1>
+      <p>
+        Everything I build, in one place — from software &amp; AI experiments to physical
+        hardware, electrical-engineering coursework, and the self-hosted homelab that runs it all.
+      </p>
+    </header>
+
+    <!-- Filter tabs -->
+    <div class="tabs reveal" role="tablist" aria-label="Filter projects by category">
+      {categories.map((c) => (
+        <button
+          type="button"
+          class={`tab${c.id === DEFAULT_CATEGORY ? ' active' : ''}`}
+          data-filter={c.id}
+          role="tab"
+          aria-selected={c.id === DEFAULT_CATEGORY ? 'true' : 'false'}
+        >
+          {c.label}<span class="tab-count">{counts[c.id] ?? 0}</span>
+        </button>
+      ))}
+      <button type="button" class="tab" data-filter="all" role="tab" aria-selected="false">
+        All<span class="tab-count">{projects.length}</span>
+      </button>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid reveal" id="projectGrid">
+      {projects.map((p) => <ProjectCard project={p} />)}
+      <p class="grid-empty" id="gridEmpty" hidden>Nothing here yet — more soon.</p>
+    </div>
+
+  </div>
+
+  <ProjectModal />
+
+  <script is:inline>
+    // ── Category filter ──────────────────────────────────────────
+    const DEFAULT = 'software_ai';
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('.project-card');
+    const empty = document.getElementById('gridEmpty');
+
+    function applyFilter(filter) {
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        applyFilter(tab.dataset.filter);
+      });
+    });
+
+    applyFilter(DEFAULT);
+
+    // ── Modal ────────────────────────────────────────────────────
+    const overlay = document.getElementById('projectModal');
+    const mImage = document.getElementById('modalImage');
+    const mTitle = document.getElementById('modalTitle');
+    const mSummary = document.getElementById('modalSummary');
+    const mTech = document.getElementById('modalTech');
+    const mCta = document.getElementById('modalCta');
+    const mClose = document.getElementById('modalClose');
+    let lastFocused = null;
+
+    function openModal(card) {
+      lastFocused = card;
+      mImage.src = card.dataset.image;
+      mImage.alt = card.dataset.title;
+      mTitle.textContent = card.dataset.title;
+      mSummary.textContent = card.dataset.summary;
+      mCta.href = card.dataset.href;
+      mCta.textContent = card.dataset.cta;
+      mTech.innerHTML = '';
+      (card.dataset.tech || '').split(',').filter(Boolean).forEach((t) => {
+        const li = document.createElement('li');
+        li.className = 'tech-pill';
+        li.textContent = t;
+        mTech.appendChild(li);
+      });
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      mClose.focus();
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('[data-modal="open"]').forEach((card) => {
+      card.addEventListener('click', () => openModal(card));
+    });
+    mClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+    // ── Reveal on scroll ─────────────────────────────────────────
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+
+</body>
+</html>
