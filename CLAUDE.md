@@ -23,10 +23,13 @@
 |----|------|--------|
 | `/` | `src/pages/index.astro` | עצמאי, CSS inline, אנושי/רך |
 | `/projects` | `src/pages/projects/index.astro` | עצמאי, "Clean Tech / Bento", English LTR, dark |
+| `/projects/<slug>` | `src/pages/projects/<slug>.astro` | EngineeringArticleLayout — מאמר מחקר הנדסי (לפרויקטים `internal`) |
 | `/homelab` | `src/pages/homelab/index.astro` | HomelabLayout, terminal aesthetic |
 | `/second-brain` | `src/pages/second-brain/index.astro` | עצמאי, Hebrew RTL, indigo (#6366f1) |
 
 **דף Projects:** Hub שמאגד את כל הפרויקטים בגריד Bento עם סינון לפי קטגוריה. **מקור נתונים: `src/data/projects.ts`** (טייפים + מערך + `getBadge()`) — זה הקובץ לעריכה כדי להוסיף פרויקט. רכיבים: `src/components/projects/ProjectCard.astro` + `ProjectModal.astro`, סטייל `src/styles/projects.css`. שני סוגי ניווט: `internal` (עוגן לדף) / `modal` (פופ-אפ). חומרי גלם לעיבוד ב-`raw_projects_assets/` (מחוץ ל-public — ראה ה-README שם ל-workflow). תמונות מתפרסמות תחת `public/assets/projects/`.
+
+**פרויקט `internal` = דף מאמר הנדסי:** פרויקטים עם `linkType:'internal'` (אקדמי/הנדסי) מקבלים דף `src/pages/projects/<slug>.astro` שעוטף ב-**`EngineeringArticleLayout.astro`** (סטייל `src/styles/engineering-article.css`) — בלוג מחקר Dark בסגנון IEEE/OpenAI, תומך RTL/LTR. דוגמה חיה: `conical-horn-antenna.astro`. **כלל דיוק:** התוכן מועתק מדויק מקבצי המקור ב-`raw_projects_assets/`, בלי המצאה/שינוי ערכים; פרטים אישיים (שמות, ת.ז.) מוסרים תמיד. ראה רכיבי ה-Layout בטבלת ה-Design System למטה.
 
 **דף הבית:** Floating Sidebar Layout — Vercel/Supabase inspired. סיידבר שמאלי קבוע 240px + תוכן ממורכז מימין. ללא Tailwind. אסור לשנות לסגנון הטרמינלי של ה-homelab.
 - Sidebar: ⚡ PERSONAL HUB, nav (Homelab / Second Brain / Web App Soon), GitHub + LinkedIn SVG icons
@@ -58,7 +61,8 @@ site/
 │   ├── pages/
 │   │   ├── index.astro              ← דף הבית (אנושי, IBM Plex Sans)
 │   │   ├── projects/
-│   │   │   └── index.astro          ← דף Projects Hub (Bento, English LTR)
+│   │   │   ├── index.astro          ← דף Projects Hub (Bento, English LTR)
+│   │   │   └── conical-horn-antenna.astro  ← מאמר פרויקט internal (EngineeringArticleLayout)
 │   │   ├── homelab/
 │   │   │   └── index.astro          ← דף ה-homelab הראשי (terminal)
 │   │   └── second-brain/
@@ -69,10 +73,12 @@ site/
 │   ├── data/
 │   │   └── projects.ts              ← ★ מקור נתוני הפרויקטים + getBadge()
 │   ├── layouts/
-│   │   └── HomelabLayout.astro      ← Layout wrapper (head, fonts, boot script)
+│   │   ├── HomelabLayout.astro      ← Layout wrapper (head, fonts, boot script)
+│   │   └── EngineeringArticleLayout.astro  ← ★ Layout מאמר מחקר הנדסי (פרויקטים internal)
 │   └── styles/
 │       ├── homelab.css              ← כל ה-CSS של דף ה-homelab
-│       └── projects.css             ← CSS של דף Projects
+│       ├── projects.css             ← CSS של דף Projects
+│       └── engineering-article.css  ← CSS של EngineeringArticleLayout
 ├── raw_projects_assets/             ← חומרי גלם לפרויקטים (פרטי, מחוץ ל-build)
 ├── public/
 │   ├── favicon.svg
@@ -120,6 +126,8 @@ site/
 | `.reveal` | Scroll reveal — IntersectionObserver |
 | `.section-header` | כותרת סקשן עם קו ענבר שמאלי |
 | `.act` | מחיצת ACT I / II / III |
+
+> **רכיבי EngineeringArticleLayout** (`engineering-article.css`, prefix `ea-`): `.ea-article` (shell RTL/LTR), `.ea-abstract`, `.ea-h2`+`.ea-num` (סקשן ממוספר), `.ea-figure`/`.ea-figrow`+`.ea-figcaption`, `.ea-eq` (נוסחה), `.ea-callout` (מסקנות), `.ea-specs` (טבלה), `.ea-refs` (ביבליוגרפיה). פונטים: Rubik (כותרות) + Heebo (גוף, עברית) + JetBrains Mono.
 
 ### Corner brackets
 כרטיסים, topo-boxes, ו-principles משתמשים ב-`::before`/`::after` פסאודו-אלמנטים לסימוני L בפינות.

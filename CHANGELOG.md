@@ -5,6 +5,20 @@
 
 ---
 
+## v3.3.0 — June 2026
+
+### פרויקט אקדמי ראשון + EngineeringArticleLayout
+
+נוסף הדף הפנימי הראשון מסוג "בלוג מחקר הנדסי", וה-Layout הרב-פעמי שמאחוריו.
+
+- **`EngineeringArticleLayout.astro` + `engineering-article.css`** — שפת עיצוב חדשה לפרויקטים אקדמיים/הנדסיים (`linkType:'internal'`): Dark research-blog בסגנון IEEE/OpenAI. תומך RTL+LTR, abstract מובלט, סקשנים ממוספרים, `ea-figure`/`ea-figrow` עם captions, נוסחאות (`ea-eq`), callouts של מסקנות (`ea-callout`), טבלת specs ו-references. **מוכן להזרקת פרויקטי לימודים עתידיים.**
+- **`/projects/conical-horn-antenna`** — פרויקט גמר בקורס אנטנות (אנטנת שופר קונית וקונית משוננת, 10GHz, MATLAB Antenna Toolbox). מאמר עברית RTL נאמן למקור: 8 סקשנים, 14 איורים, נוסחאות כיווניות, 4 חקירות (תדר / גובה קונוס / רדיוס מפתח / מערך).
+  - **דיוק:** כל התוכן הועתק מדויק מקבצי המקור; captions של איורי התדרים נושאים את הערך המודפס על האיור. **הוסרו** שמות הצוות, מספר הסטודנטים, ת.ז. ושם המרצה (פרטיות — ריפו ציבורי).
+  - **נכסים:** 14 איורים מסוננים (מתוך המצגת) + רינדור hero, מאופטמים ב-jimp → `public/assets/projects/electrical_eng/conical-horn-antenna/images/`. חומרי הגלם (Word/PDF/PPTX) נשארו פרטיים ב-`raw_projects_assets/`.
+- **הכרטיס** ב-`projects.ts` עודכן: `electrical_eng`, `state:1` (📜 Published), `linkType:'internal'`. נוסף הדף ל-`sitemap.xml`.
+
+---
+
 ## v3.2.0 — June 2026
 
 ### עמוד חדש — Projects Hub (`/projects`)

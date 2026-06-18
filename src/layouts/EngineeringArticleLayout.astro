@@ -1,0 +1,67 @@
+---
+import '../styles/engineering-article.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  /** Page reading direction. 'rtl' for Hebrew source, 'ltr' for English. */
+  dir?: 'rtl' | 'ltr';
+  lang?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '',
+  dir = 'rtl',
+  lang = dir === 'rtl' ? 'he' : 'en',
+  canonical,
+  ogImage = 'https://liad-dev.com/og/home.png',
+} = Astro.props;
+---
+<!doctype html>
+<html lang={lang} dir={dir}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <meta name="author" content="Liad Levy" />
+  <meta name="robots" content="index, follow" />
+  {canonical && <link rel="canonical" href={canonical} />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  {canonical && <meta property="og:url" content={canonical} />}
+  <meta property="og:title" content={title} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:site_name" content="Liad Levy" />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  {description && <meta name="twitter:description" content={description} />}
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="ea-topbar">
+    <a href="/projects" class="ea-back">← Projects</a>
+    <span class="ea-brand">Liad Levy / Engineering</span>
+  </div>
+
+  <article class="ea-article" dir={dir}>
+    <slot />
+  </article>
+</body>
+</html>

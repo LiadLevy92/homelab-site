@@ -107,6 +107,19 @@ export const projects: Project[] = [
     ctaLabel: 'Read the full story →',
   },
   {
+    id: 'conical-horn-antenna',
+    title: 'Conical Horn Antenna',
+    category: 'electrical_eng',
+    state: 1, // 📜 Published — antennas course final project
+    summary:
+      'Antennas final project: design & simulation of a conical horn ' +
+      'antenna (standard + corrugated) for X-band ~10 GHz.',
+    technologies: ['MATLAB', 'Antenna Toolbox', 'RF', '10 GHz', 'EM Theory'],
+    image: '/assets/projects/electrical_eng/conical-horn-antenna/images/horn-card.jpg',
+    linkType: 'internal',
+    href: '/projects/conical-horn-antenna',
+  },
+  {
     id: 'homelab',
     title: 'Self-Hosted Homelab',
     category: 'homelab_infra',
