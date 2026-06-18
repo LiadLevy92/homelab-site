@@ -5,6 +5,19 @@
 
 ---
 
+## v3.4.0 — June 2026
+
+### סקיל `publish-project` נשמר בריפו
+
+ה-workflow של "חומרי גלם → דף באתר" הפך ל-Claude Code skill, ונשמר בריפו לגיבוי/גרסאות/שיתוף.
+
+- **`skills/publish-project/`** — מקור הסקיל (`SKILL.md` + `references/`: categories, extraction-toolchain, accuracy-and-privacy). הסקיל מותקן ב-`~/.claude/skills/` ורץ עם `/publish-project`.
+- **`skills/publish-project.skill`** — חבילה בודדת (zip, נתיבי forward-slash cross-platform) להתקנה/שיתוף בקליק.
+- **`skills/README.md`** — מה זה + הוראות התקנה/עדכון. התיקייה `skills/` לא נכנסת ל-build (Astro בונה רק `src/`+`public/`).
+- אומת ב-dry-run עם סוכן "קר" (ללא הקשר): זיהה קטגוריה נכונה, הסיר שם/ת.ז./מרצה, שמר ערכים נאמן למקור, עצר לפני git — ואף תפס אי-התאמה בין תמונה לפרויקט וסירב לפרסם.
+
+---
+
 ## v3.3.0 — June 2026
 
 ### פרויקט אקדמי ראשון + EngineeringArticleLayout
