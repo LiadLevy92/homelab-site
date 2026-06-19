@@ -147,6 +147,19 @@ but treat raw phone clips as unfit to publish until processed:
   This is where privacy bites — a "it works!" clip of catching Wi-Fi shows **neighbours'
   SSIDs** on the laptop screen → **don't publish that one.** Prefer the clip that proves the
   result with no third-party data (lab signal-generator → spectrum-analyzer peak).
+- **If the user *does* want a clip that contains third-party data** (e.g. it's the best proof),
+  blur it rather than dropping it. A camera that pans around can't use a fixed-region blur, so
+  blur the whole frame **time-gated** — sharp only on the windows you've verified are safe:
+  ```bash
+  # blur SSID screens everywhere; keep the hardware reveal (8–14 s) sharp
+  -vf "scale=480:-2,gblur=sigma=8:enable='not(between(t,8,14))'"
+  ```
+  `gblur=sigma=8` at ~480 px wide makes text unreadable while rows/icons still read as "the
+  list grew." With input-seek (`-ss` before `-i`) the `enable` `t` is output-relative (starts
+  at 0). **Verify frame-by-frame from the *output*** that every screen frame is blurred, the
+  sharp window holds only safe content, and nothing leaks at the window edges. Downscale hard
+  + low CRF (28) — fuzzy is fine here and guarantees unreadability. Say so in the caption
+  ("names blurred for privacy").
 - **Compress (H.264, web-safe):**
   ```bash
   ffmpeg -i in.mp4 -vf "scale=1280:-2" -c:v libx264 -crf 26 -preset slow -an \
