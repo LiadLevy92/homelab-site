@@ -90,6 +90,47 @@ Publish only to `public/assets/projects/<category>/<slug>/images/`. Keep `.gitke
 empty category dirs persist; raw materials stay out of `public/` (they're gitignored, so
 they never reach `dist/`).
 
+## Photo projects: EXIF orientation, galleries & batch optimizing
+
+Photo-led projects (maker/woodworking, lab photos) bring dozens of phone/WhatsApp images.
+Two things bite every time — handle both:
+
+**1. EXIF orientation — jimp does NOT auto-rotate.** Phone photos store the image sideways
+plus an EXIF `Orientation` tag; jimp reads pixels as-is, so they publish rotated unless you
+correct them. Read the tag and rotate:
+```js
+const ORI = { 6: 90, 8: -90, 3: 180 };           // tag → degrees for jimp .rotate()
+const img = await Jimp.read(src);
+const o = img._exif && img._exif.tags ? img._exif.tags.Orientation : 1;
+if (ORI[o]) img.rotate(ORI[o]);                    // 6 is by far the most common (portrait)
+```
+**WhatsApp (`*-WA*.jpg`) files are the trap:** WhatsApp strips EXIF, so the tag reads
+`undefined`/`0` **but the pixels are still baked sideways**. Auto-detection can't catch
+these — pass a manual per-file rotation override (usually `90`) and verify. Even same-camera
+`IMG_*` files in one folder can disagree (one needs `90`, the next none) — don't assume a
+folder is uniform.
+
+**2. Verify every published image by eye.** After optimizing, `Read` each generated file.
+This pass catches (a) wrong orientation and (b) **content mismatches** — folders get mixed
+(a "wall-art" folder held stray balcony + vacuum-cleanup shots; exclude those). If a file is
+still sideways after `+90`, just drop it rather than guessing the rotation.
+
+**Card thumb vs gallery sizing** (what shipped this session):
+```js
+// gallery image: full-width, ordered NN.jpg
+img.resize(1200, Jimp.AUTO); img.quality(80); await img.writeAsync(dir + '/01.jpg');
+// card thumbnail: fixed-ratio crop so the grid stays tidy
+cimg.cover(640, 440);        cimg.quality(82); await cimg.writeAsync(dir + '/card.jpg');
+```
+Hero/card = the finished/most-representative shot; `gallery` = chronological (file-name or
+timestamp order — numeric-sort `0.jpg…10.jpg`, don't lexically sort). Cap ~5–8 per gallery.
+
+**Batch pattern.** Drive the whole drop from one `site/_optimg.cjs` with a job list:
+`{ out, base, card, cardRot?, g: [[file, rotOverride?], …] }` per project; default rotation
+from EXIF, override per file for WA/baked-rotated ones. jimp is pure-JS and slow on 12 MP
+images (tens of seconds for a big batch) — run it with `run_in_background` and poll the
+output file. Delete `_optimg.cjs` when done (don't let it leak into git).
+
 ## Build & preview verification
 
 - `npm run build` must pass. Confirm no leak: `find dist -iname '*.docx' -o -iname '*.pptx'`

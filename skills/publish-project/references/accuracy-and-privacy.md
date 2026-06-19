@@ -20,6 +20,15 @@ summary or interpretation of them.
 - **Don't editorialize the findings.** Present what the source concluded; don't add your own
   engineering commentary, caveats, or "this could be improved by…" unless it's in the source.
 
+### When the source is photos + measurements (no document)
+Many projects have no report — just photos, some of them instrument screens. The accuracy
+rule still binds: **transcribe the values printed on the screen verbatim** (VNA marker
+`2.026 GHz / −25.842 dB`, spectrum-analyzer `1.96 GHz / −27.04 dBm`, etc.) and caption each
+figure with exactly what it shows. Don't infer a before/after improvement the photos don't
+prove. Here the *narrative* legitimately comes from **Liad's own account** — ask him, and
+his answer (e.g. "I joined the team late after reserve duty", the family-game origin of a
+build) is faithful source you can write up. That's the human-in-the-loop, not invention.
+
 ### When the source is messy
 Extraction artifacts are fine to clean — they're not content:
 - stray anchor numbers (e.g. a lone `218947980334` from an image position), reversed RTL
@@ -57,6 +66,22 @@ without being asked:
   (and the prose you transcribe) get published.
 - Keep the site's existing security rule: no internal IPs, usernames, or passwords; external
   URLs as endpoints, VMs by number. (See `site/CLAUDE.md`.)
+
+### Attribution — "whose work is this?"
+A folder name can imply someone else made it (e.g. `עבודות מהנגרייה של שי` — "works from
+Shai's woodshop"). **Don't assume, and don't guess — ask** before publishing it as Liad's.
+(In this case he confirmed he built it all himself, in a woodworking *course* run by someone
+named Shai.) Whatever the answer: still strip the person's name (instructor / workshop owner
+/ collaborator) per the no-names rule — present it as "a woodworking course" without naming.
+
+### Third-party & bystander media — don't republish
+Photos folders mix in things you must **not** publish:
+- **Third-party images:** YouTube screenshots / video frames (Liad watched them for
+  reference), stock/CC-licensed decorative images (e.g. a `freepng` CC-BY-NC playing-cards
+  cover). Describe what they were *for* in prose if relevant, but never republish the image.
+- **Don't expose third parties' data.** Don't pull frames from a video that would reveal
+  e.g. neighbours' Wi-Fi SSIDs; describe the result in words instead. Be mindful of
+  bystanders' faces in workshop photos — prefer shots of the work, not people.
 
 ## Hand-off, not auto-publish
 

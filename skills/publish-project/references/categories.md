@@ -47,6 +47,37 @@ state that honestly reflects where the project is.
 The labels live in `src/data/projects.ts` (`BADGE_LABELS`). Don't hardcode them on the page
 — `getBadge()` already returns label + colour class for the card.
 
+## Modal photo galleries (`gallery: string[]`)
+
+Modal cards support an optional **photo gallery** — added this session, reusable for any
+future modal project (it's the standard treatment for `maker_hardware`).
+
+In `projects.ts`, add an ordered `gallery` array to a `linkType: 'modal'` project:
+```ts
+{
+  id: 'wood-nightstand', title: 'Pine Nightstand', category: 'maker_hardware', state: 1,
+  summary: '…',                       // 2 lines on the card
+  technologies: ['Woodworking', 'Pine', 'Drawers'],
+  image: '/assets/projects/maker_hardware/wood-nightstand/images/card.jpg',  // card thumb
+  linkType: 'modal',
+  href: '#',                          // no external link → CTA hides itself
+  tldr: '…',                          // 1–2 line note shown in the modal
+  gallery: [                          // chronological; gallery[0] = modal's opening image
+    '/assets/projects/maker_hardware/wood-nightstand/images/01.jpg',
+    '/assets/projects/maker_hardware/wood-nightstand/images/02.jpg',
+    // …
+  ],
+}
+```
+
+How it renders (wiring already in the repo — don't rebuild it):
+- `ProjectModal.astro` has a `#modalThumbs` strip; `ProjectCard.astro` emits
+  `data-gallery={JSON.stringify(project.gallery ?? [])}`; the inline script in
+  `projects/index.astro` builds the main image + clickable thumbnails and **hides the CTA**
+  when `href` is empty or `#`. Styles: `.modal-thumbs` / `.modal-thumb` in `projects.css`.
+- The `Project` interface in `projects.ts` carries `gallery?: string[]`.
+- Card title stays **English**; `tldr`/`summary` are English too (the hub is English LTR).
+
 ## Per-category emphasis
 
 ### `software_ai` — default `linkType: 'modal'`
@@ -57,13 +88,19 @@ where to see it**. Keep it punchy.
 - Use `internal` only if the project genuinely warrants a long write-up.
 - Tags: frameworks/services (Next.js, Supabase, Claude, …).
 
-### `maker_hardware` — default `linkType: 'modal'` (use `internal` if large)
-Physical builds — power supplies, enclosures, 3D-printed parts, PCBs. The story is
-**visual and physical**.
-- Lead with real photos of the build; show materials, CAD (Fusion 360), and the process.
-- A small build → modal with the best photo + a short description. A big build (multi-stage,
-  lots of measurements) → an internal article page (same layout as `electrical_eng`).
-- Tags: materials/tools (LiFePO4, Fusion 360, Li-Ion, PCB, …).
+### `maker_hardware` — default `linkType: 'modal'` + **photo gallery** (use `internal` if large)
+Physical builds — power supplies, enclosures, furniture, woodworking, home projects. The
+story is **visual and physical**.
+- **One card per piece.** A "woodworking" drop is many cards (a table, a nightstand, a
+  cabinet…), not one. Liad's standing preference: each piece is its own modal card with a
+  1–2 line note and its photos **in chronological order** showing the build progress.
+- Use the **modal photo gallery** (`gallery: string[]`, see below): card thumbnail = the
+  finished/most-representative shot; `gallery` = the chronological set (first entry is the
+  modal's opening image). Set `href: '#'` so the CTA hides (these have no external link).
+- A genuinely large/measurement-heavy build → an internal article page (like `electrical_eng`).
+- Badge honesty: a finished, in-use build is state 1 (🛋️ In Use); one **still being built**
+  is state 2 (🔨 On the Bench) — Liad cares about this distinction, confirm status if unsure.
+- Tags: materials/tools (Pine, Woodworking, ATX PSU, Fusion 360, PCB, …).
 
 ### `electrical_eng` — default `linkType: 'internal'` (engineering article)
 Academic / engineering coursework and research. This is the richest treatment: a faithful
@@ -71,8 +108,17 @@ Academic / engineering coursework and research. This is the richest treatment: a
 applies hard here — equations, measured values, and figure data must match the source
 exactly. Emphasis: introduction, theory (with equations), methodology, investigations,
 results, references.
-- Tags: tools/domain (MATLAB, Antenna Toolbox, RF, HFSS, EM Theory, …).
-- Reference implementation: `src/pages/projects/conical-horn-antenna.astro`.
+- **Works without a written report.** If the project has only photos + lab measurements
+  (no DOCX/PPTX), still build the article: transcribe the values printed on instrument
+  screens **verbatim** (VNA marker freq/dB, spectrum-analyzer marker dBm, etc.) and get the
+  narrative from Liad. Caption each measurement with exactly what's on screen — don't claim
+  a before/after delta the photos don't show.
+- Components seen in the wild: `ea-eq` (equations), `ea-code` + `ea-code-label` (verbatim
+  source-code blocks, LTR, mono — added for the microcontroller-bingo page), `ea-callout`,
+  `ea-figrow`, `ea-specs`, `ea-refs`.
+- Tags: tools/domain (MATLAB, Antenna Toolbox, RF, VNA, S-Parameters, Embedded C, …).
+- Reference implementations: `conical-horn-antenna.astro` (simulation-heavy),
+  `microcontroller-bingo.astro` (code), `antenna-build.astro` (photos + measurements, no report).
 
 ### `homelab_infra` — default `linkType: 'internal'`, usually linking to `/homelab`
 Infrastructure and self-hosted services. There is already a rich `/homelab` page, so the
