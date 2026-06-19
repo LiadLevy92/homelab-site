@@ -155,16 +155,16 @@ export const projects: Project[] = [
     id: 'bench-psu',
     title: 'Bench Power Supply',
     category: 'maker_hardware',
-    state: 1, // 🛋️ In Use
+    state: 2, // 🔨 On the Bench — still being built
     summary:
-      'A retired computer PSU rebuilt into a workshop bench supply — ' +
+      'A retired computer PSU being rebuilt into a workshop bench supply — ' +
       'boxed up with banana terminals, a fan and a power switch.',
     technologies: ['ATX PSU', 'Electronics', 'Enclosure', 'DC Bench Supply'],
     image: '/assets/projects/maker_hardware/bench-psu/images/card.jpg',
     linkType: 'modal',
     href: '#',
     tldr:
-      'Took a spare ATX computer power supply and turned it into a proper bench supply for the workshop — mounted in an enclosure with colour-coded banana terminals, an added cooling fan and a front power switch.',
+      'Turning a spare ATX computer power supply into a proper bench supply for the workshop — mounted in an enclosure with colour-coded banana terminals, an added cooling fan and a front power switch. Still a work in progress on the bench.',
     gallery: [
       '/assets/projects/maker_hardware/bench-psu/images/01.jpg',
       '/assets/projects/maker_hardware/bench-psu/images/02.jpg',
