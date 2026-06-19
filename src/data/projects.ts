@@ -34,6 +34,10 @@ export interface Project {
   tldr?: string;
   /** Label for the modal's primary action button. */
   ctaLabel?: string;
+  /** Ordered image paths for a modal photo gallery (chronological). When
+   *  present, the modal shows a main image + thumbnail strip instead of a
+   *  single image. The first entry is used as the main image. */
+  gallery?: string[];
 }
 
 // ── Category metadata (drives the filter tabs) ──────────────────
@@ -132,6 +136,200 @@ export const projects: Project[] = [
     linkType: 'internal',
     href: '/projects/microcontroller-bingo',
   },
+  {
+    id: 'antenna-build',
+    title: 'Physical Antenna — Build & Measurement',
+    category: 'electrical_eng',
+    state: 1, // 📜 Published — communications course project
+    summary:
+      'Communications lab: building a physical antenna and tuning it on ' +
+      'a VNA & spectrum analyzer — resonant around ~2 GHz.',
+    technologies: ['RF', 'Antenna', 'VNA', 'S-Parameters', 'Spectrum Analyzer'],
+    image: '/assets/projects/electrical_eng/antenna-build/images/card.jpg',
+    linkType: 'internal',
+    href: '/projects/antenna-build',
+  },
+
+  // ── Maker / Hardware ─────────────────────────────────────────
+  {
+    id: 'bench-psu',
+    title: 'Bench Power Supply',
+    category: 'maker_hardware',
+    state: 1, // 🛋️ In Use
+    summary:
+      'A retired computer PSU rebuilt into a workshop bench supply — ' +
+      'boxed up with banana terminals, a fan and a power switch.',
+    technologies: ['ATX PSU', 'Electronics', 'Enclosure', 'DC Bench Supply'],
+    image: '/assets/projects/maker_hardware/bench-psu/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'Took a spare ATX computer power supply and turned it into a proper bench supply for the workshop — mounted in an enclosure with colour-coded banana terminals, an added cooling fan and a front power switch.',
+    gallery: [
+      '/assets/projects/maker_hardware/bench-psu/images/01.jpg',
+      '/assets/projects/maker_hardware/bench-psu/images/02.jpg',
+      '/assets/projects/maker_hardware/bench-psu/images/03.jpg',
+      '/assets/projects/maker_hardware/bench-psu/images/04.jpg',
+      '/assets/projects/maker_hardware/bench-psu/images/05.jpg',
+    ],
+  },
+  {
+    id: 'slat-wall',
+    title: 'Living-Room Slat Wall',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'A warm wood-slat accent wall built for the living room — from a ' +
+      'bare wall to a finished feature behind the TV.',
+    technologies: ['Woodworking', 'Wall Slats', 'Interior', 'DIY'],
+    image: '/assets/projects/maker_hardware/slat-wall/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'Designed and installed a wooden slat accent wall in the living room — measuring, cutting and mounting the slats to turn a plain wall into a warm feature wall behind the TV.',
+    gallery: [
+      '/assets/projects/maker_hardware/slat-wall/images/01.jpg',
+      '/assets/projects/maker_hardware/slat-wall/images/02.jpg',
+      '/assets/projects/maker_hardware/slat-wall/images/03.jpg',
+      '/assets/projects/maker_hardware/slat-wall/images/04.jpg',
+      '/assets/projects/maker_hardware/slat-wall/images/05.jpg',
+      '/assets/projects/maker_hardware/slat-wall/images/06.jpg',
+      '/assets/projects/maker_hardware/slat-wall/images/07.jpg',
+    ],
+  },
+  {
+    id: 'wood-wall-art',
+    title: 'Geometric Wood Wall Art',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'A framed geometric wood-mosaic wall piece, assembled slat by slat ' +
+      'from stained and natural timber.',
+    technologies: ['Woodworking', 'Wood Mosaic', 'Wall Art', 'Wood Stain'],
+    image: '/assets/projects/maker_hardware/wood-wall-art/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'A geometric wood wall-art panel built piece by piece — cutting and arranging stained, natural and white timber into a mirrored X pattern, then framing it.',
+    gallery: [
+      '/assets/projects/maker_hardware/wood-wall-art/images/01.jpg',
+      '/assets/projects/maker_hardware/wood-wall-art/images/02.jpg',
+      '/assets/projects/maker_hardware/wood-wall-art/images/03.jpg',
+      '/assets/projects/maker_hardware/wood-wall-art/images/04.jpg',
+      '/assets/projects/maker_hardware/wood-wall-art/images/05.jpg',
+    ],
+  },
+  {
+    id: 'wood-table',
+    title: 'Round Pedestal Table',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'A round pedestal table built from a hand-drawn leg template ' +
+      'through to a white-painted finish.',
+    technologies: ['Woodworking', 'Furniture', 'Templating', 'Paint Finish'],
+    image: '/assets/projects/maker_hardware/wood-table/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'A round table (part of a table-and-chairs build) made from scratch — from a hand-drawn curved-leg template on MDF, through cutting and assembly, to a white-painted finish styled at home.',
+    gallery: [
+      '/assets/projects/maker_hardware/wood-table/images/01.jpg',
+      '/assets/projects/maker_hardware/wood-table/images/02.jpg',
+      '/assets/projects/maker_hardware/wood-table/images/03.jpg',
+      '/assets/projects/maker_hardware/wood-table/images/04.jpg',
+      '/assets/projects/maker_hardware/wood-table/images/05.jpg',
+      '/assets/projects/maker_hardware/wood-table/images/06.jpg',
+      '/assets/projects/maker_hardware/wood-table/images/07.jpg',
+    ],
+  },
+  {
+    id: 'wood-nightstand',
+    title: 'Pine Nightstand',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'A two-drawer pine nightstand built from raw timber, with shaped ' +
+      'drawer pulls and tapered legs.',
+    technologies: ['Woodworking', 'Furniture', 'Pine', 'Drawers'],
+    image: '/assets/projects/maker_hardware/wood-nightstand/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'A two-drawer bedside nightstand built from solid pine — the carcass, drawers on runners, carved finger-pull recesses and tapered legs.',
+    gallery: [
+      '/assets/projects/maker_hardware/wood-nightstand/images/01.jpg',
+      '/assets/projects/maker_hardware/wood-nightstand/images/02.jpg',
+      '/assets/projects/maker_hardware/wood-nightstand/images/03.jpg',
+      '/assets/projects/maker_hardware/wood-nightstand/images/04.jpg',
+      '/assets/projects/maker_hardware/wood-nightstand/images/05.jpg',
+      '/assets/projects/maker_hardware/wood-nightstand/images/06.jpg',
+    ],
+  },
+  {
+    id: 'wood-kitchen',
+    title: 'Modular Kitchen Cabinet',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'A modular kitchen base cabinet built and fitted with a door and ' +
+      'drawers, from carcass to primed finish.',
+    technologies: ['Woodworking', 'Cabinetry', 'Carpentry', 'Drawers'],
+    image: '/assets/projects/maker_hardware/wood-kitchen/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'A modular kitchen base unit built from board — assembling the carcass, fitting a door and drawer runners, and priming it ready for finish.',
+    gallery: [
+      '/assets/projects/maker_hardware/wood-kitchen/images/01.jpg',
+      '/assets/projects/maker_hardware/wood-kitchen/images/02.jpg',
+      '/assets/projects/maker_hardware/wood-kitchen/images/03.jpg',
+      '/assets/projects/maker_hardware/wood-kitchen/images/04.jpg',
+      '/assets/projects/maker_hardware/wood-kitchen/images/05.jpg',
+      '/assets/projects/maker_hardware/wood-kitchen/images/06.jpg',
+    ],
+  },
+  {
+    id: 'wood-balcony',
+    title: 'Balcony Corner Bench',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'An L-shaped slatted corner bench built for the balcony — from ' +
+      'workshop frame to installed seating.',
+    technologies: ['Woodworking', 'Pine', 'Outdoor Furniture', 'Balcony'],
+    image: '/assets/projects/maker_hardware/wood-balcony/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'A large L-shaped corner bench for the balcony, built from pine — framing the two sides in the workshop and assembling them into a slatted corner seating unit on the balcony.',
+    gallery: [
+      '/assets/projects/maker_hardware/wood-balcony/images/01.jpg',
+      '/assets/projects/maker_hardware/wood-balcony/images/02.jpg',
+      '/assets/projects/maker_hardware/wood-balcony/images/03.jpg',
+      '/assets/projects/maker_hardware/wood-balcony/images/04.jpg',
+    ],
+  },
+  {
+    id: 'wood-planter',
+    title: 'Wooden Planter',
+    category: 'maker_hardware',
+    state: 1,
+    summary:
+      'A handmade raised wooden planter box on legs, built from pine ' +
+      'for the balcony.',
+    technologies: ['Woodworking', 'Pine', 'Balcony'],
+    image: '/assets/projects/maker_hardware/wood-planter/images/card.jpg',
+    linkType: 'modal',
+    href: '#',
+    tldr:
+      'A raised planter box built from pine for the balcony — a clean, simple build with a boxed top and four legs.',
+    gallery: [
+      '/assets/projects/maker_hardware/wood-planter/images/01.jpg',
+      '/assets/projects/maker_hardware/wood-planter/images/02.jpg',
+    ],
+  },
+
   {
     id: 'homelab',
     title: 'Self-Hosted Homelab',

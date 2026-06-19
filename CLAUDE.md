@@ -27,7 +27,7 @@
 | `/homelab` | `src/pages/homelab/index.astro` | HomelabLayout, terminal aesthetic |
 | `/second-brain` | `src/pages/second-brain/index.astro` | עצמאי, Hebrew RTL, indigo (#6366f1) |
 
-**דף Projects:** Hub שמאגד את כל הפרויקטים בגריד Bento עם סינון לפי קטגוריה. **מקור נתונים: `src/data/projects.ts`** (טייפים + מערך + `getBadge()`) — זה הקובץ לעריכה כדי להוסיף פרויקט. רכיבים: `src/components/projects/ProjectCard.astro` + `ProjectModal.astro`, סטייל `src/styles/projects.css`. שני סוגי ניווט: `internal` (עוגן לדף) / `modal` (פופ-אפ). חומרי גלם לעיבוד ב-`raw_projects_assets/` (מחוץ ל-public — ראה ה-README שם ל-workflow). תמונות מתפרסמות תחת `public/assets/projects/`.
+**דף Projects:** Hub שמאגד את כל הפרויקטים בגריד Bento עם סינון לפי קטגוריה. **מקור נתונים: `src/data/projects.ts`** (טייפים + מערך + `getBadge()`) — זה הקובץ לעריכה כדי להוסיף פרויקט. רכיבים: `src/components/projects/ProjectCard.astro` + `ProjectModal.astro`, סטייל `src/styles/projects.css`. שני סוגי ניווט: `internal` (עוגן לדף) / `modal` (פופ-אפ). חומרי גלם לעיבוד ב-`raw_projects_assets/` (מחוץ ל-public — ראה ה-README שם ל-workflow). תמונות מתפרסמות תחת `public/assets/projects/`. **מודל עם גלריה:** פרויקט `modal` יכול לכלול `gallery: string[]` (נתיבי תמונות כרונולוגיים) — אז המודל מציג תמונה ראשית + רצועת thumbnails (`.modal-thumbs`); ה-CTA מוסתר כש-`href: '#'` (פרויקט גלריה ללא יעד חיצוני).
 
 **פרויקט `internal` = דף מאמר הנדסי:** פרויקטים עם `linkType:'internal'` (אקדמי/הנדסי) מקבלים דף `src/pages/projects/<slug>.astro` שעוטף ב-**`EngineeringArticleLayout.astro`** (סטייל `src/styles/engineering-article.css`) — בלוג מחקר Dark בסגנון IEEE/OpenAI, תומך RTL/LTR. דוגמה חיה: `conical-horn-antenna.astro`. **כלל דיוק:** התוכן מועתק מדויק מקבצי המקור ב-`raw_projects_assets/`, בלי המצאה/שינוי ערכים; פרטים אישיים (שמות, ת.ז.) מוסרים תמיד. ראה רכיבי ה-Layout בטבלת ה-Design System למטה.
 
@@ -63,7 +63,8 @@ site/
 │   │   ├── projects/
 │   │   │   ├── index.astro          ← דף Projects Hub (Bento, English LTR)
 │   │   │   ├── conical-horn-antenna.astro    ← מאמר פרויקט internal (EngineeringArticleLayout)
-│   │   │   └── microcontroller-bingo.astro   ← מאמר פרויקט internal (קוד C, ea-code)
+│   │   │   ├── microcontroller-bingo.astro   ← מאמר פרויקט internal (קוד C, ea-code)
+│   │   │   └── antenna-build.astro            ← מאמר פרויקט internal (אנטנה פיזית, מדידות VNA)
 │   │   ├── homelab/
 │   │   │   └── index.astro          ← דף ה-homelab הראשי (terminal)
 │   │   └── second-brain/

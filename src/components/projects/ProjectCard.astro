@@ -27,6 +27,7 @@ const dataAttrs = {
     data-summary={project.tldr ?? project.summary}
     data-href={project.href}
     data-cta={project.ctaLabel ?? 'Open →'}
+    data-gallery={JSON.stringify(project.gallery ?? [])}
     data-tech={project.technologies.join(',')}
     data-badge-label={badge.label}
     data-badge-cls={badge.cls}

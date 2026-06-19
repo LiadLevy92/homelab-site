@@ -1,0 +1,135 @@
+---
+import EngineeringArticleLayout from '../../layouts/EngineeringArticleLayout.astro';
+
+const base = '/assets/projects/electrical_eng/antenna-build/images';
+const title = 'בניית אנטנה פיזית ומדידתה | פרויקט מעבדה — Liad Levy';
+const description =
+  'פרויקט מעבדה בקורס תקשורת: בנייה של אנטנה פיזית, שיפורה ומדידתה ב-VNA ובמנתח ספקטרום סביב תדר של כ-2GHz.';
+---
+<EngineeringArticleLayout
+  title={title}
+  description={description}
+  dir="rtl"
+  lang="he"
+  canonical="https://liad-dev.com/projects/antenna-build"
+  ogImage={`https://liad-dev.com${base}/hero.jpg`}
+>
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <div class="ea-eyebrow"><span class="dot"></span>פרויקט מעבדה · קורס תקשורת</div>
+  <h1 class="ea-title">בניית אנטנה פיזית ומדידתה</h1>
+  <p class="ea-subtitle">Physical Antenna — Build, Tuning &amp; RF Measurement</p>
+
+  <div class="ea-meta">
+    <span>2026</span>
+    <span>·</span>
+    <span>תדר עבודה ~2 GHz</span>
+    <span>·</span>
+    <span>VNA + Spectrum Analyzer</span>
+  </div>
+
+  <div class="ea-tags">
+    <span class="ea-tag">RF</span>
+    <span class="ea-tag">Antenna</span>
+    <span class="ea-tag">VNA</span>
+    <span class="ea-tag">S-Parameters</span>
+    <span class="ea-tag">Spectrum Analyzer</span>
+  </div>
+
+  <figure class="ea-figure">
+    <img src={`${base}/hero.jpg`} alt="האנטנה הפיזית על שולחן המעבדה ליד מנתח הרשת" />
+    <figcaption class="ea-figcaption">האנטנה על שולחן המעבדה, מחוברת למנתח הרשת (<span dir="ltr">VNA</span>).</figcaption>
+  </figure>
+
+  <!-- ── Abstract ───────────────────────────────────────── -->
+  <div class="ea-abstract">
+    <div class="ea-abstract-label">תקציר</div>
+    <p>
+      פרויקט מעבדה בקורס תקשורת: בניית אנטנה פיזית ומדידת ביצועיה במעבדה. בשונה מפרויקט אנטנת
+      השופר, כאן <b>לא</b> נדרשה סימולציה בתוכנה לפני הבנייה — המשימה הייתה לבנות אנטנה אמיתית
+      ולמדוד את תוצאותיה בעזרת ציוד המעבדה, ולא הוגש דוח כתוב. הצטרפתי לקבוצה בשלב מתקדם, ומשם
+      בחנתי את האנטנה, חקרתי מקורות ייחוס והצעתי שיפורים — שמהם מתקבל שיפור בנראות ובביצועים.
+    </p>
+  </div>
+
+  <!-- ── 1. The task ────────────────────────────────────── -->
+  <section class="ea-section" id="task">
+    <h2 class="ea-h2"><span class="ea-num">01</span> המשימה ונקודת ההצטרפות</h2>
+    <p>
+      המטרה בקורס הייתה לבנות אנטנה פיזית ולמדוד את ביצועיה במעבדה. שלא כמו בפרויקט אנטנת השופר,
+      לא התבקשנו לבצע סימולציה בתוכנה לפני הבנייה — אלא לבנות אנטנה ולמדוד את תוצאותיה במעבדה בלבד,
+      וללא דוח כתוב.
+    </p>
+    <p>
+      הצטרפתי לקבוצה באיחור (לאחר שירות מילואים), כשהפרויקט כבר היה במצב מתקדם. כמו תמיד, רציתי
+      לעשות את זה הכי טוב שאני יכול — אז התחלתי לבחון את האנטנה הקיימת, ללמוד אילו פרמטרים ישפרו
+      את הדיוק והביצועים, ולהציע שיפורים.
+    </p>
+  </section>
+
+  <!-- ── 2. Starting point ──────────────────────────────── -->
+  <section class="ea-section" id="before">
+    <h2 class="ea-h2"><span class="ea-num">02</span> נקודת ההתחלה</h2>
+    <p>
+      להלן האנטנה כפי שהייתה לפני השיפורים שהוספתי, יחד עם מדידת ההחזר (<span dir="ltr">S11</span>)
+      הראשונית שלה במנתח הרשת.
+    </p>
+    <div class="ea-figrow">
+      <figure class="ea-figure">
+        <img src={`${base}/before-antenna.jpg`} alt="האנטנה לפני השיפורים — מבנה אלמנטים דק על חצובה" />
+        <figcaption class="ea-figcaption"><b>איור 1.</b> האנטנה לפני השיפורים.</figcaption>
+      </figure>
+      <figure class="ea-figure">
+        <img src={`${base}/before-s11.jpg`} alt="מסך VNA המציג מדידת S11 לפני התיאום" />
+        <figcaption class="ea-figcaption"><b>איור 2.</b> מדידת <span dir="ltr">S11</span> ב-<span dir="ltr">VNA</span> (Keysight E5063A): סמן ב-<span dir="ltr">2.026 GHz</span>, <span dir="ltr">−25.842 dB</span>.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── 3. Improvements ────────────────────────────────── -->
+  <section class="ea-section" id="after">
+    <h2 class="ea-h2"><span class="ea-num">03</span> השיפורים שהוספתי</h2>
+    <p>
+      כדי למצוא את הפרמטרים שייתנו את הביצועים הטובים ביותר, סקרתי מקורות ייחוס ובחנתי גיאומטריות
+      שונות, ואז יישמתי שינויים במבנה האנטנה ובהזנה שלה. התוצאה — אנטנה מסודרת ומדויקת יותר, עם
+      שיפור בנראות ובביצועים.
+    </p>
+    <div class="ea-figrow">
+      <figure class="ea-figure">
+        <img src={`${base}/after-antenna.jpg`} alt="האנטנה לאחר השיפורים — מבנה טעון-דיסקות על חצובה" />
+        <figcaption class="ea-figcaption"><b>איור 3.</b> האנטנה לאחר השיפורים.</figcaption>
+      </figure>
+      <figure class="ea-figure">
+        <img src={`${base}/feed.jpg`} alt="תקריב של פרט ההזנה — דיסקת מתכת על מוט מתוברג עם חיבור מולחם" />
+        <figcaption class="ea-figcaption"><b>איור 4.</b> פרט ההזנה — דיסקת מתכת על מוט מתוברג עם חיבור הזנה מולחם.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── 4. Measurements ────────────────────────────────── -->
+  <section class="ea-section" id="measure">
+    <h2 class="ea-h2"><span class="ea-num">04</span> מדידות במעבדה</h2>
+    <p>
+      את האנטנה מדדנו בעזרת מנתח רשת (<span dir="ltr">Keysight ENA E5063A, 100kHz–3GHz</span>)
+      למדידת ההחזר, ובעזרת מנתח ספקטרום (<span dir="ltr">Keysight N9321C, 9kHz–4GHz</span>) לקליטת
+      אות. המדידות מראות תהודה וקליטת אות באזור של כ-<span dir="ltr">2 GHz</span>.
+    </p>
+    <figure class="ea-figure">
+      <img src={`${base}/after-measure.jpg`} alt="מסך מנתח ספקטרום המציג שיא קליטה סביב 1.96GHz" />
+      <figcaption class="ea-figcaption"><b>איור 5.</b> מנתח ספקטרום (<span dir="ltr">N9321C</span>): שיא קליטה בסמן <span dir="ltr">1.96 GHz</span>, <span dir="ltr">−27.04 dBm</span>.</figcaption>
+    </figure>
+    <div class="ea-callout">
+      <div class="ea-callout-label">תוצאה — הדגמה אמיתית</div>
+      <p>
+        מעבר למדידות המעבדה, האנטנה הוכיחה את עצמה גם בשטח: בעזרתה הצלחתי לקלוט רשתות אלחוטיות
+        (<span dir="ltr">Wi-Fi</span>) של שכנים — באזור תדרי ה-<span dir="ltr">2.4 GHz</span> —
+        שלא נקלטו כלל ללא האנטנה.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <div class="ea-footer">
+    <a href="/projects" class="ea-footer-back">← חזרה לכל הפרויקטים</a>
+    <span class="ea-footer-note">Communications Course · Lab Project · 2026</span>
+  </div>
+</EngineeringArticleLayout>

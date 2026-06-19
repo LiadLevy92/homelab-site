@@ -124,6 +124,7 @@ for (const p of projects) counts[p.category] = (counts[p.category] ?? 0) + 1;
     // ── Modal ────────────────────────────────────────────────────
     const overlay = document.getElementById('projectModal');
     const mImage = document.getElementById('modalImage');
+    const mThumbs = document.getElementById('modalThumbs');
     const mTitle = document.getElementById('modalTitle');
     const mSummary = document.getElementById('modalSummary');
     const mTech = document.getElementById('modalTech');
@@ -133,12 +134,43 @@ for (const p of projects) counts[p.category] = (counts[p.category] ?? 0) + 1;
 
     function openModal(card) {
       lastFocused = card;
-      mImage.src = card.dataset.image;
+
+      // Gallery (chronological photo strip) or single image.
+      let gallery = [];
+      try { gallery = JSON.parse(card.dataset.gallery || '[]'); } catch (_) { gallery = []; }
+      mThumbs.innerHTML = '';
+      const mainSrc = gallery.length ? gallery[0] : card.dataset.image;
+      mImage.src = mainSrc;
       mImage.alt = card.dataset.title;
+      if (gallery.length > 1) {
+        gallery.forEach((src, i) => {
+          const t = document.createElement('button');
+          t.type = 'button';
+          t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+          t.innerHTML = `<img src="${src}" alt="" loading="lazy" />`;
+          t.addEventListener('click', () => {
+            mImage.src = src;
+            mThumbs.querySelectorAll('.modal-thumb').forEach((x) => x.classList.remove('active'));
+            t.classList.add('active');
+          });
+          mThumbs.appendChild(t);
+        });
+        mThumbs.hidden = false;
+      } else {
+        mThumbs.hidden = true;
+      }
+
       mTitle.textContent = card.dataset.title;
       mSummary.textContent = card.dataset.summary;
-      mCta.href = card.dataset.href;
-      mCta.textContent = card.dataset.cta;
+      // Hide the CTA when there is no real destination (gallery-only projects).
+      const href = card.dataset.href;
+      if (!href || href === '#') {
+        mCta.hidden = true;
+      } else {
+        mCta.hidden = false;
+        mCta.href = href;
+        mCta.textContent = card.dataset.cta;
+      }
       mTech.innerHTML = '';
       (card.dataset.tech || '').split(',').filter(Boolean).forEach((t) => {
         const li = document.createElement('li');
