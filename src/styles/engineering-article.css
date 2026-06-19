@@ -173,6 +173,26 @@ body::before {
 .ea-eq .frac > span:last-child { padding: 2px .4em 0; }
 .ea-eq-note { font-family: var(--font-body); font-size: 13.5px; color: var(--text-mute); margin-top: 8px; }
 
+/* ── Code block ──────────────────────────────────────────────── */
+.ea-code {
+  background: var(--bg-soft); border: 1px solid var(--line);
+  border-radius: 12px; margin: 22px 0; overflow: hidden;
+}
+.ea-code-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--accent); direction: ltr;
+  padding: 10px 16px; border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.02); text-align: left;
+}
+.ea-code pre {
+  margin: 0; padding: 16px 18px; overflow-x: auto; direction: ltr; text-align: left;
+}
+.ea-code code {
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.65;
+  color: var(--text-body); white-space: pre;
+}
+.ea-code code .cm { color: var(--text-mute); font-style: italic; }
+
 /* ── Key-result callout ──────────────────────────────────────── */
 .ea-callout {
   background: linear-gradient(180deg, rgba(78,241,154,.06), transparent);

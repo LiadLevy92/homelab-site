@@ -120,6 +120,19 @@ export const projects: Project[] = [
     href: '/projects/conical-horn-antenna',
   },
   {
+    id: 'microcontroller-bingo',
+    title: 'Microcontroller Bingo Dealer',
+    category: 'electrical_eng',
+    state: 1, // 📜 Published — microcomputers course final project
+    summary:
+      'Microcomputers final project: an embedded C "bingo dealer" on a ' +
+      'KEIL MCBSTR9 — buttons, potentiometer (ADC), LCD and running LEDs.',
+    technologies: ['Embedded C', 'KEIL MCBSTR9', 'STR9', 'ADC', 'LCD', 'GPIO'],
+    image: '/assets/projects/electrical_eng/microcontroller-bingo/images/board-card.jpg',
+    linkType: 'internal',
+    href: '/projects/microcontroller-bingo',
+  },
+  {
     id: 'homelab',
     title: 'Self-Hosted Homelab',
     category: 'homelab_infra',

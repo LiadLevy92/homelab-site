@@ -62,7 +62,8 @@ site/
 │   │   ├── index.astro              ← דף הבית (אנושי, IBM Plex Sans)
 │   │   ├── projects/
 │   │   │   ├── index.astro          ← דף Projects Hub (Bento, English LTR)
-│   │   │   └── conical-horn-antenna.astro  ← מאמר פרויקט internal (EngineeringArticleLayout)
+│   │   │   ├── conical-horn-antenna.astro    ← מאמר פרויקט internal (EngineeringArticleLayout)
+│   │   │   └── microcontroller-bingo.astro   ← מאמר פרויקט internal (קוד C, ea-code)
 │   │   ├── homelab/
 │   │   │   └── index.astro          ← דף ה-homelab הראשי (terminal)
 │   │   └── second-brain/
@@ -127,7 +128,7 @@ site/
 | `.section-header` | כותרת סקשן עם קו ענבר שמאלי |
 | `.act` | מחיצת ACT I / II / III |
 
-> **רכיבי EngineeringArticleLayout** (`engineering-article.css`, prefix `ea-`): `.ea-article` (shell RTL/LTR), `.ea-abstract`, `.ea-h2`+`.ea-num` (סקשן ממוספר), `.ea-figure`/`.ea-figrow`+`.ea-figcaption`, `.ea-eq` (נוסחה), `.ea-callout` (מסקנות), `.ea-specs` (טבלה), `.ea-refs` (ביבליוגרפיה). פונטים: Rubik (כותרות) + Heebo (גוף, עברית) + JetBrains Mono.
+> **רכיבי EngineeringArticleLayout** (`engineering-article.css`, prefix `ea-`): `.ea-article` (shell RTL/LTR), `.ea-abstract`, `.ea-h2`+`.ea-num` (סקשן ממוספר), `.ea-figure`/`.ea-figrow`+`.ea-figcaption`, `.ea-eq` (נוסחה), `.ea-code`+`.ea-code-label` (בלוק קוד LTR), `.ea-callout` (מסקנות), `.ea-specs` (טבלה), `.ea-refs` (ביבליוגרפיה). פונטים: Rubik (כותרות) + Heebo (גוף, עברית) + JetBrains Mono.
 
 ### Corner brackets
 כרטיסים, topo-boxes, ו-principles משתמשים ב-`::before`/`::after` פסאודו-אלמנטים לסימוני L בפינות.

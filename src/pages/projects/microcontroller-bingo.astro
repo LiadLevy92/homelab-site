@@ -1,0 +1,244 @@
+---
+import EngineeringArticleLayout from '../../layouts/EngineeringArticleLayout.astro';
+
+const base = '/assets/projects/electrical_eng/microcontroller-bingo/images';
+const title = 'דילר בינגו על מיקרו-בקר | פרויקט גמר — Liad Levy';
+const description =
+  'פרויקט גמר בקורס מיקרו-מחשבים: קוד C משובץ על בקר KEIL MCBSTR9 המדמה דילר במשחק בינגו — כפתורים, פוטנציומטר (ADC), צג LCD ונוריות LED רצות.';
+
+// ── Verbatim source code excerpts (KEIL MCBSTR9, C) ────────────
+const codePeripherals = `float measure(void) {
+    ADC->CR &= 0xFF7F;
+    ADC->CR = 0x0002;
+    ADC->CR |= 0x0001;
+    delay_ms(100);
+    while ((ADC->CR & 0x8000) == 0);
+    return (ADC->DR0 & 0x03FF);
+}
+
+void blink_leds(int times, unsigned int delay) {
+    int i;
+    for (i = 0; i < times; i++) {
+        LED = 0xFF;
+        delay_ms(delay);
+        LED = 0x00;
+        delay_ms(delay);
+    }
+}`;
+
+const codeShuffle = `void shuffle(int *deck, int size) {
+    int i, j, temp;
+    for (i = size - 1; i > 0; i--) {
+        j = rand() % (i + 1);
+        temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}`;
+
+const codeMainLoop = `while (running) {
+    vmax = measure();
+    LED = n;
+    delay_ms((unsigned int)vmax);
+    if (direction == 1) {
+        n = n << 1;
+        if (n == 0x80) {
+            direction = -1;
+        }
+    } else {
+        n = n >> 1;
+        if (n == 0x01) {
+            direction = 1;
+        }
+    }
+    set_cursor(0, 1);
+    if (!paused) {
+        cardIndex = deck[displayedIndex];
+        displayedCards[displayedIndex++] = cardIndex;
+        if (displayedIndex >= 52) {
+            displayedIndex = 0;
+        }
+        sprintf(buffer, "%s of %s", values[cardIndex % 13], suits[cardIndex / 13]);
+        lcd_print((const unsigned char*)buffer);
+        delay_ms(1500);
+        lcd_clear();
+    }
+}`;
+---
+<EngineeringArticleLayout
+  title={title}
+  description={description}
+  dir="rtl"
+  lang="he"
+  canonical="https://liad-dev.com/projects/microcontroller-bingo"
+  ogImage={`https://liad-dev.com${base}/board.jpg`}
+>
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <div class="ea-eyebrow"><span class="dot"></span>פרויקט גמר · מיקרו-מחשבים</div>
+  <h1 class="ea-title">דילר בינגו על מיקרו-בקר</h1>
+  <p class="ea-subtitle">Microcontroller Bingo Dealer — קוד C משובץ על בקר KEIL MCBSTR9</p>
+
+  <div class="ea-meta">
+    <span>2024</span>
+    <span>·</span>
+    <span>בקר KEIL MCBSTR9</span>
+    <span>·</span>
+    <span>שפת C</span>
+  </div>
+
+  <div class="ea-tags">
+    <span class="ea-tag">Embedded C</span>
+    <span class="ea-tag">KEIL MCBSTR9</span>
+    <span class="ea-tag">STR9</span>
+    <span class="ea-tag">ADC</span>
+    <span class="ea-tag">LCD</span>
+    <span class="ea-tag">GPIO / LEDs</span>
+  </div>
+
+  <figure class="ea-figure">
+    <img src={`${base}/board.jpg`} alt="לוח הפיתוח KEIL MCBSTR9 עם צג LCD, כפתורים ופוטנציומטר" />
+    <figcaption class="ea-figcaption">לוח הפיתוח <span dir="ltr">KEIL MCBSTR9</span> — צג LCD, כפתורים, פוטנציומטר ונוריות LED.</figcaption>
+  </figure>
+
+  <!-- ── Abstract ───────────────────────────────────────── -->
+  <div class="ea-abstract">
+    <div class="ea-abstract-label">תקציר</div>
+    <p>
+      בפרויקט זה כתבנו קטע קוד בשפת C המדמה דילר במשחק בינגו. תחילה תופיע הודעת פתיחה עם שם
+      המשחק והוראות להמשך. השחקנים מתבקשים להפעיל את המשחק על ידי לחיצה על הכפתור הראשון, וכעת
+      יתחילו להיות מוצגים על המסך בזה אחר זה קלפים שונים המדמים "שליפה" מתוך חפיסת קלפים רגילה.
+    </p>
+  </div>
+
+  <!-- ── 1. Motivation ──────────────────────────────────── -->
+  <section class="ea-section" id="motivation">
+    <h2 class="ea-h2"><span class="ea-num">01</span> רקע לבחירה</h2>
+    <p>
+      הרעיון נולד ממשחק בינגו משפחתי: בכל סבב, מי שתורו להיות הדילר "הפסיד" את ההשתתפות במשחק —
+      במקום להתרכז בשליפה המהירה של הקלף שהוכרז, הוא היה עסוק בהכרזה על הקלפים ובסידורם. כדי
+      שיהיה לכולם נוח, קל וכיף יותר לשחק, החלטתי לבנות דילר אוטומטי שיבצע את העבודה הזו.
+    </p>
+    <p>
+      בחרנו בפרויקט זה מכיוון שהוא משלב אתגר של כתיבת קוד ותכנון לוגיקה לשימוש בכפתורים
+      ובפוטנציומטר לבקרת מהירות ריצת נוריות LED — תוך שימוש בבקר KEIL ו-LCD לצורך אינטראקציה עם
+      המשתמש.
+    </p>
+    <figure class="ea-figure">
+      <img src={`${base}/workbench.jpg`} alt="סביבת הפיתוח — מחשב נייד עם סביבת הפיתוח, חיווט הבקר וצג LCD" />
+      <figcaption class="ea-figcaption">סביבת הפיתוח — בדיקות חומרה וחיווט הבקר.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ── 2. Game flow ───────────────────────────────────── -->
+  <section class="ea-section" id="gameplay">
+    <h2 class="ea-h2"><span class="ea-num">02</span> מהלך המשחק</h2>
+    <p>
+      את מהירות ה"שליפה" ניתן לשנות על ידי הזזת הפוטנציומטר. את המשחק ניתן להשהות ולהפעיל בשנית
+      על ידי לחיצה על כפתור ההפעלה (הראשון).
+    </p>
+    <p>
+      הכפתור השני מסמן ניצחון — ברגע שנלחץ תופיע הודעה מתאימה ומיד בזה אחר זה יוצגו הקלפים
+      "שנשלפו" עד כה על מנת לוודא ניצחון. בסיום ריצת הקלפים תופיע הודעה על המסך, ולתחילת משחק חדש
+      ניתן ללחוץ על הכפתור השלישי. בכל זמן המשחק ישנו חיווי ויזואלי בצורת נורות ה-LED שרצות או
+      מהבהבות בהתאם לשלבים במשחק.
+    </p>
+  </section>
+
+  <!-- ── 3. Theoretical background ──────────────────────── -->
+  <section class="ea-section" id="theory">
+    <h2 class="ea-h2"><span class="ea-num">03</span> רקע תיאורטי</h2>
+    <p>
+      בקרים (<span dir="ltr">Microcontrollers</span>) הם יחידות חישוביות זעירות הכוללות מעבד, זיכרון
+      ואמצעי קלט/פלט, ומשמשים במגוון רחב של יישומים. הבקר איתו עבדנו הוא בקר של חברת KEIL מסוג
+      <span dir="ltr">MCBSTR9</span>, המהווה אחד מהבקרים הנפוצים המשמשים ללמידה ולפיתוח בפרויקטים
+      קטנים. באמצעות שימוש בכפתורים ובפוטנציומטר באמצעות קריאה אנלוגית, ניתן לשלוט במשתנים בתוכנית
+      בזמן אמת, כמו מהירות ריצת הנוריות ומשך זמן ההשהיה בפרויקט זה.
+    </p>
+    <p>
+      בנוסף לכך, השימוש ב-<span dir="ltr">ADC (Analog-to-Digital Converter)</span> מאפשר לבקר לקרוא
+      ערכים אנלוגיים מהפוטנציומטר ולהמיר אותם לערכים דיגיטליים שהבקר יכול לעבד. זה מאפשר לנו לקבל
+      ערך מתמשך מהפוטנציומטר ולהשתמש בו לשליטה על פונקציות שונות בקוד לבחירתנו.
+    </p>
+    <p>
+      ה-<span dir="ltr">LCD (Liquid Crystal Display)</span> משמש להצגת מידע למשתמש בזמן אמת. בפרויקט
+      זה ה-LCD משמש להצגת הודעות פתיחה, קלפים ומצב המשחק. הנוריות (<span dir="ltr">LEDs</span>)
+      משמשות לצורך מתן פידבק ויזואלי למשתמש — הן מופעלות הן בצורת הבהוב והן בצורת ריצוד בחלקים
+      מסוימים של הקוד, כאשר מהירות הריצה שלהן משתנה בהתאם לערך הפוטנציומטר.
+    </p>
+  </section>
+
+  <!-- ── 4. Flow chart ──────────────────────────────────── -->
+  <section class="ea-section" id="flow">
+    <h2 class="ea-h2"><span class="ea-num">04</span> תרשים זרימה</h2>
+    <p>
+      להלן תרשים הזרימה של התוכנית — מאתחול המערכת, דרך קריאת הפוטנציומטר וערבוב החפיסה, ועד הלולאה
+      הראשית המטפלת בהצגת הקלפים, בהשהיה ובמצב הניצחון.
+    </p>
+    <figure class="ea-figure">
+      <img src={`${base}/flowchart.jpg`} alt="תרשים זרימה גרפי של תוכנית דילר הבינגו" />
+      <figcaption class="ea-figcaption"><b>איור 1.</b> תרשים הזרימה הגרפי של התוכנית.</figcaption>
+    </figure>
+    <h3 class="ea-h3">תרשים זרימה מילולי</h3>
+    <ul class="ea-list">
+      <li dir="ltr">Start</li>
+      <li dir="ltr">Initialize System</li>
+      <li dir="ltr">Read Potentiometer Value</li>
+      <li dir="ltr">Set LED Run Speed based on Potentiometer Value</li>
+      <li dir="ltr">Display Opening Messages on LCD</li>
+      <li dir="ltr">Wait for Start Button Press</li>
+      <li dir="ltr">Main Loop — Read Potentiometer Value and Update Speed → Change LED State → Display Cards on LCD → Check Button Press for Pause or Win</li>
+      <li dir="ltr">If Pause Button Pressed, Update State to Paused</li>
+      <li dir="ltr">If Win Button Pressed, Enter Win State → Display Win Message → End Game</li>
+      <li dir="ltr">Else, Continue Main Loop</li>
+    </ul>
+  </section>
+
+  <!-- ── 5. Code ────────────────────────────────────────── -->
+  <section class="ea-section" id="code">
+    <h2 class="ea-h2"><span class="ea-num">05</span> הקוד</h2>
+    <p>
+      התוכנית נכתבה בשפת C עבור בקר ה-<span dir="ltr">MCBSTR9</span>. קריאת הפוטנציומטר מתבצעת דרך
+      ה-ADC בפונקציית <span dir="ltr">measure()</span>, המחזירה ערך 10-ביט (<span dir="ltr">0x03FF</span>)
+      המשמש לקביעת זמני ההשהיה; הנוריות מהבהבות דרך <span dir="ltr">blink_leds()</span>.
+    </p>
+    <div class="ea-code">
+      <div class="ea-code-label">main.c · קריאת ADC ונוריות</div>
+      <pre><code>{codePeripherals}</code></pre>
+    </div>
+    <p>
+      חפיסת 52 הקלפים מיוצגת כמערך אינדקסים ומעורבבת באלגוריתם <span dir="ltr">Fisher–Yates</span>;
+      הצבע והערך של כל קלף נגזרים מהאינדקס (<span dir="ltr">cardIndex % 13</span> לערך,
+      <span dir="ltr">cardIndex / 13</span> לצבע).
+    </p>
+    <div class="ea-code">
+      <div class="ea-code-label">main.c · ערבוב החפיסה</div>
+      <pre><code>{codeShuffle}</code></pre>
+    </div>
+    <p>
+      בלולאה הראשית הנוריות "רצות" הלוך ושוב באמצעות הזזת ביט (<span dir="ltr">n &lt;&lt; 1</span> /
+      <span dir="ltr">n &gt;&gt; 1</span>) עם היפוך כיוון בקצוות (<span dir="ltr">0x80</span>,
+      <span dir="ltr">0x01</span>), ובכל מחזור נשלף הקלף הבא מהחפיסה ומוצג ב-LCD. הלולאה ממשיכה
+      ומטפלת בכפתורי ההשהיה (SW1) והניצחון (SW2).
+    </p>
+    <div class="ea-code">
+      <div class="ea-code-label">main.c · הלולאה הראשית</div>
+      <pre><code>{codeMainLoop}</code></pre>
+    </div>
+  </section>
+
+  <!-- ── 6. Future work ─────────────────────────────────── -->
+  <section class="ea-section" id="future">
+    <h2 class="ea-h2"><span class="ea-num">06</span> המשך הפיתוח</h2>
+    <p>
+      כרגע ההכרזות מוצגות על צג LCD קטן בלבד. השלב הבא בתכנון הוא הוספת רמקול עם צ'יפ MP3 וטעינת
+      קבצי קול שיכריזו בקול על הקלפים ועל הניצחון — כך שהמשחק יהיה נגיש וקל יותר לשימוש גם
+      למבוגרים.
+    </p>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <div class="ea-footer">
+    <a href="/projects" class="ea-footer-back">← חזרה לכל הפרויקטים</a>
+    <span class="ea-footer-note">Microcomputers Course · Final Project · 2024</span>
+  </div>
+</EngineeringArticleLayout>
