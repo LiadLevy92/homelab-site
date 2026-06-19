@@ -131,6 +131,41 @@ from EXIF, override per file for WA/baked-rotated ones. jimp is pure-JS and slow
 images (tens of seconds for a big batch) — run it with `run_in_background` and poll the
 output file. Delete `_optimg.cjs` when done (don't let it leak into git).
 
+## Live-demo video (`<video>` in an article / `gallery` slot)
+
+Some projects ship a phone video that *proves the thing worked* (antenna receiving a
+1.96 GHz signal on a spectrum analyzer). Embed it — it's the strongest possible evidence —
+but treat raw phone clips as unfit to publish until processed:
+
+- **Cloudflare Pages caps files at 25 MiB.** Raw 1080p clips are 45–150 MB → they'd fail the
+  deploy. Compress first.
+- **`ffmpeg` isn't installed** on this machine; `winget install Gyan.FFmpeg` (it lands under
+  `%LOCALAPPDATA%\Microsoft\WinGet\Packages\Gyan.FFmpeg*\...\bin\ffmpeg.exe`; the `ffmpeg`
+  PATH alias only works in a fresh shell, so call the full path).
+- **Vet the content frame-by-frame before publishing** (same as photos): extract a few
+  frames (`ffmpeg -ss <t> -i in.mp4 -frames:v 1 -vf scale=640:-1 f.jpg`) and `Read` them.
+  This is where privacy bites — a "it works!" clip of catching Wi-Fi shows **neighbours'
+  SSIDs** on the laptop screen → **don't publish that one.** Prefer the clip that proves the
+  result with no third-party data (lab signal-generator → spectrum-analyzer peak).
+- **Compress (H.264, web-safe):**
+  ```bash
+  ffmpeg -i in.mp4 -vf "scale=1280:-2" -c:v libx264 -crf 26 -preset slow -an \
+         -movflags +faststart out.mp4    # -an drops audio (avoids incidental speech/names)
+  ```
+  `+faststart` puts the moov atom up front so the browser streams (HTTP 206 range) instead of
+  downloading the whole file. ~23 s of 720p ≈ 4–5 MB. Generate a `poster` from the best frame.
+- **Embed** under `public/assets/projects/<cat>/<slug>/video/`:
+  ```astro
+  <figure class="ea-figure">
+    <video controls preload="none" playsinline poster={`${videoBase}/live-demo-poster.jpg`}>
+      <source src={`${videoBase}/live-demo.mp4`} type="video/mp4" />
+    </video>
+    <figcaption class="ea-figcaption"><b>וידאו 1.</b> …</figcaption>
+  </figure>
+  ```
+  `.ea-figure video` is styled in `engineering-article.css` (mirrors `img`). No CSP change —
+  same-origin media is covered by `default-src 'self'` in `public/_headers`.
+
 ## Build & preview verification
 
 - `npm run build` must pass. Confirm no leak: `find dist -iname '*.docx' -o -iname '*.pptx'`

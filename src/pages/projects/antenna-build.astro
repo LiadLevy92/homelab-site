@@ -2,6 +2,7 @@
 import EngineeringArticleLayout from '../../layouts/EngineeringArticleLayout.astro';
 
 const base = '/assets/projects/electrical_eng/antenna-build/images';
+const videoBase = '/assets/projects/electrical_eng/antenna-build/video';
 const title = 'בניית אנטנה פיזית ומדידתה | פרויקט מעבדה — Liad Levy';
 const description =
   'פרויקט מעבדה בקורס תקשורת: בנייה של אנטנה פיזית, שיפורה ומדידתה ב-VNA ובמנתח ספקטרום סביב תדר של כ-2GHz.';
@@ -116,6 +117,23 @@ const description =
     <figure class="ea-figure">
       <img src={`${base}/after-measure.jpg`} alt="מסך מנתח ספקטרום המציג שיא קליטה סביב 1.96GHz" />
       <figcaption class="ea-figcaption"><b>איור 5.</b> מנתח ספקטרום (<span dir="ltr">N9321C</span>): שיא קליטה בסמן <span dir="ltr">1.96 GHz</span>, <span dir="ltr">−27.04 dBm</span>.</figcaption>
+    </figure>
+    <p>
+      וכדי שלא יישאר רק בתמונות — הנה ההדגמה <b>בלייב</b>: מחולל אותות משדר על
+      <span dir="ltr">1.96 GHz</span>, והאנטנה שבניתי קולטת אותו — השיא קופץ על מנתח הספקטרום
+      בדיוק בתדר המשודר. הוכחה חיה שהאנטנה עובדת.
+    </p>
+    <figure class="ea-figure">
+      <video
+        controls
+        preload="none"
+        playsinline
+        poster={`${videoBase}/live-demo-poster.jpg`}
+      >
+        <source src={`${videoBase}/live-demo.mp4`} type="video/mp4" />
+        הדפדפן שלך אינו תומך בתגית וידאו. <a href={`${videoBase}/live-demo.mp4`}>הורדת הסרטון</a>.
+      </video>
+      <figcaption class="ea-figcaption"><b>וידאו 1.</b> הדגמה חיה — האנטנה קולטת אות <span dir="ltr">1.96 GHz</span> ממחולל האותות, והשיא מופיע על מנתח הספקטרום (<span dir="ltr">Keysight N9321C</span>).</figcaption>
     </figure>
     <div class="ea-callout">
       <div class="ea-callout-label">תוצאה — הדגמה אמיתית</div>

@@ -145,10 +145,12 @@ body::before {
 
 /* ── Figures ─────────────────────────────────────────────────── */
 .ea-figure { margin: 30px 0; }
-.ea-figure img {
+.ea-figure img,
+.ea-figure video {
   width: 100%; height: auto; display: block;
   background: #fff; border: 1px solid var(--line); border-radius: 12px;
 }
+.ea-figure video { background: #000; }
 .ea-figure.dark img { background: var(--bg-card); }
 .ea-figcaption {
   margin-top: 10px; font-family: var(--font-mono); font-size: 12.5px;
