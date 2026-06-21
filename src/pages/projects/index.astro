@@ -110,16 +110,25 @@ for (const p of projects) counts[p.category] = (counts[p.category] ?? 0) + 1;
       if (empty) empty.hidden = visible !== 0;
     }
 
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        tabs.forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        applyFilter(tab.dataset.filter);
+    function activateTab(filter) {
+      // Fall back to the default tab if the requested filter is unknown.
+      const target = [...tabs].some((t) => t.dataset.filter === filter) ? filter : DEFAULT;
+      tabs.forEach((t) => {
+        const on = t.dataset.filter === target;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
       });
+      applyFilter(target);
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateTab(tab.dataset.filter));
     });
 
-    applyFilter(DEFAULT);
+    // Optional deep-link: /projects?cat=<categoryId> opens on that tab
+    // (e.g. the home page links straight to the academic / electrical-eng tab).
+    const requested = new URLSearchParams(window.location.search).get('cat');
+    activateTab(requested || DEFAULT);
 
     // ── Modal ────────────────────────────────────────────────────
     const overlay = document.getElementById('projectModal');
