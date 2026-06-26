@@ -5,6 +5,18 @@
 
 ---
 
+## v3.8.0 — June 2026
+
+### דף Homelab — נוסף שירות Stirling PDF (CT 113)
+
+סנכרון תשתית→אתר אחרי הקמת שירות חדש על שרת הפיתוח `pve2`: כלי המרת מסמכים פרטי (Word↔PDF, מיזוג, פיצול, דחיסה, OCR) בקוד פתוח.
+- **§04 Services** — שורה חדשה בטבלה (113 · Stirling PDF · Document conversion · pve2 · LXC · running) + vlan-card "STIRLING PDF — DOCUMENT TOOLS".
+- **§05 Unlocks** — unlock-card חדש "Private Document Toolkit" (בסגנון Immich/Vaultwarden): המרות מקומיות, OCR אנגלית+עברית, בלי העלאה לשירות זר/חומת מייל/פרסומות.
+- **Topology** — Dev Node ל-4 guests · **Stats** — 10 VMs+LXC · **Boot sequence** — 10 guests · תיאור Dev Node מציין את Stirling.
+- כללי אבטחה נשמרו: בלי IP/שמות משתמש, Tailscale-only.
+
+---
+
 ## v3.7.0 — June 2026
 
 ### וידאו הדגמה חי בדף האנטנה הפיזית

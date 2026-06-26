@@ -7,7 +7,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
   <div class="boot" id="boot" aria-hidden="true">
     <div class="boot-inner">
       <div class="boot-header">LIAD-HOMELAB&nbsp;//&nbsp;RACK-0&nbsp;CONSOLE&nbsp;<span class="boot-cursor"></span></div>
-      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">2 nodes online · storage + dev · 9 guests</span></div>
+      <div class="boot-line" data-boot="0"><span class="boot-ok">[ OK ]</span><span class="boot-label">Proxmox VE</span><span class="boot-value">2 nodes online · storage + dev · 10 guests</span></div>
       <div class="boot-line" data-boot="1"><span class="boot-ok">[ OK ]</span><span class="boot-label">AdGuard Home</span><span class="boot-value">DNS filtering active · CT 100</span></div>
       <div class="boot-line" data-boot="2"><span class="boot-ok">[ OK ]</span><span class="boot-label">Home Assist</span><span class="boot-value">smart home online · VM 101</span></div>
       <div class="boot-line" data-boot="3"><span class="boot-ok">[ OK ]</span><span class="boot-label">n8n</span><span class="boot-value">automations · 2 workflows active</span></div>
@@ -70,7 +70,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
         <div class="stat-label">Proxmox Nodes</div>
       </div>
       <div class="stat">
-        <div class="stat-number">9</div>
+        <div class="stat-number">10</div>
         <div class="stat-label">VMs + LXC</div>
       </div>
       <div class="stat">
@@ -166,7 +166,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <ul>
               <li>Newer mini-PC · 12-thread CPU · 16 GB</li>
               <li><strong>Proxmox VE 9.2.3</strong> · fast local NVMe</li>
-              <li>Runs heavier services — Immich photo gallery</li>
+              <li>Runs heavier services — Immich gallery, Stirling PDF</li>
               <li>Added to scale beyond the storage node</li>
             </ul>
           </div>
@@ -234,7 +234,7 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
                       <div class="topo-box-badge">HOME OFFICE</div>
                       <div class="topo-box-title">DEV NODE · pve2</div>
                       <div class="topo-box-accent">12-thread · 16 GB · NVMe</div>
-                      <div class="topo-box-sub">Proxmox VE 9.2.3 · 3 guests</div>
+                      <div class="topo-box-sub">Proxmox VE 9.2.3 · 4 guests</div>
                     </div>
                   </li>
                   <li>
@@ -356,6 +356,13 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
               <td>pve2 · LXC</td>
               <td><span class="badge badge-ok">running</span></td>
             </tr>
+            <tr>
+              <td><span class="vm-id">113</span></td>
+              <td><span class="vm-name">Stirling PDF</span></td>
+              <td>Document conversion · Word↔PDF · OCR</td>
+              <td>pve2 · LXC</td>
+              <td><span class="badge badge-ok">running</span></td>
+            </tr>
           </tbody>
         </table>
         </div>
@@ -414,6 +421,15 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>Self-hosted analytics for my Claude Code usage</li>
             <li>Tokens, cost, models, sessions — all local</li>
             <li>Dev node · CT 112 · Tailscale-only</li>
+          </ul>
+        </div>
+        <div class="vlan-card reveal reveal-delay-1">
+          <div class="vlan-badge">STIRLING PDF — DOCUMENT TOOLS</div>
+
+          <ul>
+            <li>Private Word↔PDF, merge, split, compress, OCR</li>
+            <li>Files never leave my server — no third-party upload</li>
+            <li>Dev node · CT 113 · Tailscale-only</li>
           </ul>
         </div>
         <div class="vlan-card reveal reveal-delay-5">
@@ -545,6 +561,20 @@ import HomelabLayout from '../../layouts/HomelabLayout.astro';
             <li>Works with the Bitwarden apps and browser extensions</li>
             <li>Tailscale-only — zero public attack surface</li>
             <li>Dedicated encrypted backup, separate from the VM snapshots</li>
+          </ul>
+        </div>
+        <div class="unlock-card reveal reveal-delay-1">
+          <div class="unlock-header">
+            <div class="unlock-title">Private Document Toolkit</div>
+            <span class="badge badge-ok">live</span>
+          </div>
+          <div class="unlock-body">
+            Stirling PDF on the dev node — convert Word&harr;PDF, merge, split, compress, OCR and more. Files never leave my server, so I never upload a document to a free online tool that wants my email in return. Tailscale-only.
+          </div>
+          <ul>
+            <li>Word&harr;PDF, merge, split, compress, image&harr;PDF — all local</li>
+            <li>OCR makes scanned documents searchable — English &amp; Hebrew</li>
+            <li>No third-party upload, no email wall, no ads</li>
           </ul>
         </div>
       </div>
